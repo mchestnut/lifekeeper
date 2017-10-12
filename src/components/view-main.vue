@@ -1,17 +1,26 @@
 <template>
   <div>
-    <p>Test 2</p>
-    <basic></basic>
+    <p>Main View</p>
+    <players></players>
+    <clock></clock>
+    <log></log>
+    <main-menu></main-menu>
   </div>
 </template>
 
 <script>
-import basic from '@/components/basic'
+import clock from '@/components/clock'
+import log from '@/components/log'
+import mainMenu from '@/components/main-menu'
+import players from '@/components/players'
 
 export default {
   name: 'view-main',
   components: {
-    basic
+    clock,
+    log,
+    mainMenu,
+    players
   }
 }
 </script>
