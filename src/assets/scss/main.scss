@@ -1,0 +1,28 @@
+body {
+  font-family: 'Matrix-Bold', Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+.u-texture {
+  position: relative;
+
+  &::after,
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &::after {
+    z-index: -1;
+  }
+
+  &::before {
+    background-image: url('./assets/img/texture.jpg');
+    background-size: cover;
+    z-index: -2;
+  }
+}
