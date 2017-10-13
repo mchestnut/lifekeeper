@@ -1,9 +1,9 @@
 <template>
-  <div class="o_view-main">
-    <div class="o_view-main__players u-texture">
+  <div class="c-view-main">
+    <div class="c-view-main__players u-background-texture">
       <players></players>
     </div>
-    <div class="o_view-main__menu u-texture">
+    <div class="c-view-main__menu u-background-texture">
       <clock></clock>
       <main-menu></main-menu>
       <log></log>
@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/scss/variables.scss';
 
-  .o_view-main {
+  .c-view-main {
     display: grid;
     grid-template-columns: 7fr 3fr;
     position: absolute;
@@ -41,7 +41,7 @@ export default {
     left: 0;
   }
 
-  .o_view-main__players {
+  .c-view-main__players {
     border-right: 1px solid;
 
     &::after {
@@ -50,7 +50,7 @@ export default {
     }
   }
 
-  .o_view-main__menu {
+  .c-view-main__menu {
 
     &::after {
       background-color: $grayDark;
@@ -59,12 +59,12 @@ export default {
   }
 
   @media screen and (max-aspect-ratio: 1/1) {
-    .o_view-main {
+    .c-view-main {
       grid-template-columns: 1fr;
       grid-template-rows: 7fr 3fr;
     }
 
-    .o_view-main__players {
+    .c-view-main__players {
       border-right: none;
       border-bottom: 1px solid;
     }

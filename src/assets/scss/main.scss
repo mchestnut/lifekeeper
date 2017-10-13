@@ -3,8 +3,54 @@ body {
   margin: 0;
 }
 
-.u-texture {
+text {
+  text-anchor: middle;
+}
+
+.u-fill-black-dark {fill: $blackDark;}
+.u-fill-black-light {fill: $blackLight;}
+.u-fill-black-medium {fill: $blackMedium;}
+.u-fill-black-stroke {fill: $blackStroke;}
+.u-fill-blue-dark {fill: $blueDark;}
+.u-fill-blue-light {fill: $blueLight;}
+.u-fill-blue-medium {fill: $blueMedium;}
+.u-fill-blue-stroke {fill: $blueStroke;}
+.u-fill-colorless-dark {fill: $colorlessDark;}
+.u-fill-colorless-light {fill: $colorlessLight;}
+.u-fill-colorless-medium {fill: $colorlessMedium;}
+.u-fill-colorless-stroke {fill: $colorlessStroke;}
+.u-fill-gold-dark {fill: $goldDark;}
+.u-fill-gold-light {fill: $goldLight;}
+.u-fill-gold-medium {fill: $goldMedium;}
+.u-fill-gold-stroke {fill: $goldStroke;}
+.u-fill-gray-dark {fill: $grayDark;}
+.u-fill-gray-light {fill: $grayLight;}
+.u-fill-gray-medium {fill: $grayMedium;}
+.u-fill-gray-stroke {fill: $grayStroke;}
+.u-fill-green-dark {fill: $greenDark;}
+.u-fill-green-light {fill: $greenLight;}
+.u-fill-green-medium {fill: $greenMedium;}
+.u-fill-green-stroke {fill: $greenStroke;}
+.u-fill-red-dark {fill: $redDark;}
+.u-fill-red-light {fill: $redLight;}
+.u-fill-red-medium {fill: $redMedium;}
+.u-fill-red-stroke {fill: $redStroke;}
+.u-fill-white-dark {fill: $whiteDark;}
+.u-fill-white-light {fill: $whiteLight;}
+.u-fill-white-medium {fill: $whiteMedium;}
+.u-fill-white-stroke {fill: $whiteStroke;}
+
+.u-fill-texture {
+  fill: url(#texture)
+}
+
+.u-opacity-65 {opacity: 0.65;}
+.u-opacity-90 {opacity: 0.9;}
+.u-opacity-95 {opacity: 0.95;}
+
+.u-background-texture {
   position: relative;
+  z-index: 1;
 
   &::after,
   &::before {
