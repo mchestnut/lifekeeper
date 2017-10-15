@@ -7,6 +7,36 @@ text {
   text-anchor: middle;
 }
 
+.u-background-texture {
+  position: relative;
+  z-index: 1;
+
+  &::after,
+  &::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &::after {
+    z-index: -1;
+  }
+
+  &::before {
+    background-image: url('./assets/img/texture.jpg');
+    background-size: cover;
+    z-index: -2;
+  }
+}
+
+// grayStroke    stroke: menu container | fill: clock, log
+// grayMedium    fill: main, turns, options
+// grayDark      fill: menu, optionBars
+// grayLight     fill: menuButtons
+
 .u-fill-black-dark {fill: $blackDark;}
 .u-fill-black-light {fill: $blackLight;}
 .u-fill-black-medium {fill: $blackMedium;}
@@ -47,28 +77,3 @@ text {
 .u-opacity-65 {opacity: 0.65;}
 .u-opacity-90 {opacity: 0.9;}
 .u-opacity-95 {opacity: 0.95;}
-
-.u-background-texture {
-  position: relative;
-  z-index: 1;
-
-  &::after,
-  &::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  &::after {
-    z-index: -1;
-  }
-
-  &::before {
-    background-image: url('./assets/img/texture.jpg');
-    background-size: cover;
-    z-index: -2;
-  }
-}

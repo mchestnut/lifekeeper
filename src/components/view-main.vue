@@ -41,6 +41,11 @@ export default {
     left: 0;
   }
 
+  .c-view-main__players,
+  .c-view-main__menu {
+    padding: 10px;
+  }
+
   .c-view-main__players {
     border-right: 1px solid;
 

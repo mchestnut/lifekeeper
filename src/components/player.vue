@@ -1,7 +1,6 @@
 <template>
   <div>
     <p>Player</p>
-    <modal v-bind:active="modalActive"></modal>
   </div>
 </template>
 
@@ -9,18 +8,8 @@
 import { mapMutations } from 'vuex'
 import { mapState } from 'vuex'
 
-import modal from '@/components/modal'
-
 export default {
   name: 'player',
-  components: {
-    modal
-  },
-  data () {
-    return {
-      modalActive: false
-    }
-  },
   computed: {
     ...mapState('players', [
       'currentPlayers',
