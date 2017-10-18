@@ -3,10 +3,13 @@
     <div class="c-view-main__players u-background-texture">
       <players></players>
     </div>
-    <div class="c-view-main__menu u-background-texture">
-      <clock></clock>
-      <main-menu></main-menu>
-      <log></log>
+    <div class="c-view-main__sidebar c-view-sidebar u-background-texture">
+      <clock class="c-view-sidebar__clock"></clock>
+      <main-menu class="c-view-sidebar__main-menu"></main-menu>
+      <log class="c-view-sidebar__log"></log>
+    </div>
+    <div class="c-view-main__modals">
+      <players-add-modal></players-add-modal>
     </div>
   </div>
 </template>
@@ -16,6 +19,7 @@ import clock from '@/components/clock'
 import log from '@/components/log'
 import mainMenu from '@/components/main-menu'
 import players from '@/components/players'
+import playersAddModal from '@/components/players-add-modal'
 
 export default {
   name: 'view-main',
@@ -23,17 +27,18 @@ export default {
     clock,
     log,
     mainMenu,
-    players
+    players,
+    playersAddModal
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '../assets/scss/variables.scss';
 
   .c-view-main {
     display: grid;
-    grid-template-columns: 7fr 3fr;
+    grid-template-columns: auto 28rem;
     position: absolute;
     top: 0;
     right: 0;
@@ -42,8 +47,8 @@ export default {
   }
 
   .c-view-main__players,
-  .c-view-main__menu {
-    padding: 10px;
+  .c-view-main__sidebar {
+    padding: 1rem;
   }
 
   .c-view-main__players {
@@ -51,27 +56,49 @@ export default {
 
     &::after {
       background-color: $grayMedium;
-      opacity: .95;
+      opacity: 0.95;
     }
   }
 
-  .c-view-main__menu {
+  .c-view-main__sidebar {
 
     &::after {
       background-color: $grayDark;
-      opacity: .95;
+      opacity: 0.95;
     }
+  }
+
+  .c-view-main__modals {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .c-view-sidebar {
+    display: grid;
   }
 
   @media screen and (max-aspect-ratio: 1/1) {
     .c-view-main {
-      grid-template-columns: 1fr;
-      grid-template-rows: 7fr 3fr;
+      grid-template-columns: auto;
+      grid-template-rows: auto 22rem;
     }
 
     .c-view-main__players {
       border-right: none;
       border-bottom: 1px solid;
+    }
+
+    .c-view-sidebar {
+      grid-template-rows: auto auto;
+      grid-template-columns: 28rem 25rem;
+    }
+
+    .c-view-sidebar__main-menu {
+      grid-column-start: 1;
+      grid-row-start: 2;
     }
   }
 </style>

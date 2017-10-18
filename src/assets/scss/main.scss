@@ -1,3 +1,15 @@
+/*
+* Base
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: 'Matrix-Bold', Helvetica, Arial, sans-serif;
   margin: 0;
@@ -6,6 +18,60 @@ body {
 text {
   text-anchor: middle;
 }
+
+
+/*
+* Objects
+*/
+
+.o-flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  * + & {
+    margin-top: 2rem;
+  }
+}
+
+.o-flex-row__item {
+
+  & + & {
+    margin-left: 1rem;
+  }
+}
+
+
+.o-form-field {
+  * + & {
+    margin-top: 1rem;
+  }
+}
+
+.o-form-field__label,
+.o-form-field__input {
+  display: block;
+  width: 100%;
+}
+
+.o-form-field__label {
+  font-size: 1rem;
+}
+
+.o-form-field__input {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  border: 2px solid;
+  border-radius: 3px;
+}
+
+
+/*
+* Utilities
+*/
 
 .u-background-texture {
   position: relative;
@@ -31,11 +97,6 @@ text {
     z-index: -2;
   }
 }
-
-// grayStroke    stroke: menu container | fill: clock, log
-// grayMedium    fill: main, turns, options
-// grayDark      fill: menu, optionBars
-// grayLight     fill: menuButtons
 
 .u-fill-black-dark {fill: $blackDark;}
 .u-fill-black-light {fill: $blackLight;}
@@ -73,6 +134,9 @@ text {
 .u-fill-texture {
   fill: url(#texture)
 }
+
+.u-flip-x {transform: scaleX(-1);}
+.u-flip-Y {transform: scaleY(-1);}
 
 .u-opacity-65 {opacity: 0.65;}
 .u-opacity-90 {opacity: 0.9;}
