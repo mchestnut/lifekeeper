@@ -27,18 +27,6 @@
         <input class="o-form-field__input" id="commander-2-name" type="text" list="commander-list"/>
       </div>
 
-      <datalist id="commander-list">
-        <option value="Freyalise, Llanowar's Fury"/>
-        <option value="Karador, Ghost Chieftan"/>
-        <option value="Marchesa, the Black Rose"/>
-        <option value="Queen Marchesa"/>
-        <option value="Sigarda, Heron's Grace"/>
-        <option value="Sigarda, Host of Herons"/>
-        <option value="The Locust God"/>
-        <option value="The Scarab God"/>
-        <option value="The Scorpion God"/>
-      </datalist>
-
       <div class="o-form-field">
         <label class="o-form-field__label" for="player-position">Player position</label>
         <select class="o-form-field__input" id="player-position">
@@ -55,6 +43,10 @@
           <menu-button>Cancel</menu-button>
         </v-touch>
       </div>
+
+      <datalist id="commander-list">
+        <option v-for="(commander, index) in commanders" v-bind:key="index" v-bind:value="commander.name"/>
+      </datalist>
     </modal>
   </div>
 </template>
@@ -75,6 +67,9 @@ export default {
     modal
   },
   computed: {
+    ...mapState('commanders', [
+      'commanders'
+    ]),
     ...mapState('players', [
       'currentPlayers'
     ]),
@@ -105,7 +100,6 @@ export default {
     * On cancel button tap, close modal
     */
     onCancelTap: function (e) {
-      this.commander2 = false
       this.closePlayersAddModal()
     },
 
@@ -113,7 +107,6 @@ export default {
     * On save button tap, save modal
     */
     onSaveTap: function (e) {
-      this.commander2 = false
       this.savePlayersAddModal()
       this.closePlayersAddModal()
     }
