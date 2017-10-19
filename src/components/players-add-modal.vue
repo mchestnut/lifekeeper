@@ -1,9 +1,9 @@
 <template>
   <div>
     <modal v-show="active" v-on:close="closePlayersAddModal">
-      <div class="c-modal__header o-flex-row">
+      <div class="o-flex-row">
         <menu-bar></menu-bar>
-        <h2>Add Player</h2>
+        <h2 class="c-modal__header">Add Player</h2>
         <menu-bar class="u-flip-x"></menu-bar>
       </div>
 
@@ -38,6 +38,13 @@
         <option value="The Scarab God"/>
         <option value="The Scorpion God"/>
       </datalist>
+
+      <div class="o-form-field">
+        <label class="o-form-field__label" for="player-position">Player position</label>
+        <select class="o-form-field__input" id="player-position">
+          <option v-for="(n, index) in playersQty" v-bind:key="index">{{ index + 1 }}</option>
+        </select>
+      </div>
       
       <div class="o-flex-row">
         <v-touch class="o-flex-row__item" v-on:tap="onSaveTap">
@@ -68,11 +75,17 @@ export default {
     modal
   },
   computed: {
+    ...mapState('players', [
+      'currentPlayers'
+    ]),
     ...mapState('playersAddModal', [
       'active',
       'args',
       'commander2'
-    ])
+    ]),
+    playersQty: function () {
+      return this.currentPlayers.length + 1
+    }
   },
   methods: {
     ...mapMutations('playersAddModal', [
