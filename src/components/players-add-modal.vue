@@ -9,27 +9,27 @@
 
       <div class="o-form-field">
         <label class="o-form-field__label" for="player-name">Player name</label>
-        <input class="o-form-field__input" id="player-name" type="text"/>
+        <input class="o-form-field__input" id="player-name" type="text" v-model="args.name"/>
       </div>
 
       <div class="o-form-field">
         <label class="o-form-field__label" for="commander-name">Commander name</label>
-        <input class="o-form-field__input" id="commander-name" type="text" list="commander-list"/>
+        <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary" list="commander-list"/>
       </div>
 
-      <v-touch class="o-flex-row" v-on:tap="onAddCommanderTap" v-show="commander2 === false">
+      <v-touch class="o-flex-row" v-on:tap="onAddCommanderTap" v-show="secondaryCommander === false">
         <div class="o-flex-row__item c-modal__icon c-modal__icon--plus"></div>
         <p class="o-flex-row__item">Additional commander</p>
       </v-touch>
 
-      <div class="o-form-field" v-show="commander2">
+      <div class="o-form-field" v-show="secondaryCommander">
         <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
-        <input class="o-form-field__input" id="commander-2-name" type="text" list="commander-list"/>
+        <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary"  list="commander-list"/>
       </div>
 
       <div class="o-form-field">
         <label class="o-form-field__label" for="player-position">Player position</label>
-        <select class="o-form-field__input" id="player-position">
+        <select class="o-form-field__input" id="player-position" v-model="args.position">
           <option v-for="(n, index) in playersQty" v-bind:key="index">{{ index + 1 }}</option>
         </select>
       </div>
@@ -76,7 +76,7 @@ export default {
     ...mapState('playersAddModal', [
       'active',
       'args',
-      'commander2'
+      'secondaryCommander'
     ]),
     playersQty: function () {
       return this.currentPlayers.length + 1
@@ -90,7 +90,7 @@ export default {
     ]),
 
     /*
-    * On add commander tap, show commander2
+    * On add commander tap, show secondaryCommander
     */
     onAddCommanderTap: function (e) {
       this.addCommanderPlayersAddModal()

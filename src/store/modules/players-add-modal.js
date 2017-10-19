@@ -2,8 +2,16 @@ const namespaced = true
 
 const state = {
   active: false,
-  args: null,
-  commander2: false
+  args: {
+    name: '',
+    commanders: {
+      primary: '',
+      secondary: ''
+    },
+    position: 1
+  },
+  callback: null,
+  secondaryCommander: false
 }
 
 const mutations = {
@@ -11,33 +19,34 @@ const mutations = {
   * Shows additional commander input
   */  
   addCommanderPlayersAddModal (state) {
-    state.commander2 = true
+    state.secondaryCommander = true
   },
 
   /*
-  * Closes the modal
+  * Closes the modal and resets the state
   */  
   closePlayersAddModal (state) {
-    console.log('close modal')
-    state.commander2 = false
     state.active = false
+    state.args.name = ''
+    state.args.commanders.primary = ''
+    state.args.commanders.secondary = ''
+    state.args.position = 1
+    state.secondaryCommander = false
   },
 
   /*
   * Opens the modal and saves args to state
   */  
   openPlayersAddModal (state, args) {
-    console.log('open modal')
     state.active = true
-    state.args = args
+    state.callback = args.callback
   },
 
   /*
   * Saves the values from the modal
   */
   savePlayersAddModal (state) {
-    console.log('save modal')
-    state.args.callback()
+    state.callback(state.args)
   }  
 }
 

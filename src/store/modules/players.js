@@ -2,6 +2,7 @@ const namespaced = true
 
 const state = {
   currentPlayers: [],
+  index: 0,
   maxPlayers: 6
 }
 
@@ -10,7 +11,44 @@ const mutations = {
   * Adds a player to currentPlayers
   */  
   addPlayer (state, args) {
-    console.log('addPlayer')
+    // Create player object
+    const player = {
+      commanders: {
+        primary: args.commanders.primary,
+        secondary: args.commanders.secondary
+      },
+      damage: [],
+      dead: false,
+      decked: false,
+      id: state.index,
+      life: 40,
+      name: args.name,
+      poison: 0,
+      position: args.position - 1
+    }
+
+    // Create new player damage reference
+    const newPlayerRef = {
+      player: player,
+      primary: 0,
+      secondary: 0
+    }
+
+    // Add commander damage references for players
+    state.currentPlayers.forEach(function(opponent) {
+      const currentPlayerRef = {
+        player: opponent,
+        primary: 0,
+        secondary: 0
+      }
+
+      opponent.damage.splice(args.position - 1, 0, newPlayerRef)
+      player.damage.push(currentPlayerRef);
+    })
+
+    // Add new player to currentPlayers and increase index
+    state.currentPlayers.splice(args.position - 1, 0, player)
+    state.index++
   },
 
   /*
@@ -42,20 +80,6 @@ const mutations = {
   },
 
   /*
-  * Sets colors for a player
-  */  
-  setColors (state, args) {
-    console.log('setColors')
-  },
-
-  /*
-  * Sets commanders for a player
-  */  
-  setCommander (state, args) {
-    console.log('setCommander')
-  },
-
-  /*
   * Sets commander damage for a player and checks if player is dead
   */  
   setDamage (state, args) {
@@ -74,13 +98,6 @@ const mutations = {
   */  
   setLife (state, args) {
     console.log('setLife')
-  },
-
-  /*
-  * Sets name for a player
-  */  
-  setName (state, args) {
-    console.log('setName')
   },
 
   /*
