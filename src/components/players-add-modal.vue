@@ -14,7 +14,7 @@
 
       <div class="o-form-field">
         <label class="o-form-field__label" for="commander-name">Commander name</label>
-        <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary" list="commander-list"/>
+        <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary" v-on:input="onCommanderChange('primary')" list="primary-list"/>
       </div>
 
       <v-touch class="o-flex-row" v-on:tap="onAddCommanderTap" v-show="secondaryCommander === false">
@@ -24,7 +24,7 @@
 
       <div class="o-form-field" v-show="secondaryCommander">
         <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
-        <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary"  list="commander-list"/>
+        <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary" v-on:input="onCommanderChange('secondary')"  list="secondary-list"/>
       </div>
 
       <div class="o-form-field">
@@ -44,8 +44,12 @@
         </v-touch>
       </div>
 
-      <datalist id="commander-list">
-        <option v-for="(commander, index) in commanders" v-bind:key="index" v-bind:value="commander.name"/>
+      <datalist id="primary-list">
+        <option v-for="(commander, index) in datalist.primary" v-bind:key="index" v-bind:value="commander.name"/>
+      </datalist>
+
+      <datalist id="secondary-list">
+        <option v-for="(commander, index) in datalist.secondary" v-bind:key="index" v-bind:value="commander.name"/>
       </datalist>
     </modal>
   </div>
@@ -68,7 +72,7 @@ export default {
   },
   computed: {
     ...mapState('commanders', [
-      'commanders'
+      'commandersList'
     ]),
     ...mapState('players', [
       'currentPlayers'
@@ -76,6 +80,7 @@ export default {
     ...mapState('playersAddModal', [
       'active',
       'args',
+      'datalist',
       'secondaryCommander'
     ]),
     playersQty: function () {
@@ -86,6 +91,7 @@ export default {
     ...mapMutations('playersAddModal', [
       'addCommanderPlayersAddModal',
       'closePlayersAddModal',
+      'filterListPlayersAddModal',
       'savePlayersAddModal',
     ]),
 
@@ -101,6 +107,16 @@ export default {
     */
     onCancelTap: function (e) {
       this.closePlayersAddModal()
+    },
+
+    /*
+    * On commander field change, filter commanders list
+    */
+    onCommanderChange: function (id) {
+      this.filterListPlayersAddModal({
+        commandersList: this.commandersList,
+        id: id
+      })
     },
 
     /*

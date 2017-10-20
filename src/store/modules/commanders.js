@@ -1,7 +1,7 @@
 const namespaced = true
 
 const state = {
-  commanders: [
+  commandersList: [
     {name: "Aboshan, Cephalid Emperor",colors: ['u']},
     {name: "Adamaro, First to Desire",colors: ['r']},
     {name: "Adriana, Captain of the Guard",colors: ['r', 'w']},
