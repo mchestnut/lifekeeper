@@ -15,6 +15,10 @@ body {
   margin: 0;
 }
 
+p {
+  margin: 0;
+}
+
 text {
   text-anchor: middle;
 }
@@ -44,7 +48,7 @@ text {
 
 .o-form-field {
   * + & {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 }
 
@@ -66,6 +70,77 @@ text {
   margin-top: 0.5rem;
   border: 2px solid;
   border-radius: 3px;
+}
+
+
+.o-icon-button {
+  display: flex;
+  justify-content: center;
+
+  * + & {
+    margin-top: 2rem;
+  }
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.o-icon-button--disabled {
+
+  .o-icon-button__label,
+  .o-icon-button__icon {
+    border-style: dashed;
+    background-color: $grayMedium;
+  }
+}
+
+.o-icon-button__container {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.o-icon-button__label,
+.o-icon-button__icon {
+  border: 2px solid;
+  background-color: white;
+}
+
+.o-icon-button__label {
+  font-size: 1.2rem;
+  min-width: 10rem;
+  margin-left: -1.5rem;
+  padding: 0.4rem;
+  padding-left: 1.7rem;
+  border-radius: 3px;
+}
+
+.o-icon-button__icon {
+  font-size: 2.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  z-index: 10;
+
+  &::after {
+    display: block;
+    margin-top: -0.2rem;
+  }
+}
+
+.o-icon-button__icon--minus {
+
+  &::after {
+    content: '-';
+  }
+}
+
+.o-icon-button__icon--plus {
+
+  &::after {
+    content: '+';
+  }
 }
 
 

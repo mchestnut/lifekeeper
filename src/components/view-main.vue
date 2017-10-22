@@ -10,6 +10,7 @@
     </div>
     <div class="c-view-main__modals">
       <players-add-modal></players-add-modal>
+      <players-remove-modal></players-remove-modal>
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@ import log from '@/components/log'
 import mainMenu from '@/components/main-menu'
 import players from '@/components/players'
 import playersAddModal from '@/components/players-add-modal'
+import playersRemoveModal from '@/components/players-remove-modal'
 
 export default {
   name: 'view-main',
@@ -28,7 +30,8 @@ export default {
     log,
     mainMenu,
     players,
-    playersAddModal
+    playersAddModal,
+    playersRemoveModal
   }
 }
 </script>

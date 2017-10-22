@@ -72,6 +72,9 @@ export default {
     ...mapMutations('playersAddModal', [
       'openPlayersAddModal'
     ]),
+    ...mapMutations('playersRemoveModal', [
+      'openPlayersRemoveModal'
+    ]),
     ...mapMutations('players', [
       'addPlayer',
       'removePlayer',
@@ -105,7 +108,9 @@ export default {
     * On remove players tap, open modal
     */
     onPlayersRemoveTap: function (e) {
-      // this.openPlayersRemoveModal()
+      this.openPlayersRemoveModal({
+        callback: this.removePlayer
+      })
     },
 
     /*

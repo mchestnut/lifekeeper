@@ -65,26 +65,4 @@ export default {
     margin-right: 1rem;
     margin-left: 1rem;
   }
-
-  .c-modal__icon {
-    font-size: 2rem;
-    display: block;
-    width: 2rem;
-    height: 2rem;
-    border: 2px solid;
-    border-radius: 50%;
-    background-color: $grayLight;
-
-    &::after {
-      display: block;
-      margin-top: -0.2rem;
-    }
-  }
-
-  .c-modal__icon--plus {
-
-    &::after {
-      content: '+';
-    }
-  }
 </style>

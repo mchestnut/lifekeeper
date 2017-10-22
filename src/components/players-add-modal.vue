@@ -17,10 +17,12 @@
         <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary" v-on:input="onCommanderChange('primary')" list="primary-list"/>
       </div>
 
-      <v-touch class="o-flex-row" v-on:tap="onAddCommanderTap" v-show="secondaryCommander === false">
-        <div class="o-flex-row__item c-modal__icon c-modal__icon--plus"></div>
-        <p class="o-flex-row__item">Additional commander</p>
-      </v-touch>
+      <div class="o-icon-button" v-show="secondaryCommander === false">
+        <v-touch class="o-icon-button__container" v-on:tap="onAddCommanderTap">
+          <div class="o-icon-button__icon o-icon-button__icon--plus"></div>
+          <p class="o-icon-button__label">Add second commander</p>
+        </v-touch>
+      </div>
 
       <div class="o-form-field" v-show="secondaryCommander">
         <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
@@ -30,7 +32,7 @@
       <div class="o-form-field">
         <label class="o-form-field__label" for="player-position">Player position</label>
         <select class="o-form-field__input" id="player-position" v-model="args.position">
-          <option v-for="(n, index) in playersQty" v-bind:key="index">{{ index + 1 }}</option>
+          <option v-for="n in playersQty" v-bind:key="n">{{ n }}</option>
         </select>
       </div>
       

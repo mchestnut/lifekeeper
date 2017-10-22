@@ -62,7 +62,17 @@ const mutations = {
   * Removes a player from currentPlayers
   */  
   removePlayer (state, args) {
-    console.log('removePlayer')
+    let playerIndex = -1
+
+    state.currentPlayers.forEach(function (player, index) {
+      if (player.id === args.id) {
+        playerIndex = index
+      }
+    })
+
+    if (playerIndex > -1) {
+      state.currentPlayers.splice(playerIndex, 1)
+    }
   },
 
   /*
