@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal v-show="active" v-on:close="closePlayersAddModal">
+    <modal v-show="active" v-on:close="closeModal">
       <div class="o-flex-row">
         <menu-bar></menu-bar>
         <h2 class="c-modal__header">Add Player</h2>
@@ -91,31 +91,31 @@ export default {
   },
   methods: {
     ...mapMutations('playersAddModal', [
-      'addCommanderPlayersAddModal',
-      'closePlayersAddModal',
-      'filterListPlayersAddModal',
-      'savePlayersAddModal',
+      'addCommander',
+      'closeModal',
+      'filterDatalist',
+      'saveModal',
     ]),
 
     /*
     * On add commander tap, show secondaryCommander
     */
     onAddCommanderTap: function (e) {
-      this.addCommanderPlayersAddModal()
+      this.addCommander()
     },
 
     /*
     * On cancel button tap, close modal
     */
     onCancelTap: function (e) {
-      this.closePlayersAddModal()
+      this.closeModal()
     },
 
     /*
     * On commander field change, filter commanders list
     */
     onCommanderChange: function (id) {
-      this.filterListPlayersAddModal({
+      this.filterDatalist({
         commandersList: this.commandersList,
         id: id
       })
@@ -125,8 +125,8 @@ export default {
     * On save button tap, save modal
     */
     onSaveTap: function (e) {
-      this.savePlayersAddModal()
-      this.closePlayersAddModal()
+      this.saveModal()
+      this.closeModal()
     }
   }
 }

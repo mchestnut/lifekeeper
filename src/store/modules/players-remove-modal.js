@@ -10,7 +10,7 @@ const mutations = {
   /*
   * Closes the modal and resets the state
   */  
-  closePlayersRemoveModal (state) {
+  closeModal (state) {
     state.active = false
     state.cacheList.forEach((player, index) =>
       state.cacheList[index].remove = false
@@ -20,7 +20,7 @@ const mutations = {
   /*
   * Opens the modal and saves args to state
   */  
-  openPlayersRemoveModal (state, args) {
+  openModal (state, args) {
     state.active = true
     state.callback = args.callback
   },
@@ -28,7 +28,7 @@ const mutations = {
   /*
   * Saves the values from the modal
   */
-  savePlayersRemoveModal (state, args) {
+  saveModal (state, args) {
     args.removeList.forEach(player =>
       state.callback(player)
     )
@@ -37,7 +37,7 @@ const mutations = {
   /*
   * Toggles remove state of player in cacheList
   */
-  toggleRemovePlayersRemoveModal (state, args) {
+  toggleRemove (state, args) {
     const player = state.cacheList[args.playerIndex]
 
     player.remove = player.remove ? false : true
@@ -46,7 +46,7 @@ const mutations = {
   /*
   * Updates cacheList to the currentPlayers list
   */  
-  updateCacheListPlayersRemoveModal (state, args) {
+  updateCacheList (state, args) {
     state.cacheList = args.currentPlayers.map(function (player) {
         return {
           id: player.id,

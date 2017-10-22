@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal v-show="active" v-on:close="closePlayersRemoveModal">
+    <modal v-show="active" v-on:close="closeModal">
       <div class="o-flex-row">
         <menu-bar></menu-bar>
         <h2 class="c-modal__header">Remove Players</h2>
@@ -57,17 +57,17 @@ export default {
   },
   methods: {
     ...mapMutations('playersRemoveModal', [
-      'closePlayersRemoveModal',
-      'savePlayersRemoveModal',
-      'toggleRemovePlayersRemoveModal',
-      'updateCacheListPlayersRemoveModal'
+      'closeModal',
+      'saveModal',
+      'toggleRemove',
+      'updateCacheList'
     ]),
 
     /*
     * On cancel button tap, close modal
     */
     onCancelTap: function (e) {
-      this.closePlayersRemoveModal()
+      this.closeModal()
     },
 
     /*
@@ -78,7 +78,7 @@ export default {
       const playerIndex = rootNode.dataset.index
 
       if (playerIndex !== undefined) {
-        this.toggleRemovePlayersRemoveModal({playerIndex})
+        this.toggleRemove({playerIndex})
       }
     },
 
@@ -90,13 +90,13 @@ export default {
         player.remove
       )
 
-      this.savePlayersRemoveModal({removeList})
-      this.closePlayersRemoveModal()
+      this.saveModal({removeList})
+      this.closeModal()
     }
   },
   watch: {
     currentPlayers: function () {
-      this.updateCacheListPlayersRemoveModal({
+      this.updateCacheList({
         currentPlayers: this.currentPlayers
       })
     }

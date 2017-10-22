@@ -22,14 +22,14 @@ const mutations = {
   /*
   * Shows additional commander input
   */  
-  addCommanderPlayersAddModal (state) {
+  addCommander (state) {
     state.secondaryCommander = true
   },
 
   /*
   * Closes the modal and resets the state
   */  
-  closePlayersAddModal (state) {
+  closeModal (state) {
     state.active = false
     state.args.name = ''
     state.args.commanders.primary = ''
@@ -43,7 +43,7 @@ const mutations = {
   /*
   * Filters the datalist of commanders base on input
   */
-  filterListPlayersAddModal (state, args) {
+  filterDatalist (state, args) {
     const commandersList = args.commandersList
     const value = state.args.commanders[args.id]
     const regex = new RegExp(value, 'i')
@@ -65,7 +65,7 @@ const mutations = {
   /*
   * Opens the modal and saves args to state
   */  
-  openPlayersAddModal (state, args) {
+  openModal (state, args) {
     state.active = true
     state.callback = args.callback
   },
@@ -73,7 +73,7 @@ const mutations = {
   /*
   * Saves the values from the modal
   */
-  savePlayersAddModal (state) {
+  saveModal (state) {
     state.callback(state.args)
   }  
 }

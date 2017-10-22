@@ -69,12 +69,12 @@ export default {
     ...mapMutations('log', [
       'resetLog'
     ]),
-    ...mapMutations('playersAddModal', [
-      'openPlayersAddModal'
-    ]),
-    ...mapMutations('playersRemoveModal', [
-      'openPlayersRemoveModal'
-    ]),
+    ...mapMutations('playersAddModal', {
+      openPlayersAddModal: 'openModal'
+    }),
+    ...mapMutations('playersRemoveModal', {
+      openPlayersRemoveModal: 'openModal'
+    }),
     ...mapMutations('players', [
       'addPlayer',
       'removePlayer',
