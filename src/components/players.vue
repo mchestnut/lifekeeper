@@ -140,6 +140,7 @@
     align-items: center;
     justify-items: center;
     align-content: center;
+    justify-content: center;
   }
 
   .c-players__wrapper {
@@ -155,28 +156,102 @@
   }
 
   .c-players--1 {
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
   }
 
   .c-players--2 {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 1rem;
   }
 
   .c-players--3 {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 1rem;
+
+    .c-players__wrapper:nth-child(1) {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 1;
+    }
+
+    .c-players__wrapper:nth-child(2) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 2;
+    }
+
+    .c-players__wrapper:nth-child(3) {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 2;
+    }
   }
 
   .c-players--4 {
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+
+    .c-players__wrapper:nth-child(1) {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 1;
+    }
+
+    .c-players__wrapper:nth-child(2) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 2;
+    }
+
+    .c-players__wrapper:nth-child(3) {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 3;
+    }
+
+    .c-players__wrapper:nth-child(4) {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 2;
+    }
   }
 
   .c-players--5 {
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, auto);
+
+    .c-players__wrapper:nth-child(1) {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 1;
+    }
+
+    .c-players__wrapper:nth-child(2) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 2;
+    }
+
+    .c-players__wrapper:nth-child(3) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 3;
+    }
+
+    .c-players__wrapper:nth-child(4) {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 3;
+    }
+
+    .c-players__wrapper:nth-child(5) {
+      grid-row-start: 3;
+      grid-row-end: 5;
+      grid-column-start: 2;
+    }
   }
 
   .c-players--6 {
