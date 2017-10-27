@@ -13,7 +13,7 @@
             <menu-button>New</menu-button>
           </v-touch>
           <v-touch class="o-flex-row__item" v-on:tap="onGameToggleTap">
-            <menu-button>{{ active ? 'Stop' : 'Start'}}</menu-button>
+            <menu-button>{{active ? 'Stop' : 'Start'}}</menu-button>
           </v-touch>
         </div>
 

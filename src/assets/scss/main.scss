@@ -11,11 +11,12 @@ html {
 }
 
 body {
-  font-family: 'Matrix-Bold', Helvetica, Arial, sans-serif;
+  font-family: $serif;
   margin: 0;
 }
 
 p {
+  line-height: 1;
   margin: 0;
 }
 
@@ -63,7 +64,7 @@ text {
 }
 
 .o-form-field__input {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: $sans-serif;
   font-size: 1rem;
   text-align: center;
   height: 2.5rem;

@@ -73,6 +73,9 @@ export default {
     modal
   },
   computed: {
+    ...mapState('colors', [
+      'definitions'
+    ]),
     ...mapState('commanders', [
       'commandersList'
     ]),
@@ -95,7 +98,7 @@ export default {
       'closeModal',
       'filterDatalist',
       'saveModal',
-    ]),
+    ]),    
 
     /*
     * On add commander tap, show secondaryCommander
@@ -125,8 +128,81 @@ export default {
     * On save button tap, save modal
     */
     onSaveTap: function (e) {
+      this.setColors()
       this.saveModal()
       this.closeModal()
+    },
+
+    /*
+    * Sets the colors based on commanders
+    */
+    setColors: function () {
+      const colorNames = {
+        w: 'white',
+        u: 'blue',
+        b: 'black',
+        r: 'red',
+        g: 'green'
+      }
+      const commanderColors = []
+      const commanderPrimary = this.args.commanders.primary
+      const commanderSecondary = this.args.commanders.secondary
+
+      // Get array of all commanders' colors
+      this.commandersList.forEach(function (commander) {
+        if (commander.name === commanderPrimary || commander.name === commanderSecondary) {
+          commander.colors.forEach(function (color) {
+            let found = false
+
+            // Check if color is already in the array
+            commanderColors.forEach(function (setColor) {
+              if (setColor === color) {
+                found = true
+              }
+            })
+
+            if (!found) {
+              commanderColors.push(color)
+            }
+          })
+        }
+      })
+
+      // Set colors object based on quantity of colors
+      if (commanderColors.length === 0) {
+        this.args.colors = {
+          dark: this.definitions['colorlessDark'],
+          light: this.definitions['colorlessLight'],
+          medium: this.definitions['colorlessMedium'],
+          stroke: this.definitions['colorlessStroke']
+        }
+      } else if (commanderColors.length === 1) {
+        const colorPrimary = colorNames[commanderColors[0]]
+
+        this.args.colors = {
+          dark: this.definitions[colorPrimary + 'Dark'],
+          light: this.definitions[colorPrimary + 'Light'],
+          medium: this.definitions[colorPrimary + 'Medium'],
+          stroke: this.definitions[colorPrimary + 'Stroke']
+        }
+      } else if (commanderColors.length > 2) {
+        this.args.colors = {
+          dark: this.definitions['goldDark'],
+          light: this.definitions['goldLight'],
+          medium: this.definitions['goldMedium'],
+          stroke: this.definitions['goldStroke']
+        }
+      } else {
+        const colorPrimary = colorNames[commanderColors[0]] + 'Stroke'
+        const colorSecondary = colorNames[commanderColors[1]] + 'Stroke'
+
+        this.args.colors = {
+          dark: this.definitions['goldDark'],
+          light: this.definitions['goldLight'],
+          medium: this.definitions['goldMedium'],
+          stroke: [this.definitions[colorPrimary], this.definitions[colorSecondary]]
+        }
+      }
     }
   }
 }

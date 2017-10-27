@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import clock from './modules/clock'
+import colors from './modules/colors'
 import commanders from './modules/commanders'
 import log from './modules/log'
 import players from './modules/players'
@@ -12,6 +13,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     clock,
+    colors,
     commanders,
     log,
     players,

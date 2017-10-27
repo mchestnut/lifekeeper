@@ -4,6 +4,7 @@ const state = {
   active: false,
   args: {
     name: '',
+    colors: {},
     commanders: {
       primary: '',
       secondary: ''
@@ -35,6 +36,7 @@ const mutations = {
     state.args.commanders.primary = ''
     state.args.commanders.secondary = ''
     state.args.position = 1
+    state.args.colors = []
     state.datalist.primary = []
     state.datalist.secondary = []
     state.secondaryCommander = false

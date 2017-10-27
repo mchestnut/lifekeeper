@@ -11,8 +11,11 @@ const mutations = {
   * Adds a player to currentPlayers
   */  
   addPlayer (state, args) {
+    const position = args.position - 1
+
     // Create player object
     const player = {
+      colors: args.colors,
       commanders: {
         primary: args.commanders.primary,
         secondary: args.commanders.secondary
@@ -23,8 +26,7 @@ const mutations = {
       id: state.index,
       life: 40,
       name: args.name,
-      poison: 0,
-      position: args.position - 1
+      poison: 0
     }
 
     // Create new player damage reference
@@ -36,18 +38,18 @@ const mutations = {
 
     // Add commander damage references for players
     state.currentPlayers.forEach(function(opponent) {
-      const currentPlayerRef = {
+      const opponentPlayerRef = {
         player: opponent,
         primary: 0,
         secondary: 0
       }
 
-      opponent.damage.splice(args.position - 1, 0, newPlayerRef)
-      player.damage.push(currentPlayerRef);
+      opponent.damage.splice(position, 0, newPlayerRef)
+      player.damage.push(opponentPlayerRef);
     })
-
+    
     // Add new player to currentPlayers and increase index
-    state.currentPlayers.splice(args.position - 1, 0, player)
+    state.currentPlayers.splice(position, 0, player)
     state.index++
   },
 
