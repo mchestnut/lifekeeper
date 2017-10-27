@@ -9,32 +9,33 @@
 </template>
 
 <script>
+  export default {
+    name: 'cardDamage',
+    props: [
+      'colors'
+    ],
+    computed: {
+      background: function () {
+        return {backgroundColor: this.colors.light}
+      },
+      border: function () {
+        if (typeof this.colors.stroke === 'string') {
+          return {backgroundColor: this.colors.stroke}
+        } else {
+          const direction = 'to right, '
+          const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
+          const gradient = 'linear-gradient(' + direction + values + ')'
 
-export default {
-  name: 'cardDamage',
-  props: [
-    'colors'
-  ],
-  computed: {
-    background: function () {
-      return {backgroundColor: this.colors.light}
-    },
-    border: function () {
-      if (typeof this.colors.stroke === 'string') {
-        return {backgroundColor: this.colors.stroke}
-      } else {
-        const direction = 'to right, '
-        const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
-        const gradient = 'linear-gradient(' + direction + values + ')'
-
-        return {backgroundImage: gradient}
+          return {backgroundImage: gradient}
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-card-damage {
     position: relative;
   }
@@ -50,7 +51,7 @@ export default {
   .c-card-damage__background,
   .c-card-damage__border-inner,
   .c-card-damage__texture {
-    border: 2px solid transparent;
+    border: $unitStroke solid transparent;
     top: 0;
     right: 0;
     bottom: 0;
@@ -71,9 +72,9 @@ export default {
   }
 
   .c-card-damage__border-outer {
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
+    top: $unitStroke * -2;
+    right: $unitStroke * -2;
+    bottom: $unitStroke * -2;
+    left: $unitStroke * -2;
   }  
 </style>

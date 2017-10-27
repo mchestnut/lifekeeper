@@ -8,16 +8,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+  import { mapState } from 'vuex'
 
-export default {
-  name: 'clock',
-  computed: {
-    ...mapState('clock', [
-      'totalTime'
-    ])
+  export default {
+    name: 'clock',
+    computed: {
+      ...mapState('clock', [
+        'totalTime'
+      ])
+    }
   }
-}
 </script>
 
 <style lang="scss">
@@ -25,19 +25,18 @@ export default {
 
   .c-clock__container {
     width: 14rem;
-    height: auto;
     margin: 0 auto;
-    padding: 1rem;
-    box-shadow: 0 0 0 2px black,
-                0 0 0 6px $grayStroke;
+    padding: 0.5rem;
+    box-shadow: 0 0 0 $unitStroke black,
+                0 0 0 ($unitStroke * 3) $grayStroke;
 
     &,
     &::after,
     &::before {
-      border-top-right-radius: 6px 50%;
-      border-bottom-right-radius: 6px 50%;
-      border-bottom-left-radius: 6px 50%;
-      border-top-left-radius: 6px 50%;
+      border-top-right-radius: ($unitStroke * 3) 50%;
+      border-bottom-right-radius: ($unitStroke * 3) 50%;
+      border-bottom-left-radius: ($unitStroke * 3) 50%;
+      border-top-left-radius: ($unitStroke * 3) 50%;
     }
 
     &::after {
@@ -52,11 +51,7 @@ export default {
     margin: 0;
   }
 
-  .c-clock__label {
-    font-size: 1rem;
-  }
-
   .c-clock__time {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 </style>

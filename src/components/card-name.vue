@@ -9,32 +9,33 @@
 </template>
 
 <script>
+  export default {
+    name: 'cardName',
+    props: [
+      'colors'
+    ],
+    computed: {
+      background: function () {
+        return {backgroundColor: this.colors.medium}
+      },
+      border: function () {
+        if (typeof this.colors.stroke === 'string') {
+          return {backgroundColor: this.colors.stroke}
+        } else {
+          const direction = 'to right, '
+          const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
+          const gradient = 'linear-gradient(' + direction + values + ')'
 
-export default {
-  name: 'cardName',
-  props: [
-    'colors'
-  ],
-  computed: {
-    background: function () {
-      return {backgroundColor: this.colors.medium}
-    },
-    border: function () {
-      if (typeof this.colors.stroke === 'string') {
-        return {backgroundColor: this.colors.stroke}
-      } else {
-        const direction = 'to right, '
-        const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
-        const gradient = 'linear-gradient(' + direction + values + ')'
-
-        return {backgroundImage: gradient}
+          return {backgroundImage: gradient}
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-card-name {
     position: relative;
   }
@@ -50,8 +51,8 @@ export default {
   .c-card-name__background,
   .c-card-name__border-inner,
   .c-card-name__texture {
-    border: 2px solid transparent;
-    border-radius: 6px;
+    border: $unitStroke solid transparent;
+    border-radius: $unitStroke * 3;
     top: 0;
     right: 0;
     bottom: 0;
@@ -72,10 +73,10 @@ export default {
   }
 
   .c-card-name__border-outer {
-    border-radius: 10px;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
+    border-radius: $unitStroke * 5;
+    top: $unitStroke * -2;
+    right: $unitStroke * -2;
+    bottom: $unitStroke * -2;
+    left: $unitStroke * -2;
   }  
 </style>

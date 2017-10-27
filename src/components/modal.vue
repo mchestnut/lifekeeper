@@ -12,22 +12,22 @@
 </template>
 
 <script>
-import menuContainer from '@/components/menu-container'
+  import menuContainer from '@/components/menu-container'
 
-export default {
-  name: 'modal',
-  components: {
-    menuContainer
-  },
-  methods: {
-    close: function () {
-      this.$emit('close')
+  export default {
+    name: 'modal',
+    components: {
+      menuContainer
     },
-    onOverlayTap: function (e) {
-      this.close()
+    methods: {
+      close: function () {
+        this.$emit('close')
+      },
+      onOverlayTap: function (e) {
+        this.close()
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -54,7 +54,7 @@ export default {
 
   .c-modal__content {
     position: relative;
-    width: 25rem;
+    width: 28rem;
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -62,7 +62,8 @@ export default {
   }
 
   .c-modal__header {
-    margin-right: 1rem;
-    margin-left: 1rem;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
   }
 </style>

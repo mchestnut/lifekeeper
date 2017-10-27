@@ -32,77 +32,79 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { mapState } from 'vuex'
+  import { mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
-import menuBar from '@/components/menu-bar'
-import menuButton from '@/components/menu-button'
-import modal from '@/components/modal'
+  import menuBar from '@/components/menu-bar'
+  import menuButton from '@/components/menu-button'
+  import modal from '@/components/modal'
 
-export default {
-  name: 'playersRemoveModal',
-  components: {
-    menuBar,
-    menuButton,
-    modal
-  },
-  computed: {
-    ...mapState('players', [
-      'currentPlayers'
-    ]),
-    ...mapState('playersRemoveModal', [
-      'active',
-      'cacheList'
-    ])
-  },
-  methods: {
-    ...mapMutations('playersRemoveModal', [
-      'closeModal',
-      'saveModal',
-      'toggleRemove',
-      'updateCacheList'
-    ]),
-
-    /*
-    * On cancel button tap, close modal
-    */
-    onCancelTap: function (e) {
-      this.closeModal()
+  export default {
+    name: 'playersRemoveModal',
+    components: {
+      menuBar,
+      menuButton,
+      modal
     },
+    computed: {
+      ...mapState('players', [
+        'currentPlayers'
+      ]),
+      ...mapState('playersRemoveModal', [
+        'active',
+        'cacheList'
+      ])
+    },
+    methods: {
+      ...mapMutations('playersRemoveModal', [
+        'closeModal',
+        'saveModal',
+        'toggleRemove',
+        'updateCacheList'
+      ]),
 
-    /*
-    * On player button tap, toggle for removal
-    */
-    onPlayerTap: function (e) {
-      const rootNode = e.target.parentElement.parentElement
-      const playerIndex = rootNode.dataset.index
+      /*
+      * On cancel button tap, close modal
+      */
+      onCancelTap: function (e) {
+        this.closeModal()
+      },
 
-      if (playerIndex !== undefined) {
-        this.toggleRemove({playerIndex})
+      /*
+      * On player button tap, toggle for removal
+      */
+      onPlayerTap: function (e) {
+        const rootNode = e.target.parentElement.parentElement
+        const playerIndex = rootNode.dataset.index
+
+        if (playerIndex !== undefined) {
+          this.toggleRemove({playerIndex})
+        }
+      },
+
+      /*
+      * On save button tap, get list of players to remove and save modal
+      */
+      onSaveTap: function (e) {
+        const removeList = this.cacheList.filter(player =>
+          player.remove
+        )
+
+        this.saveModal({removeList})
+        this.closeModal()
       }
     },
-
-    /*
-    * On save button tap, get list of players to remove and save modal
-    */
-    onSaveTap: function (e) {
-      const removeList = this.cacheList.filter(player =>
-        player.remove
-      )
-
-      this.saveModal({removeList})
-      this.closeModal()
-    }
-  },
-  watch: {
-    currentPlayers: function () {
-      this.updateCacheList({
-        currentPlayers: this.currentPlayers
-      })
+    watch: {
+      currentPlayers: function () {
+        this.updateCacheList({
+          currentPlayers: this.currentPlayers
+        })
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
 </style>

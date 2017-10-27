@@ -17,53 +17,49 @@
 </template>
 
 <script>
-export default {
-  name: 'cardButtonPoison',
-  props: [
-    'player'
-  ],
-  computed: {
-    background: function () {
-      return {fill: this.player.colors.medium}
-    },
-    gradientId: function () {
-      return 'gradient' + this.player.id
-    },
-    stop1: function () {
-      if (Array.isArray(this.player.colors.stroke)) {
-        return this.player.colors.stroke[0]
-      }
+  export default {
+    name: 'cardButtonPoison',
+    props: [
+      'player'
+    ],
+    computed: {
+      background: function () {
+        return {fill: this.player.colors.medium}
+      },
+      gradientId: function () {
+        return 'gradient' + this.player.id
+      },
+      stop1: function () {
+        if (Array.isArray(this.player.colors.stroke)) {
+          return this.player.colors.stroke[0]
+        }
 
-      return ''
-    },
-    stop2: function () {
-      if (Array.isArray(this.player.colors.stroke)) {
-        return this.player.colors.stroke[1]
-      }
+        return ''
+      },
+      stop2: function () {
+        if (Array.isArray(this.player.colors.stroke)) {
+          return this.player.colors.stroke[1]
+        }
 
-      return ''
-    },
-    stroke: function () {
-      if (typeof this.player.colors.stroke === 'string') {
-        return {fill: this.player.colors.stroke}
-      } else {
-        return {fill: 'url(#' + this.gradientId + ')'}
+        return ''
+      },
+      stroke: function () {
+        if (typeof this.player.colors.stroke === 'string') {
+          return {fill: this.player.colors.stroke}
+        } else {
+          return {fill: 'url(#' + this.gradientId + ')'}
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
   @import '../assets/scss/variables.scss';
 
-  .c-card-button-poison {
-    width: 6rem;
-  }
-
   .c-card-button-poison__stroke {
     stroke: black;
-    stroke-width: 2px;
+    stroke-width: $unitStroke;
   }
 
   .c-card-button-poison__value {

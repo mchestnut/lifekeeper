@@ -9,31 +9,33 @@
 </template>
 
 <script>
-export default {
-  name: 'cardLife',
-  props: [
-    'colors'
-  ],
-  computed: {
-    background: function () {
-      return {backgroundColor: this.colors.light}
-    },
-    border: function () {
-      if (typeof this.colors.stroke === 'string') {
-        return {backgroundColor: this.colors.stroke}
-      } else {
-        const direction = 'to right, '
-        const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
-        const gradient = 'linear-gradient(' + direction + values + ')'
+  export default {
+    name: 'cardLife',
+    props: [
+      'colors'
+    ],
+    computed: {
+      background: function () {
+        return {backgroundColor: this.colors.light}
+      },
+      border: function () {
+        if (typeof this.colors.stroke === 'string') {
+          return {backgroundColor: this.colors.stroke}
+        } else {
+          const direction = 'to right, '
+          const values = this.colors.stroke[0] + ', ' + this.colors.stroke[1]
+          const gradient = 'linear-gradient(' + direction + values + ')'
 
-        return {backgroundImage: gradient}
+          return {backgroundImage: gradient}
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
 
   .c-card-life {
     position: relative;
@@ -50,11 +52,11 @@ export default {
   .c-card-life__background,
   .c-card-life__border-inner,
   .c-card-life__texture {
-    border: 2px solid transparent;
-    border-top-right-radius: 8px 50%;
-    border-bottom-right-radius: 8px 50%;
-    border-bottom-left-radius: 8px 50%;
-    border-top-left-radius: 8px 50%;
+    border: $unitStroke solid transparent;
+    border-top-right-radius: ($unitStroke * 4) 50%;
+    border-bottom-right-radius: ($unitStroke * 4) 50%;
+    border-bottom-left-radius: ($unitStroke * 4) 50%;
+    border-top-left-radius: ($unitStroke * 4) 50%;
     top: 0;
     right: 0;
     bottom: 0;
@@ -75,14 +77,14 @@ export default {
   }
 
   .c-card-life__border-outer {
-    border-width: 4px;
-    border-top-right-radius: 11px 50%;
-    border-bottom-right-radius: 11px 50%;
-    border-bottom-left-radius: 11px 50%;
-    border-top-left-radius: 11px 50%;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
+    border-width: $unitStroke * 2;
+    border-top-right-radius: ($unitStroke * 5.5) 50%;
+    border-bottom-right-radius: ($unitStroke * 5.5) 50%;
+    border-bottom-left-radius: ($unitStroke * 5.5) 50%;
+    border-top-left-radius: ($unitStroke * 5.5) 50%;
+    top: $unitStroke * -2;
+    right: $unitStroke * -2;
+    bottom: $unitStroke * -2;
+    left: $unitStroke * -2;
   } 
 </style>

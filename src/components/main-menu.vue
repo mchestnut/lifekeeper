@@ -40,124 +40,126 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+  import { mapMutations } from 'vuex'
 
-import menuBar from '@/components/menu-bar'
-import menuButton from '@/components/menu-button'
-import menuContainer from '@/components/menu-container'
+  import menuBar from '@/components/menu-bar'
+  import menuButton from '@/components/menu-button'
+  import menuContainer from '@/components/menu-container'
 
-export default {
-  name: 'mainMenu',
-  components: {
-    menuBar,
-    menuButton,
-    menuContainer
-  },
-  data () {
-    return {
-      active: false,
-      background: 'u-fill-gray-medium',
-      strokeOuter: 'u-fill-gray-stroke'
-    }
-  },
-  methods: {
-    ...mapMutations('clock', [
-      'resetClock',
-      'startClock',
-      'stopClock'
-    ]),
-    ...mapMutations('log', [
-      'resetLog'
-    ]),
-    ...mapMutations('playersAddModal', {
-      openPlayersAddModal: 'openModal'
-    }),
-    ...mapMutations('playersRemoveModal', {
-      openPlayersRemoveModal: 'openModal'
-    }),
-    ...mapMutations('players', [
-      'addPlayer',
-      'removePlayer',
-      'reorderPlayers',
-      'resetPlayers'
-    ]),
-    /*
-    * On new game tap, resets game
-    */
-    onGameNewTap: function (e) {
-      this.resetGame()
+  export default {
+    name: 'mainMenu',
+    components: {
+      menuBar,
+      menuButton,
+      menuContainer
     },
-    
-    /*
-    * On new game tap, resets game
-    */
-    onGameToggleTap: function (e) {
-      this.toggleGame()
+    data () {
+      return {
+        active: false,
+        background: 'u-fill-gray-medium',
+        strokeOuter: 'u-fill-gray-stroke'
+      }
     },
+    methods: {
+      ...mapMutations('clock', [
+        'resetClock',
+        'startClock',
+        'stopClock'
+      ]),
+      ...mapMutations('log', [
+        'resetLog'
+      ]),
+      ...mapMutations('playersAddModal', {
+        openPlayersAddModal: 'openModal'
+      }),
+      ...mapMutations('playersRemoveModal', {
+        openPlayersRemoveModal: 'openModal'
+      }),
+      ...mapMutations('players', [
+        'addPlayer',
+        'removePlayer',
+        'reorderPlayers',
+        'resetPlayers'
+      ]),
+      /*
+      * On new game tap, resets game
+      */
+      onGameNewTap: function (e) {
+        this.resetGame()
+      },
+      
+      /*
+      * On new game tap, resets game
+      */
+      onGameToggleTap: function (e) {
+        this.toggleGame()
+      },
 
-    /*
-    * On add players tap, open modal
-    */
-    onPlayersAddTap: function (e) {
-      this.openPlayersAddModal({
-        callback: this.addPlayer
-      })
-    },
+      /*
+      * On add players tap, open modal
+      */
+      onPlayersAddTap: function (e) {
+        this.openPlayersAddModal({
+          callback: this.addPlayer
+        })
+      },
 
-    /*
-    * On remove players tap, open modal
-    */
-    onPlayersRemoveTap: function (e) {
-      this.openPlayersRemoveModal({
-        callback: this.removePlayer
-      })
-    },
+      /*
+      * On remove players tap, open modal
+      */
+      onPlayersRemoveTap: function (e) {
+        this.openPlayersRemoveModal({
+          callback: this.removePlayer
+        })
+      },
 
-    /*
-    * On reorder players tap, open modal
-    */
-    onPlayersReorderTap: function (e) {
-      // this.openPlayersReorderModal()
-    },
+      /*
+      * On reorder players tap, open modal
+      */
+      onPlayersReorderTap: function (e) {
+        // this.openPlayersReorderModal()
+      },
 
-    /*
-    * Resets game components
-    */
-    resetGame: function () {
-      this.resetClock()
-      this.resetLog()
-      this.resetPlayers()
-    },
+      /*
+      * Resets game components
+      */
+      resetGame: function () {
+        this.resetClock()
+        this.resetLog()
+        this.resetPlayers()
+      },
 
-    /*
-    * Starts game and clock
-    */
-    startGame: function () {
-      this.active = true
-      this.startClock()
-    },
+      /*
+      * Starts game and clock
+      */
+      startGame: function () {
+        this.active = true
+        this.startClock()
+      },
 
-    /*
-    * Stops game and clock
-    */
-    stopGame: function () {
-      this.active = false
-      this.stopClock()
-    },
+      /*
+      * Stops game and clock
+      */
+      stopGame: function () {
+        this.active = false
+        this.stopClock()
+      },
 
-    /*
-    * Toggles game state and clock
-    */
-    toggleGame: function () {
-      this.active = !this.active
+      /*
+      * Toggles game state and clock
+      */
+      toggleGame: function () {
+        this.active = !this.active
 
-      this.active ? this.startClock() : this.stopClock()
+        this.active ? this.startClock() : this.stopClock()
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-main-menu {
     position: relative;
   }

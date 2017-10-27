@@ -6,23 +6,25 @@
 </template>
 
 <script>
-export default {
-  name: 'menuButton'
-}
+  export default {
+    name: 'menuButton'
+  }
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-menu-button {
-    width: 7rem;
+    width: 6rem;
     cursor: pointer;
   }
 
   .c-menu-button__label {
-    font-size: 24px; /* Use px to scale in SVG */
+    font-size: 28px; /* Use px to scale in SVG */
   }
 
   .c-menu-button__stroke {
     stroke: black;
-    stroke-width: 2px;
+    stroke-width: $unitStroke;
   }
 </style>

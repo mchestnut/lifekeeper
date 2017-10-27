@@ -15,30 +15,29 @@
 </template>
 
 <script>
+  export default {
+    name: 'cardOpponet',
+    props: [
+      'opponent',
+      'playerColors'
+    ],
+    computed: {
+      background: function () {
+        return {backgroundColor: this.playerColors.light}
+      },
+      border: function () {
+        if (typeof this.opponent.colors.stroke === 'string') {
+          return {backgroundColor: this.opponent.colors.stroke}
+        } else {
+          const direction = 'to right, '
+          const values = this.opponent.colors.stroke[0] + ', ' + this.opponent.colors.stroke[1]
+          const gradient = 'linear-gradient(' + direction + values + ')'
 
-export default {
-  name: 'cardOpponet',
-  props: [
-    'opponent',
-    'playerColors'
-  ],
-  computed: {
-    background: function () {
-      return {backgroundColor: this.playerColors.light}
-    },
-    border: function () {
-      if (typeof this.opponent.colors.stroke === 'string') {
-        return {backgroundColor: this.opponent.colors.stroke}
-      } else {
-        const direction = 'to right, '
-        const values = this.opponent.colors.stroke[0] + ', ' + this.opponent.colors.stroke[1]
-        const gradient = 'linear-gradient(' + direction + values + ')'
-
-        return {backgroundImage: gradient}
+          return {backgroundImage: gradient}
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -59,8 +58,8 @@ export default {
   .c-card-opponent__background,
   .c-card-opponent__border-inner,
   .c-card-opponent__texture {
-    border: 2px solid transparent;
-    border-radius: 6px;
+    border: $unitStroke solid transparent;
+    border-radius: $unitStroke * 3;
     top: 0;
     right: 0;
     bottom: 0;
@@ -81,11 +80,11 @@ export default {
   }
 
   .c-card-opponent__border-outer {
-    border-radius: 10px;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
+    border-radius: $unitStroke * 4;
+    top: $unitStroke * -1.5;
+    right: $unitStroke * -1.5;
+    bottom: $unitStroke * -1.5;
+    left: $unitStroke * -1.5;
   }
 
   .c-card-opponent__content {
@@ -99,7 +98,9 @@ export default {
 
   .c-card-opponent__name {
     text-align: left;
+    flex-basis: 8fr;
     flex-grow: 1;
+    overflow: hidden;
   }
 
   .c-card-opponent__value {
@@ -107,11 +108,11 @@ export default {
     font-size: 0.9em;
     font-weight: bold;
     text-align: center;
-    flex-basis: 1.4rem;
+    flex-basis: 2fr;
     display: flex;
   }
 
   .c-card-opponent__separator {
-    flex-basis: 0.8rem;
+    flex-basis: 1fr;
   }
 </style>

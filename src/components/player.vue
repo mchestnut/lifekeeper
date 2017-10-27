@@ -38,129 +38,127 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { mapState } from 'vuex'
+  import { mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
-import cardButtonDecked from '@/components/card-button-decked'
-import cardButtonLife from '@/components/card-button-life'
-import cardButtonPoison from '@/components/card-button-poison'
-import cardDamage from '@/components/card-damage'
-import cardLife from '@/components/card-life'
-import cardName from '@/components/card-name'
-import cardOpponent from '@/components/card-opponent'
-import cardShell from '@/components/card-shell'
+  import cardButtonDecked from '@/components/card-button-decked'
+  import cardButtonLife from '@/components/card-button-life'
+  import cardButtonPoison from '@/components/card-button-poison'
+  import cardDamage from '@/components/card-damage'
+  import cardLife from '@/components/card-life'
+  import cardName from '@/components/card-name'
+  import cardOpponent from '@/components/card-opponent'
+  import cardShell from '@/components/card-shell'
 
-export default {
-  name: 'player',
-  components: {
-    cardButtonDecked,
-    cardButtonLife,
-    cardButtonPoison,
-    cardDamage,
-    cardLife,
-    cardName,
-    cardOpponent,
-    cardShell
-  },
-  props: [
-    'index'
-  ],
-  computed: {
-    ...mapState('players', [
-      'currentPlayers'
-    ]),
-    player: function () {
-      return this.currentPlayers[this.index]
-    }
-  },
-  methods: {
-    ...mapMutations('log', [
-      'addEntry'
-    ]),
-    ...mapMutations('players', [
-      'setDamage',
-      'setDecked',
-      'setLife',
-      'setPoison'
-    ]),
-    /*
-    * On commander damage press, open modal
-    */    
-    onDamagePress: function (e) {
-      console.log('open modal')
+  export default {
+    name: 'player',
+    components: {
+      cardButtonDecked,
+      cardButtonLife,
+      cardButtonPoison,
+      cardDamage,
+      cardLife,
+      cardName,
+      cardOpponent,
+      cardShell
     },
-    
-    /*
-    * On commander damage tap, increment damage and add log entry
-    */
-    onDamageTap: function (e) {
-      this.setDamage()
-      this.addEntry()
+    props: [
+      'index'
+    ],
+    computed: {
+      ...mapState('players', [
+        'currentPlayers'
+      ]),
+      player: function () {
+        return this.currentPlayers[this.index]
+      }
     },
-    
-    /*
-    * On decked icon tap, toggle decked value and add log entry
-    */
-    onDeckedTap: function (e) {
-      this.setDecked()
-      this.addEntry()
-    },
-    
-    /*
-    * On life minus tap, decrement life total and add log entry
-    */
-    onLifeMinusTap: function (e) {
-      this.setLife()
-      this.addEntry()
-    },
-    
-    /*
-    * On life plus tap, increment life total and add log entry
-    */
-    onLifePlusTap: function (e) {
-      this.setLife()
-      this.addEntry()
-    },
-    
-    /*
-    * On life press, open modal
-    */
-    onLifePress: function (e) {
-      console.log('open modal')
-    },
-    
-    /*
-    * On life tap, increment life total and add log entry
-    */
-    onLifeTap: function (e) {
-      this.setLife()
-      this.addEntry()
-    },
-    
-    /*
-    * On poison icon press, open modal
-    */
-    onPoisonPress: function (e) {
-      console.log('open modal')
-    },
-    
-    /*
-    * On poison icon tap, increment life total and add log entry
-    */
-    onPoisonTap: function (e) {
-      this.setPoison()
-      this.addEntry()
+    methods: {
+      ...mapMutations('log', [
+        'addEntry'
+      ]),
+      ...mapMutations('players', [
+        'setDamage',
+        'setDecked',
+        'setLife',
+        'setPoison'
+      ]),
+      /*
+      * On commander damage press, open modal
+      */    
+      onDamagePress: function (e) {
+        console.log('open modal')
+      },
+      
+      /*
+      * On commander damage tap, increment damage and add log entry
+      */
+      onDamageTap: function (e) {
+        this.setDamage()
+        this.addEntry()
+      },
+      
+      /*
+      * On decked icon tap, toggle decked value and add log entry
+      */
+      onDeckedTap: function (e) {
+        this.setDecked()
+        this.addEntry()
+      },
+      
+      /*
+      * On life minus tap, decrement life total and add log entry
+      */
+      onLifeMinusTap: function (e) {
+        this.setLife()
+        this.addEntry()
+      },
+      
+      /*
+      * On life plus tap, increment life total and add log entry
+      */
+      onLifePlusTap: function (e) {
+        this.setLife()
+        this.addEntry()
+      },
+      
+      /*
+      * On life press, open modal
+      */
+      onLifePress: function (e) {
+        console.log('open modal')
+      },
+      
+      /*
+      * On life tap, increment life total and add log entry
+      */
+      onLifeTap: function (e) {
+        this.setLife()
+        this.addEntry()
+      },
+      
+      /*
+      * On poison icon press, open modal
+      */
+      onPoisonPress: function (e) {
+        console.log('open modal')
+      },
+      
+      /*
+      * On poison icon tap, increment life total and add log entry
+      */
+      onPoisonTap: function (e) {
+        this.setPoison()
+        this.addEntry()
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
   @import '../assets/scss/variables.scss';
 
   .c-player {
-    width: 100%;
-    max-width: 24rem;
     padding: 1rem;
     z-index: 1;
   }
@@ -181,19 +179,18 @@ export default {
   }
 
   .c-player__name {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
 
   .c-player__life {
     font-family: $sans-serif;
-    font-size: 10rem;
+    font-size: 7rem;
     font-weight: bold;
-    width: 90%;
-    margin: 4px auto;
+    margin: ($unitStroke * 2) 1rem;
   }
 
   .c-player__commander {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   .c-player__damage {
@@ -201,35 +198,37 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    width: 90%;
-    min-height: 11rem;
-    margin: 4px auto 1rem;
-    padding-bottom: 1rem;
+    min-height: 12vh;
+    margin: ($unitStroke * 2)  1rem ($unitStroke * 5);
+    padding-bottom: $unitStroke * 5;
   }
 
   .c-player__opponent {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     flex-basis: 45%;
-    padding: 0.5rem;
+    margin: $unitStroke * 2;
+    padding: 0.3rem 0.5rem;
   }
 
   .c-player__button-life {
+    width: 2.5rem;
     position: absolute;
-    top: 8rem;
+    top: 6rem;
   }
 
   .c-player__button-status {
+    width: 5rem;
     position: absolute;
     bottom: 0.7rem;
   }
 
   .c-player__button-life--minus,
   .c-player__button-status--decked {
-    left: .7rem;
+    left: 0.7rem;
   }
 
   .c-player__button-life--plus,
   .c-player__button-status--poison {
-    right: .7rem;
+    right: 0.7rem;
   }
 </style>

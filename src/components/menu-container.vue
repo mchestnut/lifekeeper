@@ -5,9 +5,9 @@
 </template>
 
 <script>
-export default {
-  name: 'menuContainer'
-}
+  export default {
+    name: 'menuContainer'
+  }
 </script>
 
 <style lang="scss">
@@ -15,10 +15,10 @@ export default {
 
   .c-menu-container {
     padding: 1rem;
-    border: 2px solid;
-    border-radius: 3px;
-    box-shadow: 0 0 0 4px $grayStroke,
-                0 0 20px 4px rgba(0, 0, 0, 0.7);
+    border: $unitStroke solid;
+    border-radius: $unitStroke * 1.5;
+    box-shadow: 0 0 0 ($unitStroke * 2) $grayStroke,
+                0 0 ($unitStroke * 10) ($unitStroke * 2) rgba(0, 0, 0, 0.7);
 
     &::after {
       background-color: $grayMedium;

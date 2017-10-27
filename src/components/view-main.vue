@@ -41,7 +41,7 @@ export default {
 
   .c-view-main {
     display: grid;
-    grid-template-columns: auto 28rem;
+    grid-template-columns: 1fr auto;
     position: absolute;
     top: 0;
     right: 0;
@@ -55,7 +55,7 @@ export default {
   }
 
   .c-view-main__players {
-    border-right: 1px solid;
+    border-right: $unitStroke solid;
 
     &::after {
       background-color: $grayMedium;
@@ -64,6 +64,7 @@ export default {
   }
 
   .c-view-main__sidebar {
+    width: 24rem;
 
     &::after {
       background-color: $grayDark;
@@ -81,27 +82,5 @@ export default {
 
   .c-view-sidebar {
     display: grid;
-  }
-
-  @media screen and (max-aspect-ratio: 1/1) {
-    .c-view-main {
-      grid-template-columns: auto;
-      grid-template-rows: auto 22rem;
-    }
-
-    .c-view-main__players {
-      border-right: none;
-      border-bottom: 1px solid;
-    }
-
-    .c-view-sidebar {
-      grid-template-rows: auto auto;
-      grid-template-columns: 28rem 25rem;
-    }
-
-    .c-view-sidebar__main-menu {
-      grid-column-start: 1;
-      grid-row-start: 2;
-    }
   }
 </style>

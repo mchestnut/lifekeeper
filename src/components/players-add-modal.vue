@@ -58,155 +58,157 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { mapState } from 'vuex'
+  import { mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
-import menuBar from '@/components/menu-bar'
-import menuButton from '@/components/menu-button'
-import modal from '@/components/modal'
+  import menuBar from '@/components/menu-bar'
+  import menuButton from '@/components/menu-button'
+  import modal from '@/components/modal'
 
-export default {
-  name: 'playersAddModal',
-  components: {
-    menuBar,
-    menuButton,
-    modal
-  },
-  computed: {
-    ...mapState('colors', [
-      'definitions'
-    ]),
-    ...mapState('commanders', [
-      'commandersList'
-    ]),
-    ...mapState('players', [
-      'currentPlayers'
-    ]),
-    ...mapState('playersAddModal', [
-      'active',
-      'args',
-      'datalist',
-      'secondaryCommander'
-    ]),
-    playersQty: function () {
-      return this.currentPlayers.length + 1
-    }
-  },
-  methods: {
-    ...mapMutations('playersAddModal', [
-      'addCommander',
-      'closeModal',
-      'filterDatalist',
-      'saveModal',
-    ]),    
-
-    /*
-    * On add commander tap, show secondaryCommander
-    */
-    onAddCommanderTap: function (e) {
-      this.addCommander()
+  export default {
+    name: 'playersAddModal',
+    components: {
+      menuBar,
+      menuButton,
+      modal
     },
-
-    /*
-    * On cancel button tap, close modal
-    */
-    onCancelTap: function (e) {
-      this.closeModal()
-    },
-
-    /*
-    * On commander field change, filter commanders list
-    */
-    onCommanderChange: function (id) {
-      this.filterDatalist({
-        commandersList: this.commandersList,
-        id: id
-      })
-    },
-
-    /*
-    * On save button tap, save modal
-    */
-    onSaveTap: function (e) {
-      this.setColors()
-      this.saveModal()
-      this.closeModal()
-    },
-
-    /*
-    * Sets the colors based on commanders
-    */
-    setColors: function () {
-      const colorNames = {
-        w: 'white',
-        u: 'blue',
-        b: 'black',
-        r: 'red',
-        g: 'green'
+    computed: {
+      ...mapState('colors', [
+        'definitions'
+      ]),
+      ...mapState('commanders', [
+        'commandersList'
+      ]),
+      ...mapState('players', [
+        'currentPlayers'
+      ]),
+      ...mapState('playersAddModal', [
+        'active',
+        'args',
+        'datalist',
+        'secondaryCommander'
+      ]),
+      playersQty: function () {
+        return this.currentPlayers.length + 1
       }
-      const commanderColors = []
-      const commanderPrimary = this.args.commanders.primary
-      const commanderSecondary = this.args.commanders.secondary
+    },
+    methods: {
+      ...mapMutations('playersAddModal', [
+        'addCommander',
+        'closeModal',
+        'filterDatalist',
+        'saveModal',
+      ]),    
 
-      // Get array of all commanders' colors
-      this.commandersList.forEach(function (commander) {
-        if (commander.name === commanderPrimary || commander.name === commanderSecondary) {
-          commander.colors.forEach(function (color) {
-            let found = false
+      /*
+      * On add commander tap, show secondaryCommander
+      */
+      onAddCommanderTap: function (e) {
+        this.addCommander()
+      },
 
-            // Check if color is already in the array
-            commanderColors.forEach(function (setColor) {
-              if (setColor === color) {
-                found = true
+      /*
+      * On cancel button tap, close modal
+      */
+      onCancelTap: function (e) {
+        this.closeModal()
+      },
+
+      /*
+      * On commander field change, filter commanders list
+      */
+      onCommanderChange: function (id) {
+        this.filterDatalist({
+          commandersList: this.commandersList,
+          id: id
+        })
+      },
+
+      /*
+      * On save button tap, save modal
+      */
+      onSaveTap: function (e) {
+        this.setColors()
+        this.saveModal()
+        this.closeModal()
+      },
+
+      /*
+      * Sets the colors based on commanders
+      */
+      setColors: function () {
+        const colorNames = {
+          w: 'white',
+          u: 'blue',
+          b: 'black',
+          r: 'red',
+          g: 'green'
+        }
+        const commanderColors = []
+        const commanderPrimary = this.args.commanders.primary
+        const commanderSecondary = this.args.commanders.secondary
+
+        // Get array of all commanders' colors
+        this.commandersList.forEach(function (commander) {
+          if (commander.name === commanderPrimary || commander.name === commanderSecondary) {
+            commander.colors.forEach(function (color) {
+              let found = false
+
+              // Check if color is already in the array
+              commanderColors.forEach(function (setColor) {
+                if (setColor === color) {
+                  found = true
+                }
+              })
+
+              if (!found) {
+                commanderColors.push(color)
               }
             })
+          }
+        })
 
-            if (!found) {
-              commanderColors.push(color)
-            }
-          })
-        }
-      })
+        // Set colors object based on quantity of colors
+        if (commanderColors.length === 0) {
+          this.args.colors = {
+            dark: this.definitions['colorlessDark'],
+            light: this.definitions['colorlessLight'],
+            medium: this.definitions['colorlessMedium'],
+            stroke: this.definitions['colorlessStroke']
+          }
+        } else if (commanderColors.length === 1) {
+          const colorPrimary = colorNames[commanderColors[0]]
 
-      // Set colors object based on quantity of colors
-      if (commanderColors.length === 0) {
-        this.args.colors = {
-          dark: this.definitions['colorlessDark'],
-          light: this.definitions['colorlessLight'],
-          medium: this.definitions['colorlessMedium'],
-          stroke: this.definitions['colorlessStroke']
-        }
-      } else if (commanderColors.length === 1) {
-        const colorPrimary = colorNames[commanderColors[0]]
+          this.args.colors = {
+            dark: this.definitions[colorPrimary + 'Dark'],
+            light: this.definitions[colorPrimary + 'Light'],
+            medium: this.definitions[colorPrimary + 'Medium'],
+            stroke: this.definitions[colorPrimary + 'Stroke']
+          }
+        } else if (commanderColors.length > 2) {
+          this.args.colors = {
+            dark: this.definitions['goldDark'],
+            light: this.definitions['goldLight'],
+            medium: this.definitions['goldMedium'],
+            stroke: this.definitions['goldStroke']
+          }
+        } else {
+          const colorPrimary = colorNames[commanderColors[0]] + 'Stroke'
+          const colorSecondary = colorNames[commanderColors[1]] + 'Stroke'
 
-        this.args.colors = {
-          dark: this.definitions[colorPrimary + 'Dark'],
-          light: this.definitions[colorPrimary + 'Light'],
-          medium: this.definitions[colorPrimary + 'Medium'],
-          stroke: this.definitions[colorPrimary + 'Stroke']
-        }
-      } else if (commanderColors.length > 2) {
-        this.args.colors = {
-          dark: this.definitions['goldDark'],
-          light: this.definitions['goldLight'],
-          medium: this.definitions['goldMedium'],
-          stroke: this.definitions['goldStroke']
-        }
-      } else {
-        const colorPrimary = colorNames[commanderColors[0]] + 'Stroke'
-        const colorSecondary = colorNames[commanderColors[1]] + 'Stroke'
-
-        this.args.colors = {
-          dark: this.definitions['goldDark'],
-          light: this.definitions['goldLight'],
-          medium: this.definitions['goldMedium'],
-          stroke: [this.definitions[colorPrimary], this.definitions[colorSecondary]]
+          this.args.colors = {
+            dark: this.definitions['goldDark'],
+            light: this.definitions['goldLight'],
+            medium: this.definitions['goldMedium'],
+            stroke: [this.definitions[colorPrimary], this.definitions[colorSecondary]]
+          }
         }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
 </style>

@@ -8,20 +8,22 @@
 </template>
 
 <script>
-export default {
-  name: 'cardShell',
-  props: [
-    'colors'
-  ],
-  computed: {
-    background: function () {
-      return {backgroundColor: this.colors.dark}
+  export default {
+    name: 'cardShell',
+    props: [
+      'colors'
+    ],
+    computed: {
+      background: function () {
+        return {backgroundColor: this.colors.dark}
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-card-shell {
     position: relative;
   }
@@ -29,8 +31,8 @@ export default {
   .c-card-shell__background,
   .c-card-shell__border-inner,
   .c-card-shell__texture {
-    border: 8px solid transparent;
-    border-radius: 16px;
+    border: ($unitStroke * 4) solid transparent;
+    border-radius: $unitStroke * 8;
     position: absolute;
     top: 0;
     right: 0;
@@ -50,6 +52,6 @@ export default {
 
   .c-card-shell__border-inner {
     border-color: black;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.8);
+    box-shadow: 0 ($unitStroke / 1) ($unitStroke * 1.5) 0 rgba(0, 0, 0, 0.8);
   }
 </style>

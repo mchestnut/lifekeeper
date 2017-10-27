@@ -5,14 +5,15 @@
 </template>
 
 <script>
-export default {
-  name: 'menuBar'
-}
+  export default {
+    name: 'menuBar'
+  }
 </script>
 
 <style lang="scss">
+  @import '../assets/scss/variables.scss';
+  
   .c-menu-bar {
-    width: 86px;
-    height: 3px;
+    width: 5.5rem;
   }
 </style>
