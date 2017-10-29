@@ -12,6 +12,8 @@ const mutations = {
   */  
   addPlayer (state, args) {
     const position = args.position - 1
+    const opponentsA = []
+    const opponentsB = []
 
     // Create player object
     const player = {
@@ -37,16 +39,33 @@ const mutations = {
     }
 
     // Add commander damage references for players
-    state.currentPlayers.forEach(function(opponent) {
+    state.currentPlayers.forEach(function(opponent, opponentIndex) {
       const opponentPlayerRef = {
         player: opponent,
         primary: 0,
         secondary: 0
       }
+      let currentIndex = 0
 
-      opponent.damage.splice(position, 0, newPlayerRef)
-      player.damage.push(opponentPlayerRef);
+      if (opponentIndex < position) {
+        opponentsA.push(opponentPlayerRef)
+
+        currentIndex = position - opponentIndex - 1
+      } else {
+        opponentsB.push(opponentPlayerRef)
+
+        currentIndex = position - opponentIndex
+
+        if (currentIndex === 0) {
+          currentIndex = state.currentPlayers.length
+        }
+      }
+
+      opponent.damage.splice(currentIndex, 0, newPlayerRef)
     })
+
+    player.damage.push(...opponentsB)
+    player.damage.push(...opponentsA)
     
     // Add new player to currentPlayers and increase index
     state.currentPlayers.splice(position, 0, player)
@@ -69,6 +88,19 @@ const mutations = {
     state.currentPlayers.forEach(function (player, index) {
       if (player.id === args.id) {
         playerIndex = index
+      } else {
+        let opponentIndex = -1
+
+        player.damage.forEach(function (opponent, index) {
+
+          if (opponent.player.id === args.id) {
+            opponentIndex = index
+          }
+        })
+
+        if (opponentIndex > -1) {
+          player.damage.splice(opponentIndex, 1)
+        }
       }
     })
 

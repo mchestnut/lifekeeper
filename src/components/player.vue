@@ -197,6 +197,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    align-content: flex-start;
     justify-content: space-around;
     min-height: 12vh;
     margin: ($unitStroke * 2)  1rem ($unitStroke * 5);

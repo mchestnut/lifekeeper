@@ -71,6 +71,6 @@
 
   .c-card-button-decked__stroke {
     stroke: black;
-    stroke-width: $unitStroke;
+    stroke-width: $unitStroke * 1.5;
   }
 </style>

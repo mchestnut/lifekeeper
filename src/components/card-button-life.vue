@@ -55,6 +55,6 @@
 
   .c-card-button-life__stroke {
     stroke: black;
-    stroke-width: $unitStroke;
+    stroke-width: $unitStroke * 1.5;
   }
 </style>

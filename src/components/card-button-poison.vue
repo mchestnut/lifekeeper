@@ -59,7 +59,7 @@
 
   .c-card-button-poison__stroke {
     stroke: black;
-    stroke-width: $unitStroke;
+    stroke-width: $unitStroke * 1.5;
   }
 
   .c-card-button-poison__value {

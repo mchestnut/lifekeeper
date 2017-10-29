@@ -65,7 +65,7 @@
           primary: 'Scion of the Ur-Dragon',
           secondary: ''
         },
-        position: 1
+        position: 3
       })
       
       this.addPlayer({
