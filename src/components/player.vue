@@ -4,36 +4,48 @@
       <p>{{player.name}}</p>
     </card-name>
 
-    <card-life class="c-player__life" v-bind:colors="player.colors">
-      <p>{{player.life}}</p>
-    </card-life>
+    <v-touch v-on:tap="onLifeTap" v-on:press="onLifePress" class="c-player__life">
+      <card-life v-bind:colors="player.colors">
+        <p>{{player.life}}</p>
+      </card-life>
+    </v-touch>
 
-    <card-button-life class="c-player__button-life c-player__button-life--minus" v-bind:player="player">
-      <path d="M0,9.01H22.37V18.52H0Z"/>
-    </card-button-life>
+    <v-touch v-on:tap="onLifeMinusTap" class="c-player__button-life c-player__button-life--minus">
+      <card-button-life v-bind:player="player">
+        <path d="M0,9.01H22.37V18.52H0Z"/>
+      </card-button-life>
+    </v-touch>
 
-    <card-button-life class="c-player__button-life c-player__button-life--plus" v-bind:player="player">
-      <path d="M0,9.51H9.51V0h6.43V9.51h9.51v6.43H15.94v9.51H9.51V15.94H0Z"/>
-    </card-button-life>
+    <v-touch v-on:tap="onLifePlusTap" class="c-player__button-life c-player__button-life--plus">
+      <card-button-life v-bind:player="player">
+        <path d="M0,9.51H9.51V0h6.43V9.51h9.51v6.43H15.94v9.51H9.51V15.94H0Z"/>
+      </card-button-life>
+    </v-touch>
 
     <card-name class="c-player__commander" v-bind:colors="player.colors">
       <p>{{player.commanders.primary}} {{player.commanders.secondary}}</p>
     </card-name>
 
     <card-damage class="c-player__damage" v-bind:colors="player.colors">
-      <card-opponent v-for="(opponent, index) of player.damage" v-bind:key="index" class="c-player__opponent" v-bind:opponent="opponent.player" v-bind:playerColors="player.colors">
-        <p slot="name">{{opponent.player.name}}</p>
-        <p slot="primary">{{opponent.primary}}</p>
-        <p slot="secondary">{{opponent.secondary}}</p>
-      </card-opponent>
+      <v-touch v-for="(opponent, index) of player.damage" v-bind:key="index" v-on:tap="onDamageTap" v-on:press="onDamagePress" class="c-player__opponent">
+        <card-opponent v-bind:opponent="opponent.player" v-bind:playerColors="player.colors">
+          <p slot="name">{{opponent.player.name}}</p>
+          <p slot="primary">{{opponent.primary}}</p>
+          <p slot="secondary">{{opponent.secondary}}</p>
+        </card-opponent>
+      </v-touch>
     </card-damage>
 
-    <card-button-decked class="c-player__button-status c-player__button-status--decked" v-bind:player="player">
-    </card-button-decked>
+    <v-touch v-on:tap="onDeckedTap" class="c-player__button-status c-player__button-status--decked">
+      <card-button-decked v-bind:player="player">
+      </card-button-decked>
+    </v-touch>
 
-    <card-button-poison class="c-player__button-status c-player__button-status--poison" v-bind:player="player">
-      {{player.poison}}
-    </card-button-poison>
+    <v-touch v-on:tap="onPoisonTap" v-on:press="onPoisonPress" class="c-player__button-status c-player__button-status--poison">
+      <card-button-poison v-bind:player="player">
+        {{player.poison}}
+      </card-button-poison>
+    </v-touch>
   </card-shell>
 </template>
 
@@ -186,7 +198,7 @@
     font-family: $sans-serif;
     font-size: 7rem;
     font-weight: bold;
-    margin: ($unitStroke * 2) 1rem;
+    margin: 0 1rem;
   }
 
   .c-player__commander {
@@ -208,17 +220,16 @@
     font-size: 0.9rem;
     flex-basis: 45%;
     margin: $unitStroke * 2;
-    padding: 0.3rem 0.5rem;
   }
 
   .c-player__button-life {
-    width: 2.5rem;
+    width: 2.25rem;
     position: absolute;
     top: 6rem;
   }
 
   .c-player__button-status {
-    width: 5rem;
+    width: 4.5rem;
     position: absolute;
     bottom: 0.7rem;
   }

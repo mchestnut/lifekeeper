@@ -44,6 +44,7 @@
   @import '../assets/scss/variables.scss';
 
   .c-card-opponent {
+    padding: 0.3rem 0.5rem;
     position: relative;
   }
 
