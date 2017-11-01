@@ -6,6 +6,7 @@ import commanders from './modules/commanders'
 import log from './modules/log'
 import players from './modules/players'
 import playersAddModal from './modules/players-add-modal'
+import playersInputModal from './modules/players-input-modal'
 import playersRemoveModal from './modules/players-remove-modal'
 
 Vue.use(Vuex)
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     log,
     players,
     playersAddModal,
+    playersInputModal,
     playersRemoveModal
   }
 })

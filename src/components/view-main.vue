@@ -1,15 +1,17 @@
 <template>
   <div class="c-view-main">
-    <div class="c-view-main__players u-background-texture">
+    <div class="c-view-main__background"></div>
+    <div class="c-view-main__players">
       <players></players>
     </div>
-    <div class="c-view-main__sidebar c-view-sidebar u-background-texture">
+    <div class="c-view-main__sidebar c-view-sidebar">
       <clock class="c-view-sidebar__clock"></clock>
       <main-menu class="c-view-sidebar__main-menu"></main-menu>
       <log class="c-view-sidebar__log"></log>
     </div>
     <div class="c-view-main__modals">
       <players-add-modal></players-add-modal>
+      <players-input-modal></players-input-modal>
       <players-remove-modal></players-remove-modal>
     </div>
   </div>
@@ -21,6 +23,7 @@ import log from '@/components/log'
 import mainMenu from '@/components/main-menu'
 import players from '@/components/players'
 import playersAddModal from '@/components/players-add-modal'
+import playersInputModal from '@/components/players-input-modal'
 import playersRemoveModal from '@/components/players-remove-modal'
 
 export default {
@@ -31,6 +34,7 @@ export default {
     mainMenu,
     players,
     playersAddModal,
+    playersInputModal,
     playersRemoveModal
   }
 }
@@ -39,9 +43,9 @@ export default {
 <style lang="scss">
   @import '../assets/scss/variables.scss';
 
-  .c-view-main {
-    display: grid;
-    grid-template-columns: 1fr auto;
+  .c-view-main,
+  .c-view-main__background,
+  .c-view-main__modals {
     position: absolute;
     top: 0;
     right: 0;
@@ -49,9 +53,32 @@ export default {
     left: 0;
   }
 
+  .c-view-main {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  .c-view-main__background {
+    z-index: -1;
+    background-image: url('../assets/img/texture.jpg');
+    background-size: cover;
+  }
+
   .c-view-main__players,
   .c-view-main__sidebar {
     padding: 1rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.95;
+    }
   }
 
   .c-view-main__players {
@@ -59,25 +86,15 @@ export default {
 
     &::after {
       background-color: $grayMedium;
-      opacity: 0.95;
     }
   }
 
   .c-view-main__sidebar {
-    width: 24rem;
+    width: 23rem;
 
     &::after {
       background-color: $grayDark;
-      opacity: 0.95;
     }
-  }
-
-  .c-view-main__modals {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
   }
 
   .c-view-sidebar {

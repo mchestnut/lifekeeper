@@ -31,20 +31,20 @@ const mutations = {
       poison: 0
     }
 
-    // Create new player damage reference
-    const newPlayerRef = {
-      player: player,
-      primary: 0,
-      secondary: 0
-    }
-
     // Add commander damage references for players
     state.currentPlayers.forEach(function(opponent, opponentIndex) {
+      const newPlayerRef = {
+        player: player,
+        primary: 0,
+        secondary: 0
+      }
+
       const opponentPlayerRef = {
         player: opponent,
         primary: 0,
         secondary: 0
       }
+
       let currentIndex = 0
 
       if (opponentIndex < position) {
@@ -70,13 +70,6 @@ const mutations = {
     // Add new player to currentPlayers and increase index
     state.currentPlayers.splice(position, 0, player)
     state.index++
-  },
-
-  /*
-  * Parses string for math statements and runs it
-  */  
-  parseMath (state, args) {
-    console.log('parseMath')
   },
 
   /*
@@ -124,31 +117,50 @@ const mutations = {
   },
 
   /*
-  * Sets commander damage for a player and checks if player is dead
+  * Sets commander damage for a player
   */  
   setDamage (state, args) {
-    console.log('setDamage')
+    const player = state.currentPlayers[args.index]
+    const opponent = player.damage[args.opponentIndex]
+
+    opponent[args.commander] = parseInt(args.value, 10)
+  },
+
+  /*
+  * Sets dead status for a player
+  */
+  setDead (state, args) {
+    const player = state.currentPlayers[args.index]
+
+    player.dead = args.value
+    console.log(player.dead)
   },
 
   /*
   * Sets decked value for a player
   */  
   setDecked (state, args) {
-    console.log('setDecked')
+    const player = state.currentPlayers[args.index]
+
+    player.decked = args.value
   },
 
   /*
-  * Sets life value for a player and checks if player is dead
+  * Sets life value for a player
   */  
   setLife (state, args) {
-    console.log('setLife')
+    const player = state.currentPlayers[args.index]
+
+    player.life = parseInt(args.value, 10)
   },
 
   /*
-  * Sets poison value for a player and checks if player is dead
+  * Sets poison value for a player
   */  
   setPoison (state, args) {
-    console.log('setPoison')
+    const player = state.currentPlayers[args.index]
+
+    player.poison = parseInt(args.value, 10)
   }
 }
 

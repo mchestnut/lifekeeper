@@ -90,7 +90,7 @@
 
   .c-card-opponent__content {
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
 
     p {
       width: 100%; // Over-ride for slot p
@@ -99,21 +99,15 @@
 
   .c-card-opponent__name {
     text-align: left;
-    flex-basis: 8fr;
     flex-grow: 1;
     overflow: hidden;
   }
 
   .c-card-opponent__value {
     font-family: $sans-serif;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: bold;
     text-align: center;
-    flex-basis: 2fr;
     display: flex;
-  }
-
-  .c-card-opponent__separator {
-    flex-basis: 1fr;
   }
 </style>

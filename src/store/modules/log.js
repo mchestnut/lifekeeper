@@ -17,6 +17,7 @@ const mutations = {
   */
   addEntry (state, args) {
     console.log('addEntry')
+    console.dir(args)
   },
   
   /*

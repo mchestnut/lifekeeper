@@ -1,17 +1,22 @@
 <template>
   <div class="c-clock">
-    <div class="c-clock__container u-background-texture">
+    <clock-container>
       <p class="c-clock__label">Game Clock</p>
       <p class="c-clock__time">5:00:00</p>
-    </div>
+    </clock-container>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
 
+  import clockContainer from '@/components/clock-container'
+
   export default {
     name: 'clock',
+    components: {
+      clockContainer
+    },
     computed: {
       ...mapState('clock', [
         'totalTime'
@@ -23,26 +28,10 @@
 <style lang="scss">
   @import '../assets/scss/variables.scss';
 
-  .c-clock__container {
+  .c-clock {
     width: 14rem;
     margin: 0 auto;
-    padding: 0.5rem;
-    box-shadow: 0 0 0 $unitStroke black,
-                0 0 0 ($unitStroke * 3) $grayStroke;
-
-    &,
-    &::after,
-    &::before {
-      border-top-right-radius: ($unitStroke * 3) 50%;
-      border-bottom-right-radius: ($unitStroke * 3) 50%;
-      border-bottom-left-radius: ($unitStroke * 3) 50%;
-      border-top-left-radius: ($unitStroke * 3) 50%;
-    }
-
-    &::after {
-      background-color: $grayStroke;
-      opacity: 0.95;
-    }
+    position: relative;
   }
 
   .c-clock__label,

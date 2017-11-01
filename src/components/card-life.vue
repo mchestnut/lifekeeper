@@ -77,7 +77,6 @@
   }
 
   .c-card-life__border-outer {
-    border-width: $unitStroke * 2;
     border-top-right-radius: ($unitStroke * 5.5) 50%;
     border-bottom-right-radius: ($unitStroke * 5.5) 50%;
     border-bottom-left-radius: ($unitStroke * 5.5) 50%;
