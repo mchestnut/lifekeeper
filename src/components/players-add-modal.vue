@@ -14,7 +14,7 @@
 
       <div class="o-form-field">
         <label class="o-form-field__label" for="commander-name">Commander name</label>
-        <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary" v-on:input="onCommanderChange('primary')" list="primary-list"/>
+        <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary.name" v-on:input="onCommanderChange('primary')" list="primary-list"/>
       </div>
 
       <div class="o-icon-button" v-show="secondaryCommander === false">
@@ -26,7 +26,7 @@
 
       <div class="o-form-field" v-show="secondaryCommander">
         <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
-        <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary" v-on:input="onCommanderChange('secondary')"  list="secondary-list"/>
+        <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary.name" v-on:input="onCommanderChange('secondary')"  list="secondary-list"/>
       </div>
 
       <div class="o-form-field">
@@ -98,7 +98,36 @@
         'closeModal',
         'filterDatalist',
         'saveModal',
-      ]),    
+      ]),
+
+      /*
+      * Gets array of colors from both commanders
+      */
+      getCommanderColors: function () {
+        const commanderColors = []
+
+        function addColors (commander) {
+          commander.colors.forEach(function (color) {
+            let found = false
+
+            // Check if color is already in the array
+            commanderColors.forEach(function (setColor) {
+              if (setColor === color) {
+                found = true
+              }
+            })
+
+            if (!found) {
+              commanderColors.push(color)
+            }
+          })
+        }
+
+        addColors(this.args.commanders.primary)
+        addColors(this.args.commanders.secondary)
+
+        return commanderColors
+      },
 
       /*
       * On add commander tap, show secondaryCommander
@@ -128,13 +157,14 @@
       * On save button tap, save modal
       */
       onSaveTap: function (e) {
+        this.setCommanders()
         this.setColors()
         this.saveModal()
         this.closeModal()
       },
 
       /*
-      * Sets the colors based on commanders
+      * Set player colors based on commander colors
       */
       setColors: function () {
         const colorNames = {
@@ -144,31 +174,10 @@
           r: 'red',
           g: 'green'
         }
-        const commanderColors = []
-        const commanderPrimary = this.args.commanders.primary
-        const commanderSecondary = this.args.commanders.secondary
 
-        // Get array of all commanders' colors
-        this.commandersList.forEach(function (commander) {
-          if (commander.name === commanderPrimary || commander.name === commanderSecondary) {
-            commander.colors.forEach(function (color) {
-              let found = false
+        const commanderColors = this.getCommanderColors()
 
-              // Check if color is already in the array
-              commanderColors.forEach(function (setColor) {
-                if (setColor === color) {
-                  found = true
-                }
-              })
-
-              if (!found) {
-                commanderColors.push(color)
-              }
-            })
-          }
-        })
-
-        // Set colors object based on quantity of colors
+        // Set based on quantity of colors
         if (commanderColors.length === 0) {
           this.args.colors = {
             dark: this.definitions['colorlessDark'],
@@ -203,6 +212,21 @@
             stroke: [this.definitions[colorPrimary], this.definitions[colorSecondary]]
           }
         }
+      },      
+
+      /*
+      * Sets the commanders if matched to list, else sets blank values
+      */
+      setCommanders: function () {
+        const root = this
+
+        this.commandersList.forEach(function (commander) {
+          if (commander.name === root.args.commanders.primary.name) {
+            root.args.commanders.primary = commander
+          } else if (commander.name === root.args.commanders.secondary.name) {
+            root.args.commanders.secondary = commander
+          }
+        })
       }
     }
   }

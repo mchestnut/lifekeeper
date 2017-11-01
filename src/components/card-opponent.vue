@@ -8,8 +8,8 @@
     <div class="c-card-opponent__content">
       <div class="c-card-opponent__name"><slot name="name"></slot></div>
       <div class="c-card-opponent__value"><slot name="primary"></slot></div>
-      <div class="c-card-opponent__separator" v-show="opponent.commanders.secondary">/</div>
-      <div class="c-card-opponent__value" v-show="opponent.commanders.secondary"><slot name="secondary"></slot></div>
+      <div class="c-card-opponent__separator" v-show="opponent.commanders.secondary.name">/</div>
+      <div class="c-card-opponent__value" v-show="opponent.commanders.secondary.name"><slot name="secondary"></slot></div>
     </div>
   </div>
 </template>

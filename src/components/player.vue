@@ -23,7 +23,7 @@
     </v-touch>
 
     <card-name class="c-player__commander" v-bind:colors="player.colors">
-      <p>{{player.commanders.primary}} {{player.commanders.secondary}}</p>
+      <p>{{commanderNames}}</p>
     </card-name>
 
     <card-damage class="c-player__damage" v-bind:colors="player.colors">
@@ -83,6 +83,16 @@
       ]),
       classModifier: function () {
         return this.player.dead ? 'c-player--dead' : ''
+      },
+      commanderNames: function () {
+        if (this.player.commanders.secondary.name) {
+          const primary = this.player.commanders.primary.nickname
+          const secondary = this.player.commanders.secondary.nickname
+
+          return primary + ' / ' + secondary
+        } else {
+          return this.player.commanders.primary.name
+        }
       },
       player: function () {
         return this.currentPlayers[this.index]
@@ -245,7 +255,7 @@
         const root = this
         const fields = [{
             index: this.index,
-            label: 'New life total',
+            label: 'Life total',
             property: 'life',
             value: this.player.life
         }]
@@ -259,7 +269,7 @@
         this.openModal({
           callback: callback,
           fields: fields,
-          header: 'Set Life'
+          header: 'Life Total'
         })
       },
       
@@ -285,7 +295,7 @@
         const root = this
         const fields = [{
             index: this.index,
-            label: 'New poison total',
+            label: 'Poison total',
             property: 'poison',
             value: this.player.poison
         }]
@@ -299,7 +309,7 @@
         this.openModal({
           callback: callback,
           fields: fields,
-          header: 'Set Poison'
+          header: 'Poison Total'
         })
       },
       
@@ -328,17 +338,17 @@
         fields.push({
           commander: 'primary',
           index: this.index,
-          label: 'New primary commander total',
+          label: opponent.player.commanders.primary.name,
           opponentIndex: opponentIndex,
           property: 'damage',
           value: opponent.primary
         })
 
-        if (opponent.player.commanders.secondary) {
+        if (opponent.player.commanders.secondary.name) {
           fields.push({
             commander: 'secondary',
             index: this.index,
-            label: 'New secondary commander total',
+            label: opponent.player.commanders.secondary.name,
             opponentIndex: opponentIndex,
             property: 'damage',
             value: opponent.secondary
@@ -354,7 +364,7 @@
         this.openModal({
           callback: callback,
           fields: fields,
-          header: 'Set Commander Damage'
+          header: 'Commander Damage'
         })
       }
     }

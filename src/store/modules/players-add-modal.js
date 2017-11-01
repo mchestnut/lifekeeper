@@ -6,8 +6,16 @@ const state = {
     name: '',
     colors: {},
     commanders: {
-      primary: '',
-      secondary: ''
+      primary: {
+        name: '',
+        nickname: '',
+        colors: []
+      },
+      secondary: {
+        name: '',
+        nickname: '',
+        colors: []
+      }
     },
     position: 1
   },
@@ -33,8 +41,16 @@ const mutations = {
   closeModal (state) {
     state.active = false
     state.args.name = ''
-    state.args.commanders.primary = ''
-    state.args.commanders.secondary = ''
+    state.args.commanders.primary = {
+      name: '',
+      nickname: '',
+      colors: []
+    }
+    state.args.commanders.secondary = {
+      name: '',
+      nickname: '',
+      colors: []
+    }
     state.args.position = 1
     state.args.colors = []
     state.datalist.primary = []
@@ -47,7 +63,7 @@ const mutations = {
   */
   filterDatalist (state, args) {
     const commandersList = args.commandersList
-    const value = state.args.commanders[args.id]
+    const value = state.args.commanders[args.id].name
     const regex = new RegExp(value, 'i')
 
     if (value.length > 2) {
