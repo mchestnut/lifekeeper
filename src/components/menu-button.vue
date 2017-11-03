@@ -1,6 +1,6 @@
 <template>
   <svg class="c-menu-button" viewBox="0 0 136.85 50">
-    <path class="c-menu-button__stroke u-fill-gray-light" d="M118.06,49c2,0,3.59-1.52,4.57-3l12.79-19a5,5,0,0,0,0-4L122.63,4c-1-1.46-2.59-3-4.57-3H18.79c-2,0-3.59,1.52-4.57,3L1.42,23a5,5,0,0,0,0,4L14.22,46c1,1.46,2.59,3,4.57,3Z"/>
+    <path class="c-menu-button__stroke" d="M118.06,49c2,0,3.59-1.52,4.57-3l12.79-19a5,5,0,0,0,0-4L122.63,4c-1-1.46-2.59-3-4.57-3H18.79c-2,0-3.59,1.52-4.57,3L1.42,23a5,5,0,0,0,0,4L14.22,46c1,1.46,2.59,3,4.57,3Z"/>
     <text class="c-menu-button__label" transform="translate(68 32)"><slot></slot></text>
   </svg>
 </template>
@@ -24,7 +24,19 @@
   }
 
   .c-menu-button__stroke {
+    fill: $grayLight;
     stroke: black;
     stroke-width: $unitStroke;
+  }
+
+  .c-menu-button--disabled {
+    fill: $grayDark;
+    opacity: 0.8;
+    cursor: default;
+
+    .c-menu-button__stroke {
+      fill: $grayMedium;
+      stroke: $grayDark;
+    }
   }
 </style>

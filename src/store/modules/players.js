@@ -135,8 +135,18 @@ const mutations = {
   /*
   * Resets players in currentPlayers
   */  
-  resetPlayers (state, args) {
-    console.log('resetPlayers')
+  resetPlayers (state) {
+    state.currentPlayers.forEach(function(player) {
+      player.decked = false
+      player.dead = false
+      player.life = 40
+      player.poison = 0
+
+      player.damage.forEach(function(opponent) {
+        opponent.primary = 0
+        opponent.secondary = 0
+      })
+    })
   },
 
   /*

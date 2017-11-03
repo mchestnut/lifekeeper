@@ -185,7 +185,7 @@
         const opponentIndex = this.getOpponentIndex(e.target)
         const opponent = this.player.damage[opponentIndex]
 
-        if (!opponent.player.commanders.secondary) {
+        if (!opponent.player.commanders.secondary.name) {
           const args = {
             commander: 'primary',
             index: this.index,

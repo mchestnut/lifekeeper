@@ -2,12 +2,13 @@
   <div class="c-clock">
     <clock-container>
       <p class="c-clock__label">Game Clock</p>
-      <p class="c-clock__time">5:00:00</p>
+      <p class="c-clock__time">{{totalTime}}</p>
     </clock-container>
   </div>
 </template>
 
 <script>
+  import {mapMutations} from 'vuex'
   import {mapState} from 'vuex'
   import clockContainer from '@/components/clock-container'
 
@@ -16,9 +17,17 @@
     components: {
       clockContainer
     },
+    created: function () {
+      this.resetClock()
+    },
     computed: {
       ...mapState('clock', [
         'totalTime'
+      ])
+    },
+    methods: {
+      ...mapMutations('clock', [
+        'resetClock'
       ])
     }
   }
