@@ -13,6 +13,7 @@
       <players-add-modal></players-add-modal>
       <players-input-modal></players-input-modal>
       <players-remove-modal></players-remove-modal>
+      <players-reorder-modal></players-reorder-modal>
     </div>
   </div>
 </template>
@@ -25,6 +26,7 @@ import players from '@/components/players'
 import playersAddModal from '@/components/players-add-modal'
 import playersInputModal from '@/components/players-input-modal'
 import playersRemoveModal from '@/components/players-remove-modal'
+import playersReorderModal from '@/components/players-reorder-modal'
 
 export default {
   name: 'view-main',
@@ -35,7 +37,8 @@ export default {
     players,
     playersAddModal,
     playersInputModal,
-    playersRemoveModal
+    playersRemoveModal,
+    playersReorderModal
   }
 }
 </script>

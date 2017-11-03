@@ -66,4 +66,8 @@
     margin-right: 0.5rem;
     margin-left: 0.5rem;
   }
+
+  .c-modal__button-list {
+    margin-top: 1rem;
+  }
 </style>

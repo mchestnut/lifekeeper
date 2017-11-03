@@ -77,14 +77,6 @@ text {
 .o-icon-button {
   display: flex;
   justify-content: center;
-
-  * + & {
-    margin-top: 2rem;
-  }
-
-  & + & {
-    margin-top: 1rem;
-  }
 }
 
 .o-icon-button--disabled {
@@ -127,6 +119,16 @@ text {
   &::after {
     display: block;
     margin-top: -0.2rem;
+  }
+}
+
+.o-icon-button__icon--drag {
+
+  &::after {
+    content: '-';
+    text-shadow: 0 -0.3rem black,
+                 0 0.3rem black;
+    transform: scaleX(1.6);
   }
 }
 

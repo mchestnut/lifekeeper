@@ -106,7 +106,30 @@ const mutations = {
   * Reorders players in currentPlayers
   */  
   reorderPlayers (state, args) {
-    console.log('reorderPlayers')
+    // Reorder current players
+    state.currentPlayers = args.sortList
+
+    // Loop through current players
+    state.currentPlayers.forEach(function(player, playerIndex) {
+      const opponentsA = []
+      const opponentsB = []
+
+      // For each player, find matching damage object and sort
+      state.currentPlayers.forEach(function(opponent, opponentIndex) {
+        player.damage.forEach(function(damage, damageIndex) {
+          if (damage.player.id === opponent.id) {
+            if (opponentIndex < playerIndex) {
+              opponentsA.push(damage)
+            } else {
+              opponentsB.push(damage)
+            }
+          }
+        })
+      })
+
+      // Update player damage references
+      player.damage = opponentsB.concat(opponentsA)
+    })
   },
 
   /*

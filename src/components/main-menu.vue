@@ -75,6 +75,9 @@
       ...mapMutations('playersRemoveModal', {
         openPlayersRemoveModal: 'openModal'
       }),
+      ...mapMutations('playersReorderModal', {
+        openPlayersReorderModal: 'openModal'
+      }),
       ...mapMutations('players', [
         'addPlayer',
         'removePlayer',
@@ -117,7 +120,9 @@
       * On reorder players tap, open modal
       */
       onPlayersReorderTap: function (e) {
-        // this.openPlayersReorderModal()
+        this.openPlayersReorderModal({
+          callback: this.reorderPlayers
+        })
       },
 
       /*

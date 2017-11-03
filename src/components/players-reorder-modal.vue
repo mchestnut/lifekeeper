@@ -2,22 +2,20 @@
   <modal v-show="active" v-on:close="closeModal">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
-      <h2 class="c-modal__header">Remove Players</h2>
+      <h2 class="c-modal__header">Reorder Players</h2>
       <menu-bar class="u-flip-x"></menu-bar>
     </div>
 
-    <div class="c-modal__button-list">
+    <draggable class="c-modal__button-list" v-model="sortList" v-bind:options="{animation: 75}">
       <div class="o-icon-button"
-           v-bind:class="{'o-icon-button--disabled': cacheList[index].remove}"
-           v-bind:data-index="index"
-           v-for="(player, index) in cacheList"
+           v-for="(player, index) in sortList"
            v-bind:key="index">
-        <v-touch class="o-icon-button__container" v-on:tap="onPlayerTap">
-          <div class="o-icon-button__icon o-icon-button__icon--minus"></div>
+        <div class="o-icon-button__container">
+          <div class="o-icon-button__icon o-icon-button__icon--drag"></div>
           <p class="o-icon-button__label">{{ player.name }}</p>
-        </v-touch>
+        </div>
       </div>
-    </div>
+    </draggable>
     
     <div class="o-flex-row">
       <v-touch class="o-flex-row__item" v-on:tap="onSaveTap">
@@ -35,13 +33,15 @@
   import { mapMutations } from 'vuex'
   import { mapState } from 'vuex'
 
+  import draggable from 'vuedraggable'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import modal from '@/components/modal'
 
   export default {
-    name: 'playersRemoveModal',
+    name: 'playersReorderModal',
     components: {
+      draggable,
       menuBar,
       menuButton,
       modal
@@ -50,16 +50,27 @@
       ...mapState('players', [
         'currentPlayers'
       ]),
-      ...mapState('playersRemoveModal', [
+      ...mapState('playersReorderModal', [
         'active',
         'cacheList'
-      ])
+      ]),
+      sortList: {
+        get() {
+          return this.cacheList
+        },
+        set(sortList) {
+          this.updateCacheList({
+            sortList
+          })
+        }
+      }
     },
     methods: {
-      ...mapMutations('playersRemoveModal', [
+      ...mapMutations('playersReorderModal', [
         'closeModal',
         'saveModal',
         'toggleRemove',
+        'resetCacheList',
         'updateCacheList'
       ]),
 
@@ -68,35 +79,24 @@
       */
       onCancelTap: function (e) {
         this.closeModal()
+        this.resetCacheList({
+          currentPlayers: this.currentPlayers
+        })
       },
 
       /*
-      * On player button tap, toggle for removal
-      */
-      onPlayerTap: function (e) {
-        const rootNode = e.target.parentElement.parentElement
-        const playerIndex = rootNode.dataset.index
-
-        if (playerIndex !== undefined) {
-          this.toggleRemove({playerIndex})
-        }
-      },
-
-      /*
-      * On save button tap, get list of players to remove and save modal
+      * On save button tap, get list of players to reorder and save modal
       */
       onSaveTap: function (e) {
-        const removeList = this.cacheList.filter(player =>
-          player.remove
-        )
-
-        this.saveModal({removeList})
+        this.saveModal({
+          sortList: this.sortList
+        })
         this.closeModal()
-      }
+      }  
     },
     watch: {
       currentPlayers: function () {
-        this.updateCacheList({
+        this.resetCacheList({
           currentPlayers: this.currentPlayers
         })
       }
