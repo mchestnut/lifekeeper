@@ -1,8 +1,8 @@
 <template>
   <div class="c-card-name">
-    <div class="c-card-name__border-outer" v-bind:style="border"></div>
+    <div class="c-card-name__border-outer" :style="border"></div>
     <div class="c-card-name__texture"></div>
-    <div class="c-card-name__background" v-bind:style="background"></div>
+    <div class="c-card-name__background" :style="background"></div>
     <div class="c-card-name__border-inner"></div>
     <slot></slot>
   </div>

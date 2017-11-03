@@ -1,8 +1,8 @@
 <template>
   <div class="c-card-life">
-    <div class="c-card-life__border-outer" v-bind:style="border"></div>
+    <div class="c-card-life__border-outer" :style="border"></div>
     <div class="c-card-life__texture"></div>
-    <div class="c-card-life__background" v-bind:style="background"></div>
+    <div class="c-card-life__background" :style="background"></div>
     <div class="c-card-life__border-inner"></div>
     <slot></slot>
   </div>

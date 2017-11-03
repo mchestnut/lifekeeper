@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { mapState } from 'vuex'
+  import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'log',
@@ -37,7 +37,5 @@
 }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>  
 </style>

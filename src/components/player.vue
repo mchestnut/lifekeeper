@@ -1,34 +1,34 @@
 <template>
-  <card-shell class="c-player" v-bind:class="classModifier" v-bind:colors="player.colors">
-    <card-name class="c-player__name" v-bind:colors="player.colors">
+  <card-shell class="c-player" :class="classModifier" :colors="player.colors">
+    <card-name class="c-player__name" :colors="player.colors">
       <p>{{player.name}}</p>
     </card-name>
 
-    <v-touch v-on:tap="onLifeTap" v-on:press="onLifePress" class="c-player__life">
-      <card-life v-bind:colors="player.colors">
+    <v-touch @tap="onLifeTap" @press="onLifePress" class="c-player__life">
+      <card-life :colors="player.colors">
         <p>{{player.life}}</p>
       </card-life>
     </v-touch>
 
-    <v-touch v-on:tap="onLifeMinusTap" class="c-player__button-life c-player__button-life--minus">
-      <card-button-life v-bind:player="player">
+    <v-touch @tap="onLifeMinusTap" class="c-player__button-life c-player__button-life--minus">
+      <card-button-life :player="player">
         <path d="M0,9.01H22.37V18.52H0Z"/>
       </card-button-life>
     </v-touch>
 
-    <v-touch v-on:tap="onLifePlusTap" class="c-player__button-life c-player__button-life--plus">
-      <card-button-life v-bind:player="player">
+    <v-touch @tap="onLifePlusTap" class="c-player__button-life c-player__button-life--plus">
+      <card-button-life :player="player">
         <path d="M0,9.51H9.51V0h6.43V9.51h9.51v6.43H15.94v9.51H9.51V15.94H0Z"/>
       </card-button-life>
     </v-touch>
 
-    <card-name class="c-player__commander" v-bind:colors="player.colors">
+    <card-name class="c-player__commander" :colors="player.colors">
       <p>{{commanderNames}}</p>
     </card-name>
 
-    <card-damage class="c-player__damage" v-bind:colors="player.colors">
-      <v-touch v-for="(opponent, index) of player.damage" v-bind:key="index" v-on:tap="onDamageTap" v-on:press="onDamagePress" class="c-player__opponent">
-        <card-opponent v-bind:data-index="index" v-bind:opponent="opponent.player" v-bind:playerColors="player.colors">
+    <card-damage class="c-player__damage" :colors="player.colors">
+      <v-touch v-for="(opponent, index) of player.damage" :key="index" @tap="onDamageTap" @press="onDamagePress" class="c-player__opponent">
+        <card-opponent :data-index="index" :opponent="opponent.player" :playerColors="player.colors">
           <p slot="name">{{opponent.player.name}}</p>
           <p slot="primary">{{opponent.primary}}</p>
           <p slot="secondary">{{opponent.secondary}}</p>
@@ -36,13 +36,13 @@
       </v-touch>
     </card-damage>
 
-    <v-touch v-on:tap="onDeckedTap" class="c-player__button-status c-player__button-status--decked">
-      <card-button-decked v-bind:player="player">
+    <v-touch @tap="onDeckedTap" class="c-player__button-status c-player__button-status--decked">
+      <card-button-decked :player="player">
       </card-button-decked>
     </v-touch>
 
-    <v-touch v-on:tap="onPoisonTap" v-on:press="onPoisonPress" class="c-player__button-status c-player__button-status--poison">
-      <card-button-poison v-bind:player="player">
+    <v-touch @tap="onPoisonTap" @press="onPoisonPress" class="c-player__button-status c-player__button-status--poison">
+      <card-button-poison :player="player">
         {{player.poison}}
       </card-button-poison>
     </v-touch>
@@ -50,9 +50,8 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { mapState } from 'vuex'
-
+  import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import cardButtonDecked from '@/components/card-button-decked'
   import cardButtonLife from '@/components/card-button-life'
   import cardButtonPoison from '@/components/card-button-poison'
@@ -112,7 +111,6 @@
       ...mapMutations('playersInputModal', [
         'openModal'
       ]), 
-
 
       /*
       * Checks if player is dead and adds log entry

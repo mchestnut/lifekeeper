@@ -1,23 +1,23 @@
 <template>
   <div>
-    <modal v-show="active" v-on:close="closeModal">
+    <modal @close="closeModal" v-show="active">
       <div class="o-flex-row">
         <menu-bar></menu-bar>
         <h2 class="c-modal__header">{{header}}</h2>
         <menu-bar class="u-flip-x"></menu-bar>
       </div>
 
-      <div class="o-form-field" v-for="(field, index) of fields" v-bind:key="index">
-        <label class="o-form-field__label" v-bind:for="'field-' + index">{{field.label}}</label>
-        <input class="o-form-field__input" v-bind:id="'field-' + index" type="text" v-model="field.value"/>
+      <div v-for="(field, index) of fields" :key="index" class="o-form-field">
+        <label class="o-form-field__label" :for="'field-' + index">{{field.label}}</label>
+        <input class="o-form-field__input" :id="'field-' + index" type="text" v-model="field.value"/>
       </div>
       
       <div class="o-flex-row">
-        <v-touch class="o-flex-row__item" v-on:tap="onSaveTap">
+        <v-touch @tap="onSaveTap" class="o-flex-row__item">
           <menu-button>Save</menu-button>
         </v-touch>
 
-        <v-touch class="o-flex-row__item" v-on:tap="onCancelTap">
+        <v-touch @tap="onCancelTap" class="o-flex-row__item">
           <menu-button>Cancel</menu-button>
         </v-touch>
       </div>
@@ -26,9 +26,8 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { mapState } from 'vuex'
-
+  import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import modal from '@/components/modal'
@@ -74,7 +73,5 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>
 </style>

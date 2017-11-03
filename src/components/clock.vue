@@ -8,8 +8,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-
+  import {mapState} from 'vuex'
   import clockContainer from '@/components/clock-container'
 
   export default {
@@ -25,9 +24,7 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-
+<style>
   .c-clock {
     width: 14rem;
     margin: 0 auto;

@@ -1,5 +1,5 @@
 <template>
-  <modal v-show="active" v-on:close="closeModal">
+  <modal @close="closeModal" v-show="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Add Player</h2>
@@ -13,54 +13,53 @@
 
     <div class="o-form-field">
       <label class="o-form-field__label" for="commander-name">Commander name</label>
-      <input class="o-form-field__input" id="commander-name" type="text" v-model="args.commanders.primary.name" v-on:input="onCommanderChange('primary')" list="primary-list"/>
+      <input @input="onCommanderChange('primary')" id="commander-name" class="o-form-field__input" type="text" v-model="args.commanders.primary.name" list="primary-list"/>
     </div>
 
     <div class="c-modal__button-list">
-      <div class="o-icon-button" v-show="secondaryCommander === false">
-        <v-touch class="o-icon-button__container" v-on:tap="onAddCommanderTap">
+      <div v-show="secondaryCommander === false" class="o-icon-button">
+        <v-touch @tap="onAddCommanderTap" class="o-icon-button__container">
           <div class="o-icon-button__icon o-icon-button__icon--plus"></div>
           <p class="o-icon-button__label">Add second commander</p>
         </v-touch>
       </div>
     </div>
 
-    <div class="o-form-field" v-show="secondaryCommander">
+    <div v-show="secondaryCommander" class="o-form-field">
       <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
-      <input class="o-form-field__input" id="commander-2-name" type="text"v-model="args.commanders.secondary.name" v-on:input="onCommanderChange('secondary')"  list="secondary-list"/>
+      <input @input="onCommanderChange('secondary')" id="commander-2-name" class="o-form-field__input" type="text" v-model="args.commanders.secondary.name" list="secondary-list"/>
     </div>
 
     <div class="o-form-field">
       <label class="o-form-field__label" for="player-position">Player position</label>
-      <select class="o-form-field__input" id="player-position" v-model="args.position">
-        <option v-for="n in playersQty" v-bind:key="n">{{ n }}</option>
+      <select id="player-position" class="o-form-field__input" v-model="args.position">
+        <option v-for="n in playersQty" :key="n">{{ n }}</option>
       </select>
     </div>
     
     <div class="o-flex-row">
-      <v-touch class="o-flex-row__item" v-on:tap="onSaveTap">
+      <v-touch @tap="onSaveTap" class="o-flex-row__item">
         <menu-button>Save</menu-button>
       </v-touch>
 
-      <v-touch class="o-flex-row__item" v-on:tap="onCancelTap">
+      <v-touch @tap="onCancelTap" class="o-flex-row__item">
         <menu-button>Cancel</menu-button>
       </v-touch>
     </div>
 
     <datalist id="primary-list">
-      <option v-for="(commander, index) in datalist.primary" v-bind:key="index" v-bind:value="commander.name"/>
+      <option v-for="(commander, index) in datalist.primary" :key="index" :value="commander.name"/>
     </datalist>
 
     <datalist id="secondary-list">
-      <option v-for="(commander, index) in datalist.secondary" v-bind:key="index" v-bind:value="commander.name"/>
+      <option v-for="(commander, index) in datalist.secondary" :key="index" :value="commander.name"/>
     </datalist>
   </modal>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { mapState } from 'vuex'
-
+  import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import modal from '@/components/modal'
@@ -232,7 +231,5 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>  
 </style>

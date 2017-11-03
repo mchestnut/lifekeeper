@@ -1,15 +1,15 @@
 <template>
   <div class="c-card-opponent">
-    <div class="c-card-opponent__border-outer" v-bind:style="border"></div>
+    <div class="c-card-opponent__border-outer" :style="border"></div>
     <div class="c-card-opponent__texture"></div>
-    <div class="c-card-opponent__background" v-bind:style="background"></div>
+    <div class="c-card-opponent__background" :style="background"></div>
     <div class="c-card-opponent__border-inner"></div>
     
     <div class="c-card-opponent__content">
       <div class="c-card-opponent__name"><slot name="name"></slot></div>
       <div class="c-card-opponent__value"><slot name="primary"></slot></div>
-      <div class="c-card-opponent__separator" v-show="opponent.commanders.secondary.name">/</div>
-      <div class="c-card-opponent__value" v-show="opponent.commanders.secondary.name"><slot name="secondary"></slot></div>
+      <div v-show="opponent.commanders.secondary.name" class="c-card-opponent__separator">/</div>
+      <div v-show="opponent.commanders.secondary.name" class="c-card-opponent__value"><slot name="secondary"></slot></div>
     </div>
   </div>
 </template>

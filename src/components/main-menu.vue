@@ -9,10 +9,10 @@
         </div>
 
         <div class="o-flex-row">
-          <v-touch class="o-flex-row__item" v-on:tap="onGameNewTap">
+          <v-touch @tap="onGameNewTap" class="o-flex-row__item">
             <menu-button>New</menu-button>
           </v-touch>
-          <v-touch class="o-flex-row__item" v-on:tap="onGameToggleTap">
+          <v-touch @tap="onGameToggleTap" class="o-flex-row__item">
             <menu-button>{{active ? 'Stop' : 'Start'}}</menu-button>
           </v-touch>
         </div>
@@ -24,13 +24,13 @@
         </div>
 
         <div class="o-flex-row">
-          <v-touch class="o-flex-row__item" v-on:tap="onPlayersAddTap">
+          <v-touch @tap="onPlayersAddTap" class="o-flex-row__item">
             <menu-button>Add</menu-button>
           </v-touch>
-          <v-touch class="o-flex-row__item" v-on:tap="onPlayersReorderTap">
+          <v-touch @tap="onPlayersReorderTap" class="o-flex-row__item">
             <menu-button>Reorder</menu-button>
           </v-touch>
-          <v-touch class="o-flex-row__item" v-on:tap="onPlayersRemoveTap">
+          <v-touch @tap="onPlayersRemoveTap" class="o-flex-row__item">
             <menu-button>Remove</menu-button>
           </v-touch>
         </div>
@@ -40,8 +40,7 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-
+  import {mapMutations} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import menuContainer from '@/components/menu-container'
@@ -162,9 +161,7 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>
   .c-main-menu {
     position: relative;
   }

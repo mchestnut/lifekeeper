@@ -1,5 +1,5 @@
 <template>
-  <svg class="c-menu-bar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83 3">
+  <svg class="c-menu-bar" viewBox="0 0 83 3">
     <polygon class="u-fill-gray-dark" points="83 3 0 3 0 1.5 40 0 83 0 83 3"/>
   </svg>
 </template>
@@ -10,9 +10,7 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>  
   .c-menu-bar {
     width: 5.5rem;
   }

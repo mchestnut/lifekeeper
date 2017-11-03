@@ -1,6 +1,6 @@
 <template>
   <div class="c-modal">
-    <v-touch class="c-modal__overlay" v-on:tap="onOverlayTap">
+    <v-touch class="c-modal__overlay" @tap="onOverlayTap">
       <div></div>
     </v-touch>
     <div class="c-modal__content">
@@ -30,9 +30,7 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-
+<style>
   .c-modal,
   .c-modal__overlay {    
     position: absolute;

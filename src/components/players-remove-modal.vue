@@ -1,5 +1,5 @@
 <template>
-  <modal v-show="active" v-on:close="closeModal">
+  <modal @close="closeModal" v-show="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Remove Players</h2>
@@ -7,12 +7,8 @@
     </div>
 
     <div class="c-modal__button-list">
-      <div class="o-icon-button"
-           v-bind:class="{'o-icon-button--disabled': cacheList[index].remove}"
-           v-bind:data-index="index"
-           v-for="(player, index) in cacheList"
-           v-bind:key="index">
-        <v-touch class="o-icon-button__container" v-on:tap="onPlayerTap">
+      <div v-for="(player, index) in cacheList" :key="index" class="o-icon-button" :class="{'o-icon-button--disabled': cacheList[index].remove}" :data-index="index">
+        <v-touch @tap="onPlayerTap" class="o-icon-button__container">
           <div class="o-icon-button__icon o-icon-button__icon--minus"></div>
           <p class="o-icon-button__label">{{ player.name }}</p>
         </v-touch>
@@ -20,11 +16,11 @@
     </div>
     
     <div class="o-flex-row">
-      <v-touch class="o-flex-row__item" v-on:tap="onSaveTap">
+      <v-touch @tap="onSaveTap" class="o-flex-row__item">
         <menu-button>Save</menu-button>
       </v-touch>
 
-      <v-touch class="o-flex-row__item" v-on:tap="onCancelTap">
+      <v-touch @tap="onCancelTap" class="o-flex-row__item">
         <menu-button>Cancel</menu-button>
       </v-touch>
     </div>
@@ -32,9 +28,8 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { mapState } from 'vuex'
-
+  import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import modal from '@/components/modal'
@@ -104,7 +99,5 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../assets/scss/variables.scss';
-  
+<style>
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="c-card-shell">
     <div class="c-card-shell__texture"></div>
-    <div class="c-card-shell__background" v-bind:style="background"></div>
+    <div class="c-card-shell__background" :style="background"></div>
     <div class="c-card-shell__border-inner"></div>
     <slot></slot>
   </div>

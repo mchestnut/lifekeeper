@@ -1,17 +1,16 @@
 <template>
-  <div class="c-players" v-bind:class="classModifier">
-    <div class="c-players__wrapper" v-for="(player, index) of currentPlayers" v-bind:key="index">
+  <div class="c-players" :class="classModifier">
+    <div v-for="(player, index) of currentPlayers" :key="index" class="c-players__wrapper">
       <div class="c-players__ratio">
-        <player class="c-players__player" v-bind:index="index"></player>
+        <player class="c-players__player" :index="index"></player>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex' // TODO: Delete this
-  import { mapState } from 'vuex'
-
+  import {mapMutations} from 'vuex' // TODO: Delete this
+  import {mapState} from 'vuex'
   import player from '@/components/player'
 
   export default {
@@ -178,8 +177,6 @@
 </script>
 
 <style lang="scss">
-  @import '../assets/scss/variables.scss';
-
   .c-players {
     display: grid;
     height: 100%;

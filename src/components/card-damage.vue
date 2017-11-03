@@ -1,8 +1,8 @@
 <template>
   <div class="c-card-damage">
-    <div class="c-card-damage__border-outer" v-bind:style="border"></div>
+    <div class="c-card-damage__border-outer" :style="border"></div>
     <div class="c-card-damage__texture"></div>
-    <div class="c-card-damage__background" v-bind:style="background"></div>
+    <div class="c-card-damage__background" :style="background"></div>
     <div class="c-card-damage__border-inner"></div>
     <slot></slot>
   </div>

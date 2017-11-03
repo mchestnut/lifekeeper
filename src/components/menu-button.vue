@@ -1,5 +1,5 @@
 <template>
-  <svg class="c-menu-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136.85 50">
+  <svg class="c-menu-button" viewBox="0 0 136.85 50">
     <path class="c-menu-button__stroke u-fill-gray-light" d="M118.06,49c2,0,3.59-1.52,4.57-3l12.79-19a5,5,0,0,0,0-4L122.63,4c-1-1.46-2.59-3-4.57-3H18.79c-2,0-3.59,1.52-4.57,3L1.42,23a5,5,0,0,0,0,4L14.22,46c1,1.46,2.59,3,4.57,3Z"/>
     <text class="c-menu-button__label" transform="translate(68 32)"><slot></slot></text>
   </svg>
