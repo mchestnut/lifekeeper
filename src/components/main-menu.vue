@@ -1,45 +1,44 @@
 <template>
-  <div>
-    <div class="c-main-menu">
-      <menu-container>
-        <div class="o-flex-row">
-          <menu-bar></menu-bar>
-          <h3 class="c-main-menu__subheader">Game</h3>
-          <menu-bar class="u-flip-x"></menu-bar>
-        </div>
+  <div class="c-main-menu">
+    <menu-container>
+      <div class="o-flex-row">
+        <menu-bar></menu-bar>
+        <h3 class="c-main-menu__subheader">Game</h3>
+        <menu-bar class="u-flip-x"></menu-bar>
+      </div>
 
-        <div class="o-flex-row">
-          <v-touch @tap="onGameNewTap" class="o-flex-row__item">
-            <menu-button :class="newButtonClass">New</menu-button>
-          </v-touch>
-          <v-touch @tap="onGameToggleTap" class="o-flex-row__item">
-            <menu-button>{{gameState}}</menu-button>
-          </v-touch>
-        </div>
+      <div class="o-flex-row">
+        <v-touch @tap="onGameNewTap" class="o-flex-row__item">
+          <menu-button :class="newButtonClass">New</menu-button>
+        </v-touch>
+        <v-touch @tap="onGameToggleTap" class="o-flex-row__item">
+          <menu-button>{{gameState}}</menu-button>
+        </v-touch>
+      </div>
 
-        <div class="o-flex-row">
-          <menu-bar></menu-bar>
-          <h3 class="c-main-menu__subheader">Players</h3>
-          <menu-bar class="u-flip-x"></menu-bar>
-        </div>
+      <div class="o-flex-row">
+        <menu-bar></menu-bar>
+        <h3 class="c-main-menu__subheader">Players</h3>
+        <menu-bar class="u-flip-x"></menu-bar>
+      </div>
 
-        <div class="o-flex-row">
-          <v-touch @tap="onPlayersAddTap" class="o-flex-row__item">
-            <menu-button :class="addButtonClass">Add</menu-button>
-          </v-touch>
-          <v-touch @tap="onPlayersReorderTap" class="o-flex-row__item">
-            <menu-button :class="reorderButtonClass">Reorder</menu-button>
-          </v-touch>
-          <v-touch @tap="onPlayersRemoveTap" class="o-flex-row__item">
-            <menu-button :class="removeButtonClass">Remove</menu-button>
-          </v-touch>
-        </div>
-      </menu-container>
-    </div>
+      <div class="o-flex-row">
+        <v-touch @tap="onPlayersAddTap" class="o-flex-row__item">
+          <menu-button :class="addButtonClass">Add</menu-button>
+        </v-touch>
+        <v-touch @tap="onPlayersReorderTap" class="o-flex-row__item">
+          <menu-button :class="reorderButtonClass">Reorder</menu-button>
+        </v-touch>
+        <v-touch @tap="onPlayersRemoveTap" class="o-flex-row__item">
+          <menu-button :class="removeButtonClass">Remove</menu-button>
+        </v-touch>
+      </div>
+    </menu-container>
   </div>
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {mapMutations} from 'vuex'
   import {mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
@@ -92,13 +91,13 @@
       }
     },
     methods: {
+      ...mapActions('log', [
+        'resetLog'
+      ]),
       ...mapMutations('clock', [
         'resetClock',
         'startClock',
         'stopClock'
-      ]),
-      ...mapMutations('log', [
-        'resetLog'
       ]),
       ...mapMutations('playersAddModal', {
         openPlayersAddModal: 'openModal'

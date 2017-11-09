@@ -153,7 +153,7 @@ const mutations = {
   * Sets commander damage for a player
   */  
   setDamage (state, args) {
-    const player = state.currentPlayers[args.index]
+    const player = state.currentPlayers[args.playerIndex]
     const opponent = player.damage[args.opponentIndex]
 
     opponent[args.commander] = parseInt(args.value, 10)
@@ -163,17 +163,16 @@ const mutations = {
   * Sets dead status for a player
   */
   setDead (state, args) {
-    const player = state.currentPlayers[args.index]
+    const player = state.currentPlayers[args.playerIndex]
 
     player.dead = args.value
-    console.log(player.dead)
   },
 
   /*
   * Sets decked value for a player
   */  
   setDecked (state, args) {
-    const player = state.currentPlayers[args.index]
+    const player = state.currentPlayers[args.playerIndex]
 
     player.decked = args.value
   },
@@ -182,7 +181,7 @@ const mutations = {
   * Sets life value for a player
   */  
   setLife (state, args) {
-    const player = state.currentPlayers[args.index]
+    const player = state.currentPlayers[args.playerIndex]
 
     player.life = parseInt(args.value, 10)
   },
@@ -191,7 +190,7 @@ const mutations = {
   * Sets poison value for a player
   */  
   setPoison (state, args) {
-    const player = state.currentPlayers[args.index]
+    const player = state.currentPlayers[args.playerIndex]
 
     player.poison = parseInt(args.value, 10)
   }

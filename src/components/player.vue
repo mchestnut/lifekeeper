@@ -50,6 +50,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {mapMutations} from 'vuex'
   import {mapState} from 'vuex'
   import cardButtonDecked from '@/components/card-button-decked'
@@ -98,8 +99,8 @@
       }
     },
     methods: {
-      ...mapMutations('log', [
-        'addEntry'
+      ...mapActions('log', [
+        'setEntry'
       ]),
       ...mapMutations('players', [
         'setDamage',
@@ -113,7 +114,7 @@
       ]), 
 
       /*
-      * Checks if player is dead and adds log entry
+      * Checks if player is dead and adds log entry on change
       */
       checkDead: function (property) {
         let isDead = false
@@ -136,15 +137,18 @@
               isDead = true
             }
 
+        if (isDead != this.player.dead) {
+          const args = {
+            currentPlayers: this.currentPlayers,
+            playerIndex: this.index,
+            property: 'dead',
+            startValue: this.player.dead,
+            value: isDead
+          }
 
-        const args = {
-          index: this.index,
-          property: 'dead',
-          value: isDead
+          this.setDead(args)
+          this.setEntry(args)
         }
-
-        this.setDead(args)
-        this.addEntry(args)
       },     
 
       /*
@@ -172,9 +176,8 @@
       */    
       onDamagePress: function (e) {
         const opponentIndex = this.getOpponentIndex(e.target)
-        const opponent = this.player.damage[opponentIndex]
 
-        this.openDamageModal(opponentIndex, opponent)
+        this.setDamageModal(opponentIndex)
       },
       
       /*
@@ -186,19 +189,14 @@
         const opponent = this.player.damage[opponentIndex]
 
         if (!opponent.player.commanders.secondary.name) {
-          const args = {
+          this.setProperty({
             commander: 'primary',
-            index: this.index,
             opponentIndex: opponentIndex,
-            property: 'damage',
+            property: 'damage', 
             value: opponent.primary + 1
-          }
-
-          this.setDamage(args)
-          this.addEntry(args)
-          this.checkDead()
+          })
         } else {
-          this.openDamageModal(opponentIndex, opponent)
+          this.setDamageModal(opponentIndex)
         }
       },
       
@@ -206,136 +204,76 @@
       * On decked icon tap, toggle decked value and add log entry
       */
       onDeckedTap: function (e) {
-        const args = {
-          index: this.index,
-          property: 'decked',
+        this.setProperty({
+          property: 'decked', 
           value: !this.player.decked
-        }
-        this.setDecked(args)
-        this.addEntry(args)
-        this.checkDead()
+        })
       },
       
       /*
       * On life minus tap, decrement life total and add log entry
       */
       onLifeMinusTap: function (e) {
-        const args = {
-          index: this.index,
-          property: 'life',
+        this.setProperty({
+          property: 'life', 
           value: this.player.life - 1
-        }
-
-        this.setLife(args)
-        this.addEntry(args)
-        this.checkDead()
+        })
       },
       
       /*
       * On life plus tap, increment life total and add log entry
       */
       onLifePlusTap: function (e) {
-        const args = {
-          index: this.index,
-          property: 'life',
+        this.setProperty({
+          property: 'life', 
           value: this.player.life + 1
-        }
-
-        this.setLife(args)
-        this.addEntry(args)
-        this.checkDead()
+        })
       },
       
       /*
       * On life press, open modal
       */
       onLifePress: function (e) {
-        const root = this
-        const fields = [{
-            index: this.index,
-            label: 'Life total',
-            property: 'life',
-            value: this.player.life
-        }]
-
-        const callback = function (args) {
-          root.setLife(args)
-          root.addEntry(args)
-          root.checkDead()
-        }
-
-        this.openModal({
-          callback: callback,
-          fields: fields,
-          header: 'Life Total'
-        })
+        this.setModal('life', 'Set Life', 'Life total')
       },
       
       /*
       * On life tap, decrement life total and add log entry
       */
       onLifeTap: function (e) {
-        const args = {
-          index: this.index,
-          property: 'life',
+        this.setProperty({
+          property: 'life', 
           value: this.player.life - 1
-        }
-
-        this.setLife(args)
-        this.addEntry(args)
-        this.checkDead()
+        })
       },
       
       /*
       * On poison icon press, open modal
       */
       onPoisonPress: function (e) {
-        const root = this
-        const fields = [{
-            index: this.index,
-            label: 'Poison total',
-            property: 'poison',
-            value: this.player.poison
-        }]
-
-        const callback = function (args) {
-          root.setPoison(args)
-          root.addEntry(args)
-          root.checkDead()
-        }
-
-        this.openModal({
-          callback: callback,
-          fields: fields,
-          header: 'Poison Total'
-        })
+        this.setModal('poison', 'Set Poison', 'Poison total')
       },
       
       /*
       * On poison icon tap, increment life total and add log entry
       */
       onPoisonTap: function (e) {
-        const args = {
-          index: this.index,
-          property: 'poison',
+        this.setProperty({
+          property: 'poison', 
           value: this.player.poison + 1
-        }
-
-        this.setPoison(args)
-        this.addEntry(args)
-        this.checkDead()
+        })
       },
 
       /*
-      * Calls modal for commander damage
+      * Sets modal arguments and opens modal for commander damage
       */
-      openDamageModal: function (opponentIndex, opponent) {
+      setDamageModal: function (opponentIndex) {
         const root = this
-        let fields = []
+        const fieldArgs = []
+        const opponent = this.player.damage[opponentIndex]
 
-        fields.push({
+        fieldArgs.push({
           commander: 'primary',
-          index: this.index,
           label: opponent.player.commanders.primary.name,
           opponentIndex: opponentIndex,
           property: 'damage',
@@ -343,28 +281,87 @@
         })
 
         if (opponent.player.commanders.secondary.name) {
-          fields.push({
-            commander: 'secondary',
-            index: this.index,
-            label: opponent.player.commanders.secondary.name,
-            opponentIndex: opponentIndex,
-            property: 'damage',
-            value: opponent.secondary
+          fieldArgs.push({
+          commander: 'secondary',
+          label: opponent.player.commanders.secondary.name,
+          opponentIndex: opponentIndex,
+          property: 'damage',
+          value: opponent.secondary
           })
         }
 
         const callback = function (args) {
-          root.setDamage(args)
-          root.addEntry(args)
-          root.checkDead()
+          root.setProperty(args)
         }
 
         this.openModal({
           callback: callback,
-          fields: fields,
+          fields: fieldArgs,
           header: 'Commander Damage'
         })
-      }
+      },
+
+      /*
+      * Sets modal arguments, opens modal, and passes setProperty callback
+      */
+      setModal: function (property, header, label) {
+        const root = this
+        const fieldArgs = [{
+          label: label,
+          property: property,
+          value: this.player[property]
+        }]
+
+        const callback = function (args) {
+          root.setProperty(args)
+        }
+
+        this.openModal({
+          callback: callback,
+          fields: fieldArgs,
+          header: header
+        })
+      },
+      
+      /*
+      * Calls a set property mutation, adds a log entry, and checks if dead
+      */
+      setProperty: function (args) {
+        let setMutation = null
+
+        args.currentPlayers = this.currentPlayers
+
+        if (args.playerIndex === undefined) {
+          args.playerIndex = this.index
+        }
+
+        switch (args.property) {
+          case 'damage':
+            setMutation = this.setDamage
+            args.startValue = this.player.damage[args.opponentIndex][args.commander]
+            break
+          case 'decked':
+            setMutation = this.setDecked
+            args.startValue = this.player.decked
+            break
+          case 'life':
+            setMutation = this.setLife
+            args.startValue = this.player.life
+            break
+          case 'poison':
+            setMutation = this.setPoison
+            args.startValue = this.player.poison
+            break
+        }
+
+        setMutation(args)
+
+        if (args.startValue != args.value) {
+          this.setEntry(args)
+        }
+        
+        this.checkDead()
+      }      
     }
   }
 </script>

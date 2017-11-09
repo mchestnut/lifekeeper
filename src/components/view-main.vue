@@ -102,5 +102,7 @@ export default {
 
   .c-view-sidebar {
     display: grid;
+    grid-gap: 1rem;
+    grid-template-rows: auto auto 1fr;
   }
 </style>
