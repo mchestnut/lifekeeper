@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal @close="closeModal" v-show="active">
+    <modal @close="closeModal" v-if="active">
       <div class="o-flex-row">
         <menu-bar></menu-bar>
         <h2 class="c-modal__header">{{header}}</h2>
@@ -9,16 +9,16 @@
 
       <div v-for="(field, index) of fields" :key="index" class="o-form-field">
         <label class="o-form-field__label" :for="'field-' + index">{{field.label}}</label>
-        <input class="o-form-field__input" :id="'field-' + index" type="text" v-model="field.value"/>
+        <input class="o-form-field__input" :id="'field-' + index" type="text" v-model="field.value" v-focus="index == 0 ? true : false"/>
       </div>
       
       <div class="c-modal__button-row o-flex-row">
         <v-touch @tap="onSaveTap" class="o-flex-row__item">
-          <menu-button>Save</menu-button>
+          <menu-button :event="onSaveTap">Save</menu-button>
         </v-touch>
 
         <v-touch @tap="onCancelTap" class="o-flex-row__item">
-          <menu-button>Cancel</menu-button>
+          <menu-button :event="onCancelTap">Cancel</menu-button>
         </v-touch>
       </div>
     </modal>

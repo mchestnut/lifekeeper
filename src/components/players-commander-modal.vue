@@ -1,5 +1,5 @@
 <template>
-  <modal @close="closeModal" v-show="active">
+  <modal @close="closeModal" v-if="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Change Commanders</h2>
@@ -8,7 +8,7 @@
 
     <div class="o-form-field">
       <label class="o-form-field__label" for="commander-name">Commander name</label>
-      <input @input="onCommanderChange('primary')" id="commander-name" class="o-form-field__input" type="text" v-model="args.commanders.primary.name" list="primary-list"/>
+      <input @input="onCommanderChange('primary')" id="commander-name" class="o-form-field__input" type="text" v-model="args.commanders.primary.name" list="primary-list" v-focus/>
     </div>
 
     <div class="o-form-field">
@@ -18,11 +18,11 @@
     
     <div class="c-modal__button-row o-flex-row">
       <v-touch @tap="onSaveTap" class="o-flex-row__item">
-        <menu-button>Save</menu-button>
+        <menu-button :event="onSaveTap">Save</menu-button>
       </v-touch>
 
       <v-touch @tap="onCancelTap" class="o-flex-row__item">
-        <menu-button>Cancel</menu-button>
+        <menu-button :event="onCancelTap">Cancel</menu-button>
       </v-touch>
     </div>
 

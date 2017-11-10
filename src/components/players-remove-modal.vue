@@ -1,5 +1,5 @@
 <template>
-  <modal @close="closeModal" v-show="active">
+  <modal @close="closeModal" v-if="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Remove Players</h2>
@@ -17,11 +17,11 @@
     
     <div class="c-modal__button-row o-flex-row">
       <v-touch @tap="onSaveTap" class="o-flex-row__item">
-        <menu-button>Save</menu-button>
+        <menu-button :event="onSaveTap">Save</menu-button>
       </v-touch>
 
       <v-touch @tap="onCancelTap" class="o-flex-row__item">
-        <menu-button>Cancel</menu-button>
+        <menu-button :event="onCancelTap">Cancel</menu-button>
       </v-touch>
     </div>
   </modal>
