@@ -695,21 +695,27 @@ const mutations = {
   filterDatalist (state, args) {
     const commandersList = args.commandersList
     const value = args.commanderName
-    // const value = state.args.commanders[args.id].name
     const regex = new RegExp(value, 'i')
+    let list = []
 
     if (value.length > 2) {
-      state.datalist[args.id] = commandersList.filter(commander => 
+      list = commandersList.filter(commander => 
         commander.name.search(regex) > -1
       )
 
       // Remove list of exact match
-      if (state.datalist[args.id].length === 1) {
-        if (state.datalist[args.id][0].name === value) {
-          state.datalist[args.id] = []
+      if (list.length === 1) {
+        if (list[0].name === value) {
+          list = []
         }
       }
     }
+
+    if (list.length > 10) {
+      list.splice(10, list.length - 10)
+    }
+
+    state.datalist[args.id] = list
   }
 }
 
