@@ -435,7 +435,7 @@
   }
 
   .c-player__commander {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: center;
   }
 
@@ -454,6 +454,7 @@
     font-size: 0.8rem;
     flex-basis: 45%;
     margin: $unitStroke * 2;
+    transition: font-size 200ms;
   }
 
   .c-player__button-life {
@@ -476,5 +477,11 @@
   .c-player__button-life--plus,
   .c-player__button-status--poison {
     right: 0.7rem;
+  }
+
+  @media screen and (max-aspect-ratio: 15/10) {
+    .c-player__opponent {
+      font-size: 0.7rem;
+    }
   }
 </style>

@@ -17,6 +17,7 @@
   .c-menu-button {
     width: 6rem;
     cursor: pointer;
+    transition: width 200ms;
   }
 
   .c-menu-button__label {
@@ -37,6 +38,12 @@
     .c-menu-button__stroke {
       fill: $grayMedium;
       stroke: $grayDark;
+    }
+  }
+
+  @media screen and (max-aspect-ratio: 15/10) {
+    .c-menu-button {
+      width: 5.5rem;
     }
   }
 </style>

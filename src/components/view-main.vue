@@ -96,8 +96,7 @@ export default {
   }
 
   .c-view-main__sidebar {
-    width: 23rem;
-
+    
     &::after {
       background-color: $grayDark;
     }

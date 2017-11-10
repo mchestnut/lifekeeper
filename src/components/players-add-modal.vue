@@ -28,7 +28,7 @@
       </select>
     </div>
     
-    <div class="o-flex-row">
+    <div class="c-modal__button-row o-flex-row">
       <v-touch @tap="onSaveTap" class="o-flex-row__item">
         <menu-button>Save</menu-button>
       </v-touch>

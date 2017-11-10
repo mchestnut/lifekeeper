@@ -68,4 +68,8 @@
   .c-modal__button-list {
     margin-top: 1rem;
   }
+
+  .c-modal__button-row {
+    margin-top: 2rem;
+  }
 </style>

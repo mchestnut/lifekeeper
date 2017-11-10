@@ -194,7 +194,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .c-main-menu {
     position: relative;
   }
@@ -204,5 +204,12 @@
     text-align: center;
     width: 3rem;
     margin: 0 1rem;
+  }
+
+  @media screen and (max-aspect-ratio: 14/10) {
+    .c-main-menu__subheader { /* Move to new line */
+      margin: 0.5rem 2.5rem 0;
+      order: 3;
+    }
   }
 </style>

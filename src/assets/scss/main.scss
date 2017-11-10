@@ -33,17 +33,15 @@ text {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   * + & {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 }
 
 .o-flex-row__item {
-
-  & + & {
-    margin-left: 0.5rem;
-  }
+  margin: 0 0.2rem;
 }
 
 

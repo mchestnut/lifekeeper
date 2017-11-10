@@ -33,12 +33,6 @@
 </script>
 
 <style>
-  .c-clock {
-    width: 14rem;
-    margin: 0 auto;
-    position: relative;
-  }
-
   .c-clock__label,
   .c-clock__time {
     text-align: center;

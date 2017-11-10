@@ -137,4 +137,11 @@
   .c-entry__line {
     flex-grow: 1;
   }
+
+  @media screen and (max-aspect-ratio: 16/10) {
+    .c-log__turn { /* Move to new line */
+      margin: 0.5rem 2rem 0;
+      order: 3
+    }
+  }
 </style>

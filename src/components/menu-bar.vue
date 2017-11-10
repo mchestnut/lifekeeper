@@ -12,6 +12,6 @@
 
 <style>  
   .c-menu-bar {
-    width: 5.5rem;
+    width: 4rem;
   }
 </style>

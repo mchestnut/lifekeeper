@@ -16,7 +16,7 @@
       <input @input="onCommanderChange('secondary')" id="commander-2-name" class="o-form-field__input" type="text" v-model="args.commanders.secondary.name" list="secondary-list"/>
     </div>
     
-    <div class="o-flex-row">
+    <div class="c-modal__button-row o-flex-row">
       <v-touch @tap="onSaveTap" class="o-flex-row__item">
         <menu-button>Save</menu-button>
       </v-touch>
