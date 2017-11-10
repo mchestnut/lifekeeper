@@ -38,9 +38,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {mapMutations} from 'vuex'
-  import {mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import menuContainer from '@/components/menu-container'

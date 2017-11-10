@@ -28,8 +28,7 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
-  import {mapState} from 'vuex'
+  import {mapMutations, mapState} from 'vuex'
   import draggable from 'vuedraggable'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'

@@ -52,9 +52,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {mapMutations} from 'vuex'
-  import {mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import cardButtonDecked from '@/components/card-button-decked'
   import cardButtonLife from '@/components/card-button-life'
   import cardButtonPoison from '@/components/card-button-poison'
