@@ -681,10 +681,40 @@ const state = {
     {name: "Zurgo Bellstriker", nickname: "Zurgo", colors: ['r']},
     {name: "Zurgo Helmsmasher", nickname: "Zurgo", colors: ['r', 'w', 'b']},
     {name: "Zur the Enchanter", nickname: "Zur", colors: ['w', 'u', 'b']}
-  ]
+  ],
+  datalist: {
+    primary: [],
+    secondary: []
+  }
+}
+
+const mutations = {
+  /*
+  * Filters the datalist of commanders base on input
+  */
+  filterDatalist (state, args) {
+    const commandersList = args.commandersList
+    const value = args.commanderName
+    // const value = state.args.commanders[args.id].name
+    const regex = new RegExp(value, 'i')
+
+    if (value.length > 2) {
+      state.datalist[args.id] = commandersList.filter(commander => 
+        commander.name.search(regex) > -1
+      )
+
+      // Remove list of exact match
+      if (state.datalist[args.id].length === 1) {
+        if (state.datalist[args.id][0].name === value) {
+          state.datalist[args.id] = []
+        }
+      }
+    }
+  }
 }
 
 export default {
   namespaced,
-  state
+  state,
+  mutations
 }

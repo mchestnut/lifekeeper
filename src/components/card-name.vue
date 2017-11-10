@@ -37,6 +37,7 @@
   @import '../assets/scss/variables.scss';
   
   .c-card-name {
+    padding: 0.2rem;
     position: relative;
   }
 

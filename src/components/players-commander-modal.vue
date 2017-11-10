@@ -2,13 +2,8 @@
   <modal @close="closeModal" v-show="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
-      <h2 class="c-modal__header">Add Player</h2>
+      <h2 class="c-modal__header">Change Commanders</h2>
       <menu-bar class="u-flip-x"></menu-bar>
-    </div>
-
-    <div class="o-form-field">
-      <label class="o-form-field__label" for="player-name">Player name</label>
-      <input class="o-form-field__input" id="player-name" type="text" v-model="args.name"/>
     </div>
 
     <div class="o-form-field">
@@ -19,13 +14,6 @@
     <div class="o-form-field">
       <label class="o-form-field__label" for="commander-2-name">Second commander name</label>
       <input @input="onCommanderChange('secondary')" id="commander-2-name" class="o-form-field__input" type="text" v-model="args.commanders.secondary.name" list="secondary-list"/>
-    </div>
-
-    <div class="o-form-field">
-      <label class="o-form-field__label" for="player-position">Player position</label>
-      <select id="player-position" class="o-form-field__input" v-model="args.position">
-        <option v-for="n in playersQty" :key="n">{{ n }}</option>
-      </select>
     </div>
     
     <div class="o-flex-row">
@@ -57,21 +45,21 @@
   import modal from '@/components/modal'
 
   export default {
-    name: 'playersAddModal',
+    name: 'playersCommanderModal',
     components: {
       menuBar,
       menuButton,
       modal
     },
+    mixins: [
+      commanders
+    ],
     computed: {
       ...mapState('commanders', [
         'commandersList',
         'datalist'
       ]),
-      ...mapState('players', [
-        'currentPlayers'
-      ]),
-      ...mapState('playersAddModal', [
+      ...mapState('playersCommanderModal', [
         'active',
         'args'
       ]),
@@ -79,14 +67,11 @@
         return this.currentPlayers.length + 1
       }
     },
-    mixins: [
-      commanders
-    ],
     methods: {
       ...mapMutations('commanders', [
         'filterDatalist'
       ]),
-      ...mapMutations('playersAddModal', [
+      ...mapMutations('playersCommanderModal', [
         'closeModal',
         'saveModal'
       ]),
@@ -117,11 +102,11 @@
           commanders: this.args.commanders,
           commandersList: this.commandersList
         })
-
+        
         this.args.colors = this.getPlayerColors({
           commanders: this.args.commanders
         })
-        
+
         this.saveModal()
         this.closeModal()
       }

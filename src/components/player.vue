@@ -22,9 +22,11 @@
       </card-button-life>
     </v-touch>
 
-    <card-name class="c-player__commander" :colors="player.colors">
-      <p>{{commanderNames}}</p>
-    </card-name>
+    <v-touch @press="onCommanderPress" class="c-player__commander">
+      <card-name :colors="player.colors">
+        <p>{{commanderNames}}</p>
+      </card-name>
+    </v-touch>
 
     <card-damage class="c-player__damage" :colors="player.colors">
       <v-touch v-for="(opponent, index) of player.damage" :key="index" @tap="onDamageTap" @press="onDamagePress" class="c-player__opponent">
@@ -103,12 +105,16 @@
         'setEntry'
       ]),
       ...mapMutations('players', [
+        'setCommanders',
         'setDamage',
         'setDecked',
         'setDead',
         'setLife',
         'setPoison'
       ]),
+      ...mapMutations('playersCommanderModal', {
+        openPlayerCommanderModal: 'openModal'
+      }),
       ...mapMutations('playersInputModal', [
         'openModal'
       ]), 
@@ -169,6 +175,32 @@
 
           return index
         }
+      },
+
+      /*
+      * On commander name press, open player commander modal
+      */
+      onCommanderPress: function (e) {
+        const root = this
+
+        const callback = function (args) {
+          root.setCommanders(args)
+        }
+
+        this.openPlayerCommanderModal({
+          args: {
+            commanders: {
+              primary: {
+                name: this.player.commanders.primary.name
+              },
+              secondary: {
+                name: this.player.commanders.secondary.name
+              }
+            },
+            playerIndex: this.index
+          },
+          callback: callback
+        })
       },
 
       /*
@@ -359,7 +391,7 @@
         if (args.startValue != args.value) {
           this.setEntry(args)
         }
-        
+
         this.checkDead()
       }      
     }
@@ -380,6 +412,7 @@
 
   .c-player__button-life,
   .c-player__button-status,
+  .c-player__commander,
   .c-player__life,
   .c-player__opponent {
     cursor: pointer;
@@ -387,7 +420,6 @@
 
   .c-player__name,
   .c-player__life,
-  .c-player__commander,
   .c-player__damage {
     text-align: center;
     padding: 0.2rem;
@@ -406,6 +438,7 @@
 
   .c-player__commander {
     font-size: 1.1rem;
+    text-align: center;
   }
 
   .c-player__damage {

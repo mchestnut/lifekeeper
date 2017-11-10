@@ -150,6 +150,19 @@ const mutations = {
   },
 
   /*
+  * Sets commanders and colors
+  */
+  setCommanders (state, args) {
+    const player = state.currentPlayers[args.playerIndex]
+    
+    player.colors = args.colors
+    player.commanders = {
+      primary: args.commanders.primary,
+      secondary: args.commanders.secondary
+    }
+  },  
+
+  /*
   * Sets commander damage for a player
   */  
   setDamage (state, args) {

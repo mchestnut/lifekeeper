@@ -11,6 +11,7 @@
     </div>
     <div class="c-view-main__modals">
       <players-add-modal></players-add-modal>
+      <players-commander-modal></players-commander-modal>
       <players-input-modal></players-input-modal>
       <players-remove-modal></players-remove-modal>
       <players-reorder-modal></players-reorder-modal>
@@ -24,6 +25,7 @@ import log from '@/components/log'
 import mainMenu from '@/components/main-menu'
 import players from '@/components/players'
 import playersAddModal from '@/components/players-add-modal'
+import playersCommanderModal from '@/components/players-commander-modal'
 import playersInputModal from '@/components/players-input-modal'
 import playersRemoveModal from '@/components/players-remove-modal'
 import playersReorderModal from '@/components/players-reorder-modal'
@@ -36,6 +38,7 @@ export default {
     mainMenu,
     players,
     playersAddModal,
+    playersCommanderModal,
     playersInputModal,
     playersRemoveModal,
     playersReorderModal
