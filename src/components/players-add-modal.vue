@@ -1,5 +1,5 @@
 <template>
-  <modal @close="closeModal" v-if="active">
+  <modal @close="close" @save="save" v-if="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Add Player</h2>
@@ -24,17 +24,17 @@
     <div class="o-form-field">
       <label class="o-form-field__label" for="player-position">Player position</label>
       <select id="player-position" class="o-form-field__input" v-model="args.position">
-        <option v-for="n in playersQty" :key="n">{{ n }}</option>
+        <option v-for="n in playersQty" :key="n">{{n}}</option>
       </select>
     </div>
     
     <div class="c-modal__button-row o-flex-row">
-      <v-touch @tap="onSaveTap" class="o-flex-row__item">
-        <menu-button :event="onSaveTap">Save</menu-button>
+      <v-touch @tap="save" class="o-flex-row__item">
+        <menu-button :event="save">Save</menu-button>
       </v-touch>
 
-      <v-touch @tap="onCancelTap" class="o-flex-row__item">
-        <menu-button :event="onCancelTap">Cancel</menu-button>
+      <v-touch @tap="close" class="o-flex-row__item">
+        <menu-button :event="close">Cancel</menu-button>
       </v-touch>
     </div>
 
@@ -62,6 +62,13 @@
       menuButton,
       modal
     },
+    updated: function () {
+      if (!this.args.position) {
+        this.setPosition({
+          value: this.playersQty
+        })
+      }
+    },
     computed: {
       ...mapState('commanders', [
         'commandersList',
@@ -87,13 +94,14 @@
       ]),
       ...mapMutations('playersAddModal', [
         'closeModal',
-        'saveModal'
+        'saveModal',
+        'setPosition'
       ]),
 
       /*
-      * On cancel button tap, close modal
+      * Close the modal
       */
-      onCancelTap: function (e) {
+      close: function () {
         this.closeModal()
       },
 
@@ -109,9 +117,9 @@
       },
 
       /*
-      * On save button tap, save modal
+      * Save and close the modal
       */
-      onSaveTap: function (e) {
+      save: function () {
         this.args.commanders = this.matchCommanders({
           commanders: this.args.commanders,
           commandersList: this.commandersList

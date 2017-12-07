@@ -1,5 +1,5 @@
 <template>
-  <modal @close="closeModal" v-if="active">
+  <modal @close="close" @save="save" v-if="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Remove Players</h2>
@@ -8,20 +8,22 @@
 
     <div class="c-modal__button-list">
       <div v-for="(player, index) in cacheList" :key="index" class="o-icon-button" :class="{'o-icon-button--disabled': cacheList[index].remove}" :data-index="index">
-        <v-touch @tap="onPlayerTap" class="o-icon-button__container">
-          <div class="o-icon-button__icon o-icon-button__icon--minus"></div>
-          <p class="o-icon-button__label">{{ player.name }}</p>
+        <v-touch @tap="toggle">
+          <div class="o-icon-button__container" @keyup.space="toggle" v-focus="index == 0 ? true : false" tabindex="0">
+            <div class="o-icon-button__icon o-icon-button__icon--minus"></div>
+            <p class="o-icon-button__label">{{player.name}}</p>
+          </div>
         </v-touch>
       </div>
     </div>
     
     <div class="c-modal__button-row o-flex-row">
-      <v-touch @tap="onSaveTap" class="o-flex-row__item">
-        <menu-button :event="onSaveTap">Save</menu-button>
+      <v-touch @tap="save" class="o-flex-row__item">
+        <menu-button :event="save">Save</menu-button>
       </v-touch>
 
-      <v-touch @tap="onCancelTap" class="o-flex-row__item">
-        <menu-button :event="onCancelTap">Cancel</menu-button>
+      <v-touch @tap="close" class="o-flex-row__item">
+        <menu-button :event="close">Cancel</menu-button>
       </v-touch>
     </div>
   </modal>
@@ -58,35 +60,42 @@
       ]),
 
       /*
-      * On cancel button tap, close modal
+      * Close the modal
       */
-      onCancelTap: function (e) {
+      close: function () {
         this.closeModal()
       },
 
       /*
-      * On player button tap, toggle for removal
+      * Get list of players to remove, save, and close modal
       */
-      onPlayerTap: function (e) {
-        const rootNode = e.target.parentElement.parentElement
-        const playerIndex = rootNode.dataset.index
-
-        if (playerIndex !== undefined) {
-          this.toggleRemove({playerIndex})
-        }
-      },
-
-      /*
-      * On save button tap, get list of players to remove and save modal
-      */
-      onSaveTap: function (e) {
+      save: function () {
         const removeList = this.cacheList.filter(player =>
           player.remove
         )
 
         this.saveModal({removeList})
         this.closeModal()
-      }
+      },
+
+      /*
+      * Toggle player for removal
+      */
+      toggle: function (e) {
+        let rootNode = e.target
+        let playerIndex
+
+        // while (rootNode.clas)
+        while (rootNode.dataset.index === undefined) {
+          rootNode = rootNode.parentElement
+        }
+
+        playerIndex = rootNode.dataset.index
+
+        if (playerIndex !== undefined) {
+          this.toggleRemove({playerIndex})
+        }
+      }      
     },
     watch: {
       currentPlayers: function () {

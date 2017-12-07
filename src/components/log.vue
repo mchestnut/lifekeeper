@@ -2,16 +2,16 @@
   <div class="c-log">
     <menu-container class="c-log__menu">
       <div class="o-flex-row">
-        <v-touch @tap="onTurnPreviousTap" class="c-log__button o-flex-row__item">
-          <menu-button-left :class="previousButtonClass">Previous</menu-button-left>
+        <v-touch @tap="onTurnPrevious" class="c-log__button o-flex-row__item">
+          <menu-button-left :event="onTurnPrevious" :class="previousButtonClass">Previous</menu-button-left>
         </v-touch>
 
         <div class="c-log__turn o-flex-row__item">
           Turn {{currentTurn + 1}}
         </div>
 
-        <v-touch @tap="onTurnNextTap" class="c-log__button o-flex-row__item">
-          <menu-button-right>Next</menu-button-right>
+        <v-touch @tap="onTurnNext" class="c-log__button o-flex-row__item">
+          <menu-button-right :event="onTurnNext">Next</menu-button-right>
         </v-touch>
       </div>
     </menu-container>
@@ -68,9 +68,9 @@
         'setTurn'
       ]),
       /*
-      * On previous turn tap, decrement turn
+      * On previous turn button, decrement turn
       */
-      onTurnPreviousTap: function (e) {
+      onTurnPrevious: function (e) {
         if (this.currentTurn == 0) {
           return
         }
@@ -81,9 +81,9 @@
       },
 
       /*
-      * On next turn tap, increment turn
+      * On next turn button, increment turn
       */
-      onTurnNextTap: function (e) {
+      onTurnNext: function (e) {
         this.setTurn({
           value: this.currentTurn + 1
         })

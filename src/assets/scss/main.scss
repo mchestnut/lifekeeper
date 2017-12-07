@@ -95,6 +95,12 @@ text {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    filter: drop-shadow(0 0 0.5rem $whiteLight)
+  }
 }
 
 .o-icon-button__label,

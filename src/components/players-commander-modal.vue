@@ -1,5 +1,5 @@
 <template>
-  <modal @close="closeModal" v-if="active">
+  <modal @close="close" @save="save" v-if="active">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">Change Commanders</h2>
@@ -17,12 +17,12 @@
     </div>
     
     <div class="c-modal__button-row o-flex-row">
-      <v-touch @tap="onSaveTap" class="o-flex-row__item">
-        <menu-button :event="onSaveTap">Save</menu-button>
+      <v-touch @tap="save" class="o-flex-row__item">
+        <menu-button :event="save">Save</menu-button>
       </v-touch>
 
-      <v-touch @tap="onCancelTap" class="o-flex-row__item">
-        <menu-button :event="onCancelTap">Cancel</menu-button>
+      <v-touch @tap="close" class="o-flex-row__item">
+        <menu-button :event="close">Cancel</menu-button>
       </v-touch>
     </div>
 
@@ -76,9 +76,9 @@
       ]),
 
       /*
-      * On cancel button tap, close modal
+      * Close the modal
       */
-      onCancelTap: function (e) {
+      close: function () {
         this.closeModal()
       },
 
@@ -94,9 +94,9 @@
       },
 
       /*
-      * On save button tap, save modal
+      * Save and close the modal
       */
-      onSaveTap: function (e) {
+      save: function (e) {
         this.args.commanders = this.matchCommanders({
           commanders: this.args.commanders,
           commandersList: this.commandersList

@@ -1,6 +1,6 @@
 <template>
-  <div class="c-modal">
-    <v-touch class="c-modal__overlay" @tap="onOverlayTap">
+  <div @keyup.enter="save" @keyup.esc="close" class="c-modal">
+    <v-touch class="c-modal__overlay" @tap="close">
       <div></div>
     </v-touch>
     <div class="c-modal__content">
@@ -20,11 +20,18 @@
       menuContainer
     },
     methods: {
+      /*
+      * Emits a close event
+      */      
       close: function () {
         this.$emit('close')
       },
-      onOverlayTap: function (e) {
-        this.close()
+
+      /*
+      * Emits a save event
+      */
+      save: function () {
+        this.$emit('save')
       }
     }
   }

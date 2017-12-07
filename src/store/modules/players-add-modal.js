@@ -41,7 +41,7 @@ const mutations = {
       nickname: '',
       colors: []
     }
-    state.args.position = 1
+    state.args.position = 0
   },
 
   /*
@@ -57,7 +57,14 @@ const mutations = {
   */
   saveModal (state) {
     state.callback(state.args)
-  }  
+  },
+
+  /*
+  * Sets the initial selected position
+  */
+  setPosition (state, args) {
+    state.args.position = args.value
+  }
 }
 
 export default {

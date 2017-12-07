@@ -8,11 +8,11 @@
       </div>
 
       <div class="o-flex-row">
-        <v-touch @tap="onGameNewTap" class="o-flex-row__item">
-          <menu-button :class="newButtonClass">New</menu-button>
+        <v-touch @tap="onGameNew" class="o-flex-row__item">
+          <menu-button :event="onGameNew" :class="newButtonClass">New</menu-button>
         </v-touch>
-        <v-touch @tap="onGameToggleTap" class="o-flex-row__item">
-          <menu-button>{{gameState}}</menu-button>
+        <v-touch @tap="onGameToggle" class="o-flex-row__item">
+          <menu-button :event="onGameToggle">{{gameState}}</menu-button>
         </v-touch>
       </div>
 
@@ -23,14 +23,14 @@
       </div>
 
       <div class="o-flex-row">
-        <v-touch @tap="onPlayersAddTap" class="o-flex-row__item">
-          <menu-button :class="addButtonClass">Add</menu-button>
+        <v-touch @tap="onPlayersAdd" class="o-flex-row__item">
+          <menu-button :event="onPlayersAdd" :class="addButtonClass">Add</menu-button>
         </v-touch>
-        <v-touch @tap="onPlayersReorderTap" class="o-flex-row__item">
-          <menu-button :class="reorderButtonClass">Reorder</menu-button>
+        <v-touch @tap="onPlayersReorder" class="o-flex-row__item">
+          <menu-button :event="onPlayersReorder" :class="reorderButtonClass">Reorder</menu-button>
         </v-touch>
-        <v-touch @tap="onPlayersRemoveTap" class="o-flex-row__item">
-          <menu-button :class="removeButtonClass">Remove</menu-button>
+        <v-touch @tap="onPlayersRemove" class="o-flex-row__item">
+          <menu-button :event="onPlayersRemove" :class="removeButtonClass">Remove</menu-button>
         </v-touch>
       </div>
     </menu-container>
@@ -113,25 +113,25 @@
         'resetPlayers'
       ]),
       /*
-      * On new game tap, resets game
+      * On new game button, resets game
       */
-      onGameNewTap: function (e) {
+      onGameNew: function (e) {
         if (this.gameState != 'Stop') {
           this.resetGame()
         }
       },
       
       /*
-      * On new game tap, resets game
+      * On new game button, resets game
       */
-      onGameToggleTap: function (e) {
+      onGameToggle: function (e) {
         this.toggleGame()
       },
 
       /*
-      * On add players tap, open modal
+      * On add players button, open modal
       */
-      onPlayersAddTap: function (e) {
+      onPlayersAdd: function (e) {
         if (this.currentPlayers.length !== this.maxPlayers) {
           this.openPlayersAddModal({
             callback: this.addPlayer
@@ -140,9 +140,9 @@
       },
 
       /*
-      * On remove players tap, open modal
+      * On remove players button, open modal
       */
-      onPlayersRemoveTap: function (e) {
+      onPlayersRemove: function (e) {
         if (this.currentPlayers.length > 0) {
           this.openPlayersRemoveModal({
             callback: this.removePlayer
@@ -151,9 +151,9 @@
       },
 
       /*
-      * On reorder players tap, open modal
+      * On reorder players button, open modal
       */
-      onPlayersReorderTap: function (e) {
+      onPlayersReorder: function (e) {
         if (this.currentPlayers.length > 1) {
           this.openPlayersReorderModal({
             callback: this.reorderPlayers

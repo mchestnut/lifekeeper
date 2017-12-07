@@ -7,10 +7,9 @@
 <script>
 export default {
   name: 'app',
-  data () {
-    return {
-
-    }
+  created: function() {
+    // Prevent context menu
+    document.addEventListener('contextmenu', event => event.preventDefault())
   }
 }
 </script>
