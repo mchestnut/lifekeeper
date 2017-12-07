@@ -23,5 +23,8 @@ export default new Vuex.Store({
     playersInputModal,
     playersRemoveModal,
     playersReorderModal
+  },
+  state: {
+    modalVisible: false
   }
 })

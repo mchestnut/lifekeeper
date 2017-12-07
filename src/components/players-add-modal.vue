@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import {commanders} from '../mixins/commanders.js'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
@@ -92,8 +92,10 @@
       ...mapMutations('commanders', [
         'filterDatalist'
       ]),
+      ...mapActions('playersAddModal', [
+        'closeModal'
+      ]),
       ...mapMutations('playersAddModal', [
-        'closeModal',
         'saveModal',
         'setPosition'
       ]),

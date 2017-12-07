@@ -43,12 +43,30 @@ const mutations = {
   */
   updateCacheList (state, args) {
     state.cacheList = args.sortList
+  }  
+}
+
+const actions = {
+  /*
+  * Closes the modal and toggles global state
+  */
+  closeModal ({state, commit, rootState}) {
+    commit('closeModal')
+    rootState.modalVisible = false
+  },
+
+  /*
+  * Opens the modal and toggles global state
+  */
+  openModal ({state, commit, rootState}, args) {
+    commit('openModal', args)
+    rootState.modalVisible = true
   }
-  
 }
 
 export default {
   namespaced,
   state,
-  mutations
+  mutations,
+  actions
 }

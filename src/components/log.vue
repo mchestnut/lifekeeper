@@ -30,8 +30,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {mapState} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
   import entriesContainer from '@/components/entries-container'
   import menuButtonLeft from '@/components/menu-button-left'
   import menuButtonRight from '@/components/menu-button-right'
@@ -46,11 +45,38 @@
       menuContainer
     },
     mounted () {
+      const root = this
+
+      /*
+      * Add key bindings to window
+      */
+      window.addEventListener('keyup', function(e) {
+        if (root.modalVisible) {
+          return
+        }
+
+        // Comma
+        if (e.keyCode == 188) {
+          root.onTurnPrevious()
+        }
+
+        // Period
+        if (e.keyCode == 190) {
+          root.onTurnNext()
+        }
+      })
+
+      /*
+      * Set initial turn
+      */      
       this.setTurn({
         value: 0
       })
     },
     computed: {
+      ...mapState([
+        'modalVisible'
+      ]),
       ...mapState('log', [
         'currentTurn',
         'turns'
@@ -71,10 +97,6 @@
       * On previous turn button, decrement turn
       */
       onTurnPrevious: function (e) {
-        if (this.currentTurn == 0) {
-          return
-        }
-
         this.setTurn({
           value: this.currentTurn - 1
         })

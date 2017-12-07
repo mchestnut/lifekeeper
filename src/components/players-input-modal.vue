@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
   import modal from '@/components/modal'
@@ -47,8 +47,10 @@
       ])
     },
     methods: {
+      ...mapActions('playersInputModal', [
+        'closeModal'
+      ]),    
       ...mapMutations('playersInputModal', [
-        'closeModal',
         'saveModal'
       ]),    
 

@@ -6,7 +6,7 @@
 
     <v-touch @tap="onLifeTap" @press="onLifePress" class="c-player__life">
       <card-life :colors="player.colors">
-        <p>{{player.life}}</p>
+        <p class="t-burst" :class="transitionLife.class">{{player.life}}</p>
       </card-life>
     </v-touch>
 
@@ -74,6 +74,14 @@
       cardOpponent,
       cardShell
     },
+    data: function() {
+      return {
+        transitionLife: {
+          class: '',
+          timeout: null
+        }
+      }
+    },
     props: [
       'index'
     ],
@@ -110,10 +118,10 @@
         'setLife',
         'setPoison'
       ]),
-      ...mapMutations('playersCommanderModal', {
+      ...mapActions('playersCommanderModal', {
         openPlayerCommanderModal: 'openModal'
       }),
-      ...mapMutations('playersInputModal', [
+      ...mapActions('playersInputModal', [
         'openModal'
       ]), 
 
@@ -392,6 +400,18 @@
 
         this.checkDead()
       }      
+    },
+    watch: {
+      'player.life': function () {
+        const root = this
+
+        clearTimeout(this.transitionLife.timeout)
+        this.transitionLife.class = 't-burst-enter'
+
+        this.transitionLife.timeout = setTimeout(function() {
+          root.transitionLife.class = 't-burst-leave'
+        }, 50)
+      }
     }
   }
 </script>

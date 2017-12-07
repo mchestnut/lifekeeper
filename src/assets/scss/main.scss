@@ -157,6 +157,25 @@ text {
 
 
 /*
+* Transitions
+*/
+
+.t-burst {
+  transition-duration: 50ms;
+  transition-property: opacity transform;
+}
+
+.t-burst-enter {
+  opacity: 0.5;
+  transform: scale(1.2);
+}
+
+.t-burst-leave {
+  transition-duration: 0ms;
+}
+
+
+/*
 * Utilities
 */
 

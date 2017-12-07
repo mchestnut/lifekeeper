@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapState} from 'vuex'
+  import {mapActions, mapMutations, mapState} from 'vuex'
   import draggable from 'vuedraggable'
   import menuBar from '@/components/menu-bar'
   import menuButton from '@/components/menu-button'
@@ -62,8 +62,10 @@
       }
     },
     methods: {
+      ...mapActions('playersReorderModal', [
+        'closeModal'
+      ]),
       ...mapMutations('playersReorderModal', [
-        'closeModal',
         'saveModal',
         'toggleRemove',
         'resetCacheList',

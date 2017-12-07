@@ -58,7 +58,47 @@
         strokeOuter: 'u-fill-gray-stroke'
       }
     },
+    mounted () {
+      const root = this
+
+      /*
+      * Add key bindings to window
+      */
+      window.addEventListener('keyup', function(e) {
+        if (root.modalVisible) {
+          return
+        }
+        
+        // n
+        if (e.keyCode == 78) {
+          root.onGameNew()
+        }
+
+        // Space
+        if (e.keyCode == 32) {
+          root.onGameToggle()
+        }
+        
+        // a
+        if (e.keyCode == 65) {
+          root.onPlayersAdd()
+        }
+
+        // m
+        if (e.keyCode == 77) {
+          root.onPlayersReorder()
+        }
+
+        // r
+        if (e.keyCode == 82) {
+          root.onPlayersRemove()
+        }
+      })
+    },
     computed: {
+      ...mapState([
+        'modalVisible'
+      ]),
       ...mapState('players', [
         'currentPlayers',
         'maxPlayers'
@@ -97,13 +137,13 @@
         'startClock',
         'stopClock'
       ]),
-      ...mapMutations('playersAddModal', {
+      ...mapActions('playersAddModal', {
         openPlayersAddModal: 'openModal'
       }),
-      ...mapMutations('playersRemoveModal', {
+      ...mapActions('playersRemoveModal', {
         openPlayersRemoveModal: 'openModal'
       }),
-      ...mapMutations('playersReorderModal', {
+      ...mapActions('playersReorderModal', {
         openPlayersReorderModal: 'openModal'
       }),
       ...mapMutations('players', [

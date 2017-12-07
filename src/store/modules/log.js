@@ -258,6 +258,10 @@ const actions = {
   * Sets the current turn, clears all caches, and sets transform
   */
   setTurn ({state, commit}, args) {
+    if (args.value < 0) {
+      return
+    }
+    
     commit('setTurn', args)
     commit('resetCache')
 

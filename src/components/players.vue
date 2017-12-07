@@ -21,97 +21,97 @@
       /*
       * TODO: Delete this
       */
-      this.addPlayer({
-        name: 'Matt',
-        colors: {
-          dark: '#e2a307',
-          light: '#e4d9d3',
-          medium: '#bba66d',
-          stroke: ['#e6e6e4', '#070506']
-        },
-        commanders: {
-          primary: {
-            name: 'Teysa, Orzhov Scion',
-            nickname: 'Teysa',
-            colors: ['w', 'b']
-          },
-          secondary: {
-            name: '',
-            nickname: '',
-            colors: []
-          }
-        },
-        position: 1
-      })
+      // this.addPlayer({
+      //   name: 'Matt',
+      //   colors: {
+      //     dark: '#e2a307',
+      //     light: '#e4d9d3',
+      //     medium: '#bba66d',
+      //     stroke: ['#e6e6e4', '#070506']
+      //   },
+      //   commanders: {
+      //     primary: {
+      //       name: 'Teysa, Orzhov Scion',
+      //       nickname: 'Teysa',
+      //       colors: ['w', 'b']
+      //     },
+      //     secondary: {
+      //       name: '',
+      //       nickname: '',
+      //       colors: []
+      //     }
+      //   },
+      //   position: 1
+      // })
       
-      this.addPlayer({
-        name: 'Chris',
-        colors: {
-          dark: '#bc1f00',
-          light: '#fff8f9',
-          medium: '#f7cfb6',
-          stroke: '#da2933'
-        },
-        commanders: {
-          primary: {
-            name: 'Norin the Wary',
-            nickname: 'Norin',
-            colors: ['r']
-          },
-          secondary: {
-            name: '',
-            nickname: '',
-            colors: []
-          }
-        },
-        position: 2
-      })
+      // this.addPlayer({
+      //   name: 'Chris',
+      //   colors: {
+      //     dark: '#bc1f00',
+      //     light: '#fff8f9',
+      //     medium: '#f7cfb6',
+      //     stroke: '#da2933'
+      //   },
+      //   commanders: {
+      //     primary: {
+      //       name: 'Norin the Wary',
+      //       nickname: 'Norin',
+      //       colors: ['r']
+      //     },
+      //     secondary: {
+      //       name: '',
+      //       nickname: '',
+      //       colors: []
+      //     }
+      //   },
+      //   position: 2
+      // })
       
-      this.addPlayer({
-        name: 'Jake',
-        colors: {
-          dark: '#e2a307',
-          light: '#e4d9d3',
-          medium: '#bba66d',
-          stroke: '#d2b768'
-        },
-        commanders: {
-          primary: {
-            name: 'Scion of the Ur-Dragon',
-            nickname: 'Scion',
-            colors: ['w', 'u', 'b', 'r', 'g']
-          },
-          secondary: {
-            name: '',
-            nickname: '',
-            colors: []
-          }
-        },
-        position: 3
-      })
+      // this.addPlayer({
+      //   name: 'Jake',
+      //   colors: {
+      //     dark: '#e2a307',
+      //     light: '#e4d9d3',
+      //     medium: '#bba66d',
+      //     stroke: '#d2b768'
+      //   },
+      //   commanders: {
+      //     primary: {
+      //       name: 'Scion of the Ur-Dragon',
+      //       nickname: 'Scion',
+      //       colors: ['w', 'u', 'b', 'r', 'g']
+      //     },
+      //     secondary: {
+      //       name: '',
+      //       nickname: '',
+      //       colors: []
+      //     }
+      //   },
+      //   position: 3
+      // })
       
-      this.addPlayer({
-        name: 'Jonathan',
-        colors: {
-          dark: '#e2a307',
-          light: '#e4d9d3',
-          medium: '#bba66d',
-          stroke: ['#067bc0', '#da2933']
-        },
-        commanders: {
-          primary: {
-            name: 'Kraum, Ludevic\'s Opus',
-            nickname: 'Kraum',
-            colors: ['u', 'r']
-          },
-          secondary: {
-            name: 'Ludevic, Necro-Alchemist',
-            nickname: 'Ludevic',
-            colors: ['u', 'r']
-          }
-        },
-        position: 4
-      })
+      // this.addPlayer({
+      //   name: 'Jonathan',
+      //   colors: {
+      //     dark: '#e2a307',
+      //     light: '#e4d9d3',
+      //     medium: '#bba66d',
+      //     stroke: ['#067bc0', '#da2933']
+      //   },
+      //   commanders: {
+      //     primary: {
+      //       name: 'Kraum, Ludevic\'s Opus',
+      //       nickname: 'Kraum',
+      //       colors: ['u', 'r']
+      //     },
+      //     secondary: {
+      //       name: 'Ludevic, Necro-Alchemist',
+      //       nickname: 'Ludevic',
+      //       colors: ['u', 'r']
+      //     }
+      //   },
+      //   position: 4
+      // })
       
       // this.addPlayer({
       //   name: 'Ruth',
