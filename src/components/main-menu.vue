@@ -84,13 +84,13 @@
           root.onPlayersAdd()
         }
 
-        // m
-        if (e.keyCode == 77) {
+        // s
+        if (e.keyCode == 83) {
           root.onPlayersReorder()
         }
 
-        // r
-        if (e.keyCode == 82) {
+        // d
+        if (e.keyCode == 68) {
           root.onPlayersRemove()
         }
       })
