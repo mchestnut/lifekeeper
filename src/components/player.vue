@@ -332,10 +332,15 @@
           root.setProperty(args)
         }
 
+        const validation = function (args) {
+          root.validateProperty(args)
+        }
+
         this.openModal({
           callback: callback,
           fields: fieldArgs,
-          header: 'Commander Damage'
+          header: 'Commander Damage',
+          validation: validation
         })
       },
 
@@ -354,10 +359,32 @@
           root.setProperty(args)
         }
 
+        const validation = function (args) {
+          const basicRegex = /[^\d\+\-\*\/]/
+          const mathRegex = /(^\*|^\/|\D$)/
+
+          // Test if value contains non-digits or basic math symbols
+          if (basicRegex.test(args.value)) {
+            return false
+          }
+
+          // If equation, evaluate
+          if (Number.isInteger(args.value) === false) {
+            if (mathRegex.test(args.value)) {
+              return false
+            } else {
+              args.value = Math.round(eval(args.value))
+            }
+          }
+
+          return true
+        }
+
         this.openModal({
           callback: callback,
           fields: fieldArgs,
-          header: header
+          header: header,
+          validation: validation
         })
       },
       
@@ -399,7 +426,7 @@
         }
 
         this.checkDead()
-      }      
+      }
     },
     watch: {
       'player.life': function () {

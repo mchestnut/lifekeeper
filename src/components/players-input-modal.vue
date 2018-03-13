@@ -1,5 +1,5 @@
 <template>
-  <modal @close="close" @save="save" v-if="active">
+  <modal @close="close" @save="save" v-if="active" :class="{'c-modal--invalid' : !valid}">
     <div class="o-flex-row">
       <menu-bar></menu-bar>
       <h2 class="c-modal__header">{{header}}</h2>
@@ -43,7 +43,8 @@
       ...mapState('playersInputModal', [
         'active',
         'header',
-        'fields'
+        'fields',
+        'valid'
       ])
     },
     methods: {
@@ -51,6 +52,7 @@
         'closeModal'
       ]),    
       ...mapMutations('playersInputModal', [
+        'resetModal',
         'saveModal'
       ]),    
 
@@ -62,11 +64,16 @@
       },
 
       /*
-      * Save and close the modal
+      * Save, then close or reset the modal
       */
       save: function () {
         this.saveModal()
-        this.closeModal()
+
+        if (this.valid) {
+          this.closeModal()
+        } else {
+          this.resetModal()
+        }
       }
     }
   }

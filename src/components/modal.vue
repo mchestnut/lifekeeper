@@ -37,7 +37,25 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  @keyframes shake {
+    10%, 90% {
+      transform: translate(-1px, 0);
+    }
+    
+    20%, 80% {
+      transform: translate(2px, 0);
+    }
+
+    30%, 50%, 70% {
+      transform: translate(-4px, 0);
+    }
+
+    40%, 60% {
+      transform: translate(4px, 0);
+    }
+  }
+
   .c-modal,
   .c-modal__overlay {    
     position: absolute;
@@ -51,6 +69,14 @@
     display: flex;
     text-align: center;
     z-index: 1000;
+  }
+
+  .c-modal--invalid {
+
+    .c-modal__content {
+      animation: shake 500ms cubic-bezier(.36,.07,.19,.97) both;
+      transform: translate(0, 0);
+    }
   }
 
   .c-modal__overlay {

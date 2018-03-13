@@ -4,7 +4,10 @@ const state = {
   active: false,
   callback: null,
   header: '',
-  fields: []
+  fields: [],
+  timeout: null,
+  valid: true,
+  validation: null
 }
 
 const mutations = {
@@ -13,9 +16,12 @@ const mutations = {
   * Closes the modal and resets the state
   */  
   closeModal (state) {
+    clearTimeout(state.timeout)
+
     state.active = false
     state.header = ''
     state.fields = []
+    state.valid = true
   },
 
   /*
@@ -26,16 +32,39 @@ const mutations = {
     state.callback = args.callback
     state.header = args.header
     state.fields = args.fields
+    state.validation = args.validation
+  },
+
+  /*
+  * Resets the valid state value after timeout
+  */
+  resetModal (state) {
+    const root = state
+
+    state.timeout = setTimeout(() => {
+      root.valid = true
+    }, 500)
   },
 
   /*
   * Saves the values and logs entries from the modal
   */
   saveModal (state) {
+    clearTimeout(state.timeout)
+    state.valid = true
+
     state.fields.forEach(function (args) {
-      state.callback(args)
+      if (state.validation(args) == false) {
+        state.valid = false
+      }
     })
-  }  
+
+    if (state.valid) {
+      state.fields.forEach(function (args) {
+        state.callback(args)
+      })
+    }
+  }
 }
 
 const actions = {
