@@ -333,7 +333,7 @@
         }
 
         const validation = function (args) {
-          root.validateProperty(args)
+          return root.validateProperty(args)
         }
 
         this.openModal({
@@ -360,24 +360,7 @@
         }
 
         const validation = function (args) {
-          const basicRegex = /[^\d\+\-\*\/]/
-          const mathRegex = /(^\*|^\/|\D$)/
-
-          // Test if value contains non-digits or basic math symbols
-          if (basicRegex.test(args.value)) {
-            return false
-          }
-
-          // If equation, evaluate
-          if (Number.isInteger(args.value) === false) {
-            if (mathRegex.test(args.value)) {
-              return false
-            } else {
-              args.value = Math.round(eval(args.value))
-            }
-          }
-
-          return true
+          return root.validateProperty(args)
         }
 
         this.openModal({
@@ -426,6 +409,43 @@
         }
 
         this.checkDead()
+      },
+
+      /*
+      * Validates if passed value is a number or equation
+      */
+      validateProperty: function (args) {
+        const basicRegex = RegExp('[^\\d\\+\\-\\*\\/]')
+        const leadingRegex = RegExp('\\b(?:0*(0\\.\\d+)|0+)', 'g')
+        const mathRegex = RegExp('(^\\*|^\\/|\\D$)')
+        const whitespaceRegex = RegExp('\\s+', 'g')
+
+        // Remove leading zeros and whitespace
+        if (typeof args.value === 'string') {
+          args.value = args.value.replace(leadingRegex, '$1')
+          args.value = args.value.replace(whitespaceRegex, '')
+        }
+
+        // Set empty value to 0
+        if (args.value == '') {
+          args.value = 0
+        }
+
+        // Test if value contains non-digits or basic math symbols
+        if (basicRegex.test(args.value)) {
+          return false
+        }
+
+        // If equation, evaluate
+        if (Number.isInteger(args.value) === false) {
+          if (mathRegex.test(args.value)) {
+            return false
+          } else {
+            args.value = Math.round(eval(args.value))
+          }
+        }
+
+        return true
       }
     },
     watch: {
