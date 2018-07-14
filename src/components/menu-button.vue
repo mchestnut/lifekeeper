@@ -31,6 +31,7 @@
 
   .c-menu-button {
     font: inherit;
+    line-height: 1;
     padding: 0;
     border: none;
     background-color: transparent;
@@ -50,6 +51,10 @@
     width: 6rem;
     cursor: pointer;
     transition: width 200ms;
+
+    @media screen and (max-aspect-ratio: 15/10) {
+      width: 5.5rem;
+    }
   }
 
   .c-menu-button__label {
@@ -70,12 +75,6 @@
     .c-menu-button__stroke {
       fill: $grayMedium;
       stroke: $grayDark;
-    }
-  }
-
-  @media screen and (max-aspect-ratio: 15/10) {
-    .c-menu-button__svg {
-      width: 5.5rem;
     }
   }
 </style>

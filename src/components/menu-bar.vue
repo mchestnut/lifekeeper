@@ -10,8 +10,9 @@
   }
 </script>
 
-<style>  
+<style lang="scss">  
   .c-menu-bar {
-    width: 4rem;
+    width: 4vw;
+    height: 0.5vw;
   }
 </style>

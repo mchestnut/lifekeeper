@@ -467,8 +467,13 @@
   @import '../assets/scss/variables.scss';
 
   .c-player {
-    padding: 1rem;
+    font-size: 1rem;
+    padding: 1em;
     z-index: 1;
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      font-size: 0.8rem;
+    }
   }
 
   .c-player--dead {
@@ -491,18 +496,18 @@
   }
 
   .c-player__name {
-    font-size: 2rem;
+    font-size: 2em;
   }
 
   .c-player__life {
     font-family: $sans-serif;
-    font-size: 7rem;
+    font-size: 7em;
     font-weight: bold;
     margin: 0 1rem;
   }
 
   .c-player__commander {
-    font-size: 1rem;
+    font-size: 1em;
     text-align: center;
   }
 
@@ -512,16 +517,20 @@
     align-items: center;
     align-content: flex-start;
     justify-content: space-around;
-    min-height: 12vh;
+    min-height: 12vmin;
     margin: ($unitStroke * 2)  1rem ($unitStroke * 5);
     padding-bottom: $unitStroke * 5;
   }
 
   .c-player__opponent {
-    font-size: 0.8rem;
+    font-size: 0.8em;
     flex-basis: 45%;
     margin: $unitStroke * 2;
     transition: font-size 200ms;
+
+    @media screen and (max-aspect-ratio: 15/10) {
+      font-size: 0.7em;
+    }
   }
 
   .c-player__button-life {
@@ -544,11 +553,5 @@
   .c-player__button-life--plus,
   .c-player__button-status--poison {
     right: 0.7rem;
-  }
-
-  @media screen and (max-aspect-ratio: 15/10) {
-    .c-player__opponent {
-      font-size: 0.7rem;
-    }
   }
 </style>

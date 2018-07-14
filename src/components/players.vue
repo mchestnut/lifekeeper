@@ -188,11 +188,11 @@
   .c-players__wrapper {
     width: 100%;
     height: 100%;
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
 
   .c-players__ratio {
-    width: 34vmin;
+    width: 30vmin;
     margin: auto;
     transition: width 200ms;
   }
@@ -214,21 +214,36 @@
     grid-gap: 1rem;
 
     .c-players__wrapper:nth-child(1) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 1;
+      grid-row: 2 / 4;
+      grid-column: 1;
     }
 
     .c-players__wrapper:nth-child(2) {
-      grid-row-start: 1;
-      grid-row-end: 3;
-      grid-column-start: 2;
+      grid-row: 1 / 3;
+      grid-column: 2;
     }
 
     .c-players__wrapper:nth-child(3) {
-      grid-row-start: 3;
-      grid-row-end: 5;
-      grid-column-start: 2;
+      grid-row: 3 / 5;
+      grid-column: 2;
+    }
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      
+      .c-players__wrapper:nth-child(1) {
+        grid-row: 1 / 3;
+        grid-column: 1;
+      }
+
+      .c-players__wrapper:nth-child(2) {
+        grid-row: 1 / 3;
+        grid-column: 3;
+      }
+
+      .c-players__wrapper:nth-child(3) {
+        grid-row: 2 / 4;
+        grid-column: 2;
+      }
     }
   }
 
@@ -237,27 +252,23 @@
     grid-template-columns: repeat(3, 1fr);
 
     .c-players__wrapper:nth-child(1) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 1;
+      grid-row: 2 / 4;
+      grid-column: 1;
     }
 
     .c-players__wrapper:nth-child(2) {
-      grid-row-start: 1;
-      grid-row-end: 3;
-      grid-column-start: 2;
+      grid-row: 1 / 3;
+      grid-column: 2;
     }
 
     .c-players__wrapper:nth-child(3) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 3;
+      grid-row: 2 / 4;
+      grid-column: 3;
     }
 
     .c-players__wrapper:nth-child(4) {
-      grid-row-start: 3;
-      grid-row-end: 5;
-      grid-column-start: 2;
+      grid-row: 3 / 5;
+      grid-column: 2;
     }
   }
 
@@ -266,33 +277,28 @@
     grid-template-columns: repeat(3, auto);
 
     .c-players__wrapper:nth-child(1) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 1;
+      grid-row: 2 / 4;
+      grid-column: 1;
     }
 
     .c-players__wrapper:nth-child(2) {
-      grid-row-start: 1;
-      grid-row-end: 3;
-      grid-column-start: 2;
+      grid-row: 1 / 3;
+      grid-column: 2;
     }
 
     .c-players__wrapper:nth-child(3) {
-      grid-row-start: 1;
-      grid-row-end: 3;
-      grid-column-start: 3;
+      grid-row: 1 / 3;
+      grid-column: 3;
     }
 
     .c-players__wrapper:nth-child(4) {
-      grid-row-start: 3;
-      grid-row-end: 5;
-      grid-column-start: 3;
+      grid-row: 3 / 5;
+      grid-column: 3;
     }
 
     .c-players__wrapper:nth-child(5) {
-      grid-row-start: 3;
-      grid-row-end: 5;
-      grid-column-start: 2;
+      grid-row: 3 / 5;
+      grid-column: 2;
     }
   }
 
@@ -301,45 +307,37 @@
     grid-template-columns: repeat(3, 1fr);
 
     .c-players__wrapper:nth-child(1) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 1;
+      grid-row: 2 / 4;
+      grid-column: 1;
     }
 
     .c-players__wrapper:nth-child(2) {
-      grid-row-start: 1;
-      grid-row-end: 3;
-      grid-column-start: 2;
+      grid-row: 1 / 3;
+      grid-column: 2;
     }
 
     .c-players__wrapper:nth-child(3) {
-      grid-row-start: 2;
-      grid-row-end: 4;
-      grid-column-start: 3;
+      grid-row: 2 / 4;
+      grid-column: 3;
     }
 
     .c-players__wrapper:nth-child(4) {
-      grid-row-start: 4;
-      grid-row-end: 6;
-      grid-column-start: 3;
+      grid-row: 4 / 6;
+      grid-column: 3;
     }
 
     .c-players__wrapper:nth-child(5) {
-      grid-row-start: 5;
-      grid-row-end: 7;
-      grid-column-start: 2;
+      grid-row: 5 / 7;
+      grid-column: 2;
     }
 
     .c-players__wrapper:nth-child(6) {
-      grid-row-start: 4;
-      grid-row-end: 6;
-      grid-column-start: 1;
+      grid-row: 4 / 6;
+      grid-column: 1;
     }
-  }
 
-  @media screen and (max-aspect-ratio: 15/10) {
-    .c-players__ratio {
-      width: 32vmin;
+    @media screen and (max-aspect-ratio: 4/3) {
+      grid-template-rows: 1fr 15fr 1fr 1fr 15fr 1fr;
     }
   }
 </style>

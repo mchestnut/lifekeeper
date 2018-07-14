@@ -62,6 +62,11 @@ export default {
   .c-view-main {
     display: grid;
     grid-template-columns: 1fr auto;
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      grid-template-columns: auto;
+      grid-template-rows: 1fr auto;
+    }
   }
 
   .c-view-main__background {
@@ -106,5 +111,24 @@ export default {
     display: grid;
     grid-gap: 1rem;
     grid-template-rows: auto auto 1fr;
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      grid-template-columns: auto auto;
+    }
+  }
+
+  .c-view-sidebar__main-menu {
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      grid-row: 2;
+    }
+  }
+
+  .c-view-sidebar__log {
+
+    @media screen and (max-aspect-ratio: 4/3) {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
   }
 </style>
