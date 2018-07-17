@@ -1,3 +1,5 @@
+import datalist from './polyfills/datalist.js'
+
 import Vue from 'vue'
 import App from './App'
 import directives from './directives'

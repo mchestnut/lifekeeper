@@ -52,6 +52,7 @@ export default {
   .c-view-main,
   .c-view-main__background,
   .c-view-main__modals {
+    height: 100%;
     position: absolute;
     top: 0;
     right: 0;

@@ -14,6 +14,10 @@
     <div class="o-form-field">
       <label class="o-form-field__label" for="commander-name">Commander name</label>
       <input @input="onCommanderChange('primary')" id="commander-name" class="o-form-field__input" type="text" v-model="args.commanders.primary.name" list="primary-list"/>
+
+      <datalist id="primary-list">
+        <option v-for="(commander, index) in datalist.primary" :key="index" :value="commander.name"/>
+      </datalist>
     </div>
 
     <div class="o-form-field">
@@ -37,10 +41,6 @@
         <menu-button :event="close">Cancel</menu-button>
       </v-touch>
     </div>
-
-    <datalist id="primary-list">
-      <option v-for="(commander, index) in datalist.primary" :key="index" :value="commander.name"/>
-    </datalist>
 
     <datalist id="secondary-list">
       <option v-for="(commander, index) in datalist.secondary" :key="index" :value="commander.name"/>
